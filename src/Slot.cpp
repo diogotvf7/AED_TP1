@@ -5,6 +5,8 @@
 #include <string>
 #include "Slot.h"
 
+using namespace std;
+
 Slot::Slot(std::string weekday, std::string start, std::string duration, std::string type) {
 
     if (weekday == "Monday")
@@ -18,8 +20,8 @@ Slot::Slot(std::string weekday, std::string start, std::string duration, std::st
     else if (weekday == "Friday")
             this->weekday = 4;
 
-    this->start = stof(start);
-    this->duration = stof(duration);
+    this->start = stof(start,  nullptr);
+    this->duration = stof(duration, nullptr);
     this->type = type;
 }
 
