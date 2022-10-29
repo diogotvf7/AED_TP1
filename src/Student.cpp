@@ -2,22 +2,23 @@
 // Created by joaob on 29/10/2022.
 //
 
-#include "../headers/Student.h"
+#include "Student.h"
 
-Student::Student(int number, std::string name) {
+using namespace std;
+
+Student::Student(int number, string name) {
     this->number = number;
     this->name = name;
 }
  
-
 int Student::getNumber() const {
     return number;
 }
 
-const std::string &Student::getName() const {
+const string &Student::getName() const {
     return name;
 }
 
-const std::list<Class> &Student::getClasses() const {
+const list<Class> &Student::getClasses() const {
     return classes;
 }
