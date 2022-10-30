@@ -49,3 +49,8 @@ void ScheduleManager::readClassesFile() {
         }
     }
 }
+
+void ScheduleManager::readStudentsFile() {
+
+
+}

@@ -6,7 +6,8 @@
 #define AED_TP1_SCHEDULEMANAGER_H
 
 #include <vector>
-#include "Class.h"
+#include <set>
+#include "Student.h"
 
 class ScheduleManager {
 
@@ -14,9 +15,11 @@ public:
 
     std::vector<Class> getClasses() const;
     void readClassesFile();
+    void readStudentsFile();
 
 private:
     std::vector<Class> classes;
+    std::set<Student> students;
 };
 
 
