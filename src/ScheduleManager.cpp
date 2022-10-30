@@ -15,6 +15,10 @@ vector<Class> ScheduleManager::getClasses() const {
     return classes;
 }
 
+set<Student, StudentCmp> ScheduleManager::getStudents() const {
+    return students;
+}
+
 void ScheduleManager::readClassesFile() {
 
     ifstream in("../data/input/classes.csv");
@@ -52,10 +56,13 @@ void ScheduleManager::readClassesFile() {
 
 void ScheduleManager::readStudentsFile() {
 
-    ifstream in("../data/input/classes.csv");
+    ifstream in("../data/input/students_classes.csv");
     string line;
 
     getline(in, line); // Ignore first line
+
+    string previousCode = "0";
+    Student currentStudent = Student("0", "D");
 
     while (getline(in, line)) {
 
@@ -68,20 +75,19 @@ void ScheduleManager::readStudentsFile() {
         getline(input, ucCode, ',');
         getline(input, classCode, '\r');
 
-        set<Student>::iterator i = find_if(students.begin(), students.end(), [code](const Student &s) {return stoi(code) == s.getCode();});
+        vector<Class>::iterator i = find_if(classes.begin(), classes.end(),[classCode, ucCode](const Class &c) { return c.getClassCode() == classCode && c.getUcCode() == ucCode; });
 
-        if (i == students.end()) {
 
-            Student s(code, name);
-            s.addClass(Class(classCode, ucCode));
-            students.insert(s);
+        if (code == previousCode) {
+
+            currentStudent.addClass(*i);
         } else {
-
-            // Isto está tudo merdado aqui:
-            // 1 -> Tentar adicionar referência a uma aula que esteja no vetor classes (mudar em cima também)
-            // 2 -> Tentar perceber porque é que não dá para fazer logo "i->addClass(...);"
-            Student s = *i;
-            s.addClass(Class(classCode, ucCode));
+            if (currentStudent.getCode() != 0)
+                students.insert(currentStudent);
+            currentStudent = Student(code, name);
+            currentStudent.addClass(*i);
         }
+        previousCode = code;
     }
 }
+

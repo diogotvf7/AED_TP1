@@ -20,6 +20,7 @@ class ScheduleManager {
 public:
 
     std::vector<Class> getClasses() const;
+    std::set<Student, StudentCmp> getStudents() const;
     void readClassesFile();
     void readStudentsFile();
 

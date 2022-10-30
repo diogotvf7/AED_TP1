@@ -19,9 +19,13 @@ public:
 
     std::string getName() const;
 
+    std::list<Class> getClasses() const;
+
     void addClass(const Class &c);
 
     void removeClass();
+
+    bool operator==(const Student &s) const;
 
 private:
     int code;

@@ -20,6 +20,10 @@ string Student::getName() const {
     return name;
 }
 
+list<Class> Student::getClasses() const {
+    return schedule;
+}
+
 void Student::addClass(const Class &c) {
     schedule.push_back(c);
 }
@@ -28,3 +32,8 @@ void Student::addClass(const Class &c) {
 void Student::removeClass() {
 
 }
+
+bool Student::operator==(const Student &s) const {
+    return code == s.code;
+}
+
