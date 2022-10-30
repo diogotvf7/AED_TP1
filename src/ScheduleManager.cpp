@@ -39,7 +39,7 @@ void ScheduleManager::readClassesFile() {
         getline(input, duration, ',');
         getline(input, type, '\r');
 
-        vector<Class>::iterator i = find_if(classes.begin(), classes.end(),[classCode, ucCode](const Class &c) { return c.getClassCode() == classCode && c.getUcCode() == ucCode; });
+        auto i = find_if(classes.begin(), classes.end(),[classCode, ucCode](const Class &c) { return c.getClassCode() == classCode && c.getUcCode() == ucCode; });
 
         if (i == classes.end()) {
 
@@ -62,7 +62,7 @@ void ScheduleManager::readStudentsFile() {
     getline(in, line); // Ignore first line
 
     string previousCode = "0";
-    Student currentStudent = Student("0", "D");
+    Student previousStudent = Student("0", "D");
 
     while (getline(in, line)) {
 
@@ -75,19 +75,20 @@ void ScheduleManager::readStudentsFile() {
         getline(input, ucCode, ',');
         getline(input, classCode, '\r');
 
-        vector<Class>::iterator i = find_if(classes.begin(), classes.end(),[classCode, ucCode](const Class &c) { return c.getClassCode() == classCode && c.getUcCode() == ucCode; });
+        auto i = find_if(classes.begin(), classes.end(),[classCode, ucCode](const Class &c) { return c.getClassCode() == classCode && c.getUcCode() == ucCode; });
 
 
         if (code == previousCode) {
 
-            currentStudent.addClass(*i);
+            previousStudent.addClass(*i);
         } else {
-            if (currentStudent.getCode() != 0)
-                students.insert(currentStudent);
-            currentStudent = Student(code, name);
-            currentStudent.addClass(*i);
+            if (previousStudent.getCode() != 0)
+                students.insert(previousStudent);
+            previousStudent = Student(code, name);
+            previousStudent.addClass(*i);
         }
         previousCode = code;
     }
+    students.insert(previousStudent);
 }
 

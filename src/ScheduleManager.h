@@ -18,10 +18,23 @@ struct StudentCmp {
 class ScheduleManager {
 
 public:
-
+    /**
+     * @brief Get function for the Class's Vector;
+     * @return a vector<Class> with all the Classes from input the file;
+     */
     std::vector<Class> getClasses() const;
+    /**
+     * @brief Get functions for the Students Set;
+     * @return a set<Student> with all the Students from the input file;
+     */
     std::set<Student, StudentCmp> getStudents() const;
+    /**
+     * @brief Reads the classes_per_uc.csv file and stores the input in vector<Class> classes;
+     */
     void readClassesFile();
+    /**
+     * @brief Reads the students_classes.csv file and stores the input in set<Student> students;
+     */
     void readStudentsFile();
 
 private:
