@@ -22,7 +22,7 @@ void ScheduleManager::readClassesFile() {
 
     getline(in, line); // Ignore first line
 
-    while (getline(in, line, '\r')) {
+    while (getline(in, line)) {
 
         string classCode, ucCode, weekday, start, duration, type;
 
@@ -33,9 +33,9 @@ void ScheduleManager::readClassesFile() {
         getline(input, weekday, ',');
         getline(input, start, ',');
         getline(input, duration, ',');
-        getline(input, type);
+        getline(input, type, '\r');
 
-        std::vector<Class>::iterator i = find_if(classes.begin(), classes.end(),[classCode, ucCode](Class c) { return c.getClassCode() == classCode && c.getUcCode() == ucCode; });
+        vector<Class>::iterator i = find_if(classes.begin(), classes.end(),[classCode, ucCode](const Class &c) { return c.getClassCode() == classCode && c.getUcCode() == ucCode; });
 
         if (i == classes.end()) {
 
@@ -52,5 +52,36 @@ void ScheduleManager::readClassesFile() {
 
 void ScheduleManager::readStudentsFile() {
 
+    ifstream in("../data/input/classes.csv");
+    string line;
 
+    getline(in, line); // Ignore first line
+
+    while (getline(in, line)) {
+
+        string code, name, ucCode, classCode;
+
+        stringstream input(line);
+
+        getline(input, code, ',');
+        getline(input, name, ',');
+        getline(input, ucCode, ',');
+        getline(input, classCode, '\r');
+
+        set<Student>::iterator i = find_if(students.begin(), students.end(), [code](const Student &s) {return stoi(code) == s.getCode();});
+
+        if (i == students.end()) {
+
+            Student s(code, name);
+            s.addClass(Class(classCode, ucCode));
+            students.insert(s);
+        } else {
+
+            // Isto está tudo merdado aqui:
+            // 1 -> Tentar adicionar referência a uma aula que esteja no vetor classes (mudar em cima também)
+            // 2 -> Tentar perceber porque é que não dá para fazer logo "i->addClass(...);"
+            Student s = *i;
+            s.addClass(Class(classCode, ucCode));
+        }
+    }
 }

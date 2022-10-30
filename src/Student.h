@@ -13,7 +13,7 @@
 class Student {
 
 public:
-    Student(int code, std::string name, bool status);
+    Student(std::string code, std::string name, bool status = false);
 
     int getCode() const;
 

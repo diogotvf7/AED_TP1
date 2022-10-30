@@ -6,8 +6,8 @@
 
 using namespace std;
 
-Student::Student(int code, string name, bool status = 0) {
-    this->code = code;
+Student::Student(string code, string name, bool status) {
+    this->code = stoi(code);
     this->name = name;
     this->status = status;
 }
@@ -28,4 +28,3 @@ void Student::addClass(const Class &c) {
 void Student::removeClass() {
 
 }
-

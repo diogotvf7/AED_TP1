@@ -1,6 +1,5 @@
 .gitignore
 .idea/*
 cmake-build-debug/
-CMakeLists.txt
 data/diagrama
 src/zzz.cpp

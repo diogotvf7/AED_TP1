@@ -9,6 +9,12 @@
 #include <set>
 #include "Student.h"
 
+struct StudentCmp {
+    bool operator() (const Student& left, const Student& right) const {
+        return left.getCode() < right.getCode();
+    }
+};
+
 class ScheduleManager {
 
 public:
@@ -19,7 +25,7 @@ public:
 
 private:
     std::vector<Class> classes;
-    std::set<Student> students;
+    std::set<Student, StudentCmp> students;
 };
 
 
