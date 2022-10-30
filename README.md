@@ -10,7 +10,7 @@ objetivos a implementar:
 - [ ] Implementação de uma função que gera ficheros com os reusltados dos métodos criados
 
 //menor prioridade
-- [ ] Binary Tree
+- [ ] Binary Tree (estou nas tuas paredes veiga)
 - [ ] Interface do Programa
 
 <img src="https://user-images.githubusercontent.com/76122976/198676936-400bde9d-add0-45f2-ac68-47cf20f7c5ad.png" width=10% height=10%>
