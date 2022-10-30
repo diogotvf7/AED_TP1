@@ -13,11 +13,9 @@ class ScheduleManager {
 public:
 
     std::vector<Class> getClasses() const;
-
     void readClassesFile();
 
 private:
-
     std::vector<Class> classes;
 };
 

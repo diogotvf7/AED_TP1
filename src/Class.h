@@ -18,6 +18,8 @@ public:
 
     std::string getUcCode() const;
 
+    std::list<Slot> getSlots() const;
+
     void addSlot(const Slot &slot);
 
 private:

@@ -35,8 +35,6 @@ void ScheduleManager::readClassesFile() {
         getline(input, duration, ',');
         getline(input, type);
 
-        cout << classCode << ' ' << ucCode << ' '  << weekday << ' '  << start << ' '  << duration << ' '  << type;
-
         std::vector<Class>::iterator i = find_if(classes.begin(), classes.end(),[classCode, ucCode](Class c) { return c.getClassCode() == classCode && c.getUcCode() == ucCode; });
 
         if (i == classes.end()) {

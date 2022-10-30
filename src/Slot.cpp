@@ -2,30 +2,25 @@
 // Created by diogotvf7 on 27-10-2022.
 //
 
+#include <iomanip>
+#include <cmath>
+#include <ostream>
+#include <map>
 #include <string>
+
 #include "Slot.h"
 
 using namespace std;
 
 Slot::Slot(std::string weekday, std::string start, std::string duration, std::string type) {
 
-    if (weekday == "Monday")
-            this->weekday = 0;
-    else if (weekday == "Tuesday")
-            this->weekday = 1;
-    else if (weekday == "Wednesday")
-            this->weekday = 2;
-    else if (weekday == "Thursday")
-            this->weekday = 3;
-    else if (weekday == "Friday")
-            this->weekday = 4;
-
+    this->weekday = weekday;
     this->start = stof(start,  nullptr);
     this->duration = stof(duration, nullptr);
     this->type = type;
 }
 
-int Slot::getWeekday() const {
+string Slot::getWeekday() const {
     return weekday;
 }
 float Slot::getStart() const {
@@ -34,11 +29,23 @@ float Slot::getStart() const {
 float Slot::getDuration() const {
     return duration;
 }
-std::string Slot::getType() const {
+string Slot::getType() const {
     return type;
 }
 
 bool Slot::operator<(const Slot &s) const {
 
-    return weekday < s.weekday || (weekday == s.weekday && start < s.start);
+    map<string, int> weekdays = {{"Monday", 1}, {"Tuesday", 2}, {"Wednesday", 3}, {"Thursday", 4}, {"Friday", 5}};
+
+    return weekdays[weekday] < weekdays[s.weekday] || (weekdays[weekday] == weekdays[s.weekday] && start < s.start);
+}
+
+ostream& operator<<(std::ostream& os, const Slot& s) {
+
+    float startHours; float startMinutes = modf(s.start, &startHours) * 60;
+    ostringstream startOss; startOss << startHours << ':' << startMinutes;
+    float endHours; float endMinutes = modf(s.start + s.duration, &endHours) * 60;
+    ostringstream endOss; endOss << endHours << ':' << endMinutes;
+
+    os << setfill(' ') << left << setw(15) << s.weekday << setw(15) << startOss.str() << setw(15) << endOss.str() << setw(15) << s.type << endl;
 }

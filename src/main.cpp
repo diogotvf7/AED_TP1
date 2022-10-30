@@ -36,19 +36,19 @@ void testSlots() {
     else cout << "failed" << '\n';
 }
 
-void testReadClassesFile(const vector<Class> &classes) {
-
-
-}
-
 int main() {
 
     // testSlots();
 
-    ScheduleManager s;
-    s.readClassesFile();
+    ScheduleManager sm;
+    sm.readClassesFile();
+    vector<Class> classes = sm.getClasses();
+    for (const Class &c : classes)
+        for (const Slot &s : c.getSlots())
+            cout << s;
 
-    cout << '\n' << s.getClasses().size();
+
+    cout << '\n' << sm.getClasses().size();
 /*
     cout << s.getClasses()[0].getClassCode() << ' ' << s.getClasses()[0].getUcCode();
     cout << s.getClasses()[1].getClassCode() << ' ' << s.getClasses()[1].getUcCode();

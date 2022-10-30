@@ -1,24 +1,31 @@
 //
-// Created by joaob on 29/10/2022.
+// Created by diogotvf7 on 28-10-2022.
 //
 
 #include "Student.h"
 
 using namespace std;
 
-Student::Student(int number, string name) {
-    this->number = number;
+Student::Student(int code, string name, bool status = 0) {
+    this->code = code;
     this->name = name;
-}
- 
-int Student::getNumber() const {
-    return number;
+    this->status = status;
 }
 
-const string &Student::getName() const {
+int Student::getCode() const {
+    return code;
+}
+
+string Student::getName() const {
     return name;
 }
 
-const list<Class> &Student::getClasses() const {
-    return classes;
+void Student::addClass(const Class &c) {
+    schedule.push_back(c);
 }
+
+//TODO
+void Student::removeClass() {
+
+}
+

@@ -5,20 +5,23 @@
 #ifndef AED_TP1_SLOT_H
 #define AED_TP1_SLOT_H
 
+#include <ostream>
+
 class Slot {
 
 public:
     Slot(std::string weekday, std::string start, std::string duration, std::string type);
 
-    int getWeekday() const;
+    std::string getWeekday() const;
     float getStart() const;
     float getDuration() const;
     std::string getType() const;
 
     bool operator<(const Slot &s) const;
+    friend std::ostream& operator<<(std::ostream& os, const Slot& s);
 
 private:
-    int weekday;
+    std::string weekday;
     float start;
     float duration;
     std::string type;

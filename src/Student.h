@@ -1,35 +1,34 @@
 //
-// Created by joaob on 29/10/2022.
+// Created by diogotvf7 on 28-10-2022.
 //
+
+#ifndef AED_TP1_STUDENT_H
+#define AED_TP1_STUDENT_H
+
 #include <string>
+#include <vector>
 
 #include "Class.h"
 
-#ifndef AED_TP1_MASTER_STUDENT_H
-#define AED_TP1_MASTER_STUDENT_H
-
-
 class Student {
 
-
 public:
+    Student(int code, std::string name, bool status);
 
-    Student(int number , std::string name );
+    int getCode() const;
 
+    std::string getName() const;
 
-    int getNumber() const;
+    void addClass(const Class &c);
 
-    const std::string &getName() const;
-
-    const std::list<Class> &getClasses() const;
-
+    void removeClass();
 
 private:
-    int number;
-    std::string name ;
-    std::list<Class> classes;
-
+    int code;
+    std::string name;
+    bool status;
+    std::list<Class> schedule;
 };
 
 
-#endif //AED_TP1_MASTER_STUDENT_H
+#endif //AED_TP1_STUDENT_H

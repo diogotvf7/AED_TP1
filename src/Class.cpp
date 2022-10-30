@@ -19,6 +19,11 @@ string Class::getUcCode() const {
     return ucCode;
 }
 
+std::list<Slot> Class::getSlots() const {
+    return slots;
+}
+
 void Class::addSlot(const Slot &slot) {
     slots.push_back(slot);
 }
+
