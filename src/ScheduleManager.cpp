@@ -68,6 +68,10 @@ void ScheduleManager::readClassesFile() {
     }
 }
 
+
+
+
+
 void ScheduleManager::readStudentsFile() {
 
     ifstream in("../data/input/students_classes.csv");
@@ -105,5 +109,43 @@ void ScheduleManager::readStudentsFile() {
     }
     students.insert(previousStudent);
 }
+
+
+void ScheduleManager::addRequest(  std::string typeofrequest , const Student &student ,
+                                   const std::vector<Class> classes1 = {}, const std::vector<Class> classes2 = {}) {
+    requests.push(Request(student , classes1 , classes2 , typeofrequest));
+}
+
+void ScheduleManager::processRequests() {
+    while(!requests.empty()){
+        Request request = requests.front();
+        if (request.getTypeOfRequest() == "Remove Student "){
+            Class studentclass = request.getStudentClasses1().front();
+            Student student  = request.getStudent();
+            removeStudent( student , studentclass );
+        }
+        else if (request.getTypeOfRequest() == "Add Student"){
+            addStudent();
+        }
+        else if (request.getTypeOfRequest() == "Change Student Class"){
+            changeStudentClass();
+        }
+        else if (request.getTypeOfRequest() == "Change Student Classes"){
+            changeStudentClasses();
+        }
+        else{
+            cout << "Invalid Input" ;
+        }
+        requests.pop();
+    }
+}
+
+void ScheduleManager::removeStudent(Student &student, Class studentclass) {
+
+}
+
+
+
+
 
 

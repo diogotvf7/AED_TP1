@@ -7,7 +7,9 @@
 
 #include <vector>
 #include <set>
+#include <string>
 #include "Student.h"
+#include "Request.h"
 
 struct StudentCmp {
     bool operator() (const Student& left, const Student& right) const {
@@ -49,9 +51,20 @@ public:
      */
     void readStudentsFile();
 
+
+    void addRequest(std::string typeofrequest , const Student &student , std::vector<Class> classes1 , std::vector<Class> classes2);
+    void processRequests();
+
 private:
     std::vector<Class> classes;
     std::set<Student, StudentCmp> students;
+    std::queue<Request> requests;
+    void removeStudent(Student &student , Class studentclass);
+    void addStudent();
+    void changeStudentClass();
+    void changeStudentClasses();
+
+
 };
 
 
