@@ -43,11 +43,18 @@ public:
     //TODO
     void removeClass();
     /**
-     * @brief Overload of operator== to check equality between different Students;
+     * @brief Overload of operator== to check equality between Student objects;
      * @param s the right hand side Student;
-     * @return return true if both Students have the same Student Code, returns false otherwise;
+     * @return return true if both Student objects have the same Student Code and Name, returns false otherwise;
      */
     bool operator==(const Student &s) const;
+    /**
+     * @brief Overload of operator<< to output Student's info;
+     * @param os the output stream to which we want to output the Student's info;
+     * @param s the Student that whose info we want to output;
+     * @return returns a reference to the original output stream;
+     */
+    friend std::ostream& operator<<(std::ostream& os, const Student& s);
 
 private:
     int code;

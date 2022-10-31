@@ -19,15 +19,27 @@ class ScheduleManager {
 
 public:
     /**
+     * @brief Constructor for the Schedule Manager's class.
+     * Runs the input reading functions;
+     */
+    ScheduleManager();
+    /**
      * @brief Get function for the Class's Vector;
      * @return a vector<Class> with all the Classes from input the file;
      */
-    std::vector<Class> getClasses() const;
+    std::vector<Class> getClassesVector() const;
     /**
      * @brief Get functions for the Students Set;
      * @return a set<Student> with all the Students from the input file;
      */
-    std::set<Student, StudentCmp> getStudents() const;
+    std::set<Student, StudentCmp> getStudentsSet() const;
+    /**
+     * @brief Function that finds a Student by Code and Name in the Student's set;
+     * @param code the Code to look for;
+     * @param name the Name to look for;
+     * @return returns a reference to the Student in case it finds him, returns Student("", "") otherwise;
+     */
+    Student findStudent(std::string code, const std::string& name) const;
     /**
      * @brief Reads the classes_per_uc.csv file and stores the input in vector<Class> classes;
      */

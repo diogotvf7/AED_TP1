@@ -34,6 +34,14 @@ void Student::removeClass() {
 }
 
 bool Student::operator==(const Student &s) const {
-    return code == s.code;
+    return code == s.code && name == s.name;
+}
+
+ostream &operator<<(ostream &os, const Student &s) {
+
+    os << " - Code: " << s.code << "      Name: " << s.name << "\n" << endl;
+    for (const Class &c : s.schedule)
+        os << c;
+    return os;
 }
 

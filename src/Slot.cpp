@@ -40,12 +40,13 @@ bool Slot::operator<(const Slot &s) const {
     return weekdays[weekday] < weekdays[s.weekday] || (weekdays[weekday] == weekdays[s.weekday] && start < s.start);
 }
 
-ostream& operator<<(std::ostream& os, const Slot& s) {
+ostream &operator<<(std::ostream& os, const Slot& s) {
 
     float startHours; float startMinutes = modf(s.start, &startHours) * 60;
-    ostringstream startOss; startOss << startHours << ':' << startMinutes;
+    ostringstream startOss; startOss << setfill('0') << right << setw(2) << startHours << ':' << setw(2) << left << startMinutes;
     float endHours; float endMinutes = modf(s.start + s.duration, &endHours) * 60;
-    ostringstream endOss; endOss << endHours << ':' << endMinutes;
+    ostringstream endOss; endOss << setfill('0') << right << setw(2) << endHours << ':' << setw(2) << left << endMinutes;
 
     os << setfill(' ') << left << setw(15) << s.weekday << setw(15) << startOss.str() << setw(15) << endOss.str() << setw(15) << s.type << endl;
+    return os;
 }

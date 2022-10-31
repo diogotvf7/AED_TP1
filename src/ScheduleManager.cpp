@@ -11,12 +11,26 @@
 
 using namespace std;
 
-vector<Class> ScheduleManager::getClasses() const {
+ScheduleManager::ScheduleManager() {
+    readClassesFile();
+    readStudentsFile();
+}
+
+vector<Class> ScheduleManager::getClassesVector() const {
     return classes;
 }
 
-set<Student, StudentCmp> ScheduleManager::getStudents() const {
+set<Student, StudentCmp> ScheduleManager::getStudentsSet() const {
     return students;
+}
+
+Student ScheduleManager::findStudent(string code, const string &name) const {
+    auto i = students.find(Student(code, name));
+    if (i == students.end())
+        throw invalid_argument("No Student with that code!");
+    if (i->getName() != name)
+        throw invalid_argument("Code and Name do not match!");
+    return *i;
 }
 
 void ScheduleManager::readClassesFile() {
@@ -91,4 +105,5 @@ void ScheduleManager::readStudentsFile() {
     }
     students.insert(previousStudent);
 }
+
 

@@ -38,6 +38,19 @@ public:
      * @param slot the slot to be added;
      */
     void addSlot(const Slot &slot);
+    /**
+     * @brief Overload of operator== to check equality between Class objects;
+     * @param c the right hand side Class;
+     * @return return true if both Class objects have the same Class Code and UC Code, returns false otherwise;
+     */
+    bool operator==(const Class &c) const;
+    /**
+     * @brief Overload of operator<< to output Class's info;
+     * @param os the output stream to which we want to output the Class's info;
+     * @param s the Class that we want to output;
+     * @return returns a reference to the original output stream;
+     */
+    friend std::ostream& operator<<(std::ostream& os, const Class& c);
 
 private:
     std::string classCode;

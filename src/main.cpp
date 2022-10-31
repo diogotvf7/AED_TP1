@@ -20,51 +20,82 @@ void testSlots() {
     cout << ":::::SLOT TESTS:::::\n";
 
     cout << "Test 1: ";
-    if (s1 < s2) cout << "passed" << '\n';
-    else cout << "failed" << '\n';
+    if (s1 < s2) cout << "passed" << endl;
+    else cout << "failed" << endl;
 
     cout << "Test 2: ";
-    if (!(s3 < s5)) cout << "passed" << '\n';
-    else cout << "failed" << '\n';
+    if (!(s3 < s5)) cout << "passed" << endl;
+    else cout << "failed" << endl;
 
     cout << "Test 3: ";
-    if (!(s3 < s4)) cout << "passed" << '\n';
-    else cout << "failed" << '\n';
+    if (!(s3 < s4)) cout << "passed" << endl;
+    else cout << "failed" << endl;
 
     cout << "Test 4: ";
-    if ((s5 < s1)) cout << "passed" << '\n';
-    else cout << "failed" << '\n';
+    if ((s5 < s1)) cout << "passed" << endl;
+    else cout << "failed" << endl;
+}
+
+void testStudents(const ScheduleManager &sm) {
+
+    auto s1 = sm.findStudent("202071557","Ludovico");
+    auto s3 = sm.findStudent("202027527","Renata");
+
+    cout << ":::::STUDENT TESTS:::::" << endl;
+
+    cout << "Test 1: ";
+    if (s1.getClasses().size() == 4) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    cout << "Test 2: ";
+    try {
+        auto s2 = sm.findStudent("202071557", "Wrong Name");
+        cout << "failed" << endl;
+    } catch (const invalid_argument &e) {
+        cout << "passed" << endl;
+    }
+
+    cout << "Test 3: ";
+    if (s3.getClasses() == list<Class>{Class("1LEIC13", "L.EIC003"), Class("1LEIC13","L.EIC004"), Class("1LEIC14", "L.EIC005")}) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    cout << "Test 4: ";
+    if (s3.getClasses() == list<Class>{Class("1LEIC13", "L.EIC001"), Class("1LEIC13","L.EIC004"), Class("1LEIC14", "L.EIC005")}) cout << "failed" << endl;
+    else cout << "passed" << endl;
+
+    cout << "Test 5: ";
+    try {
+        auto s2 = sm.findStudent("0", "Ludovico");
+        cout << "failed" << endl;
+    } catch (const invalid_argument &e) {
+        cout << "passed" << endl;
+    }
+}
+
+void testStudentsPrint(const ScheduleManager &sm) {
+
+    cout << *sm.getStudentsSet().find(Student("201920727", "Ines")) << endl;
+    cout << *sm.getStudentsSet().begin() << endl;
 }
 
 int main() {
 
-    // testSlots();
-
     ScheduleManager sm;
 
-    sm.readClassesFile();
-    vector<Class> classes = sm.getClasses();
+    vector<Class> classes = sm.getClassesVector();
     for (const Class &c : classes)
         for (const Slot &s : c.getSlots())
             cout << s;
 
-    sm.readStudentsFile();
-    set<Student, StudentCmp> students = sm.getStudents();
-    for (auto it = students.begin(); it != students.end(); ++it)
-        cout << ' ' << it->getCode() << endl;
-/*
-    for (const Student &s : students)
-        cout << s.getClasses().size() << endl;
-*/
+    set<Student, StudentCmp> students = sm.getStudentsSet();
+    for (const auto & student : students)
+        cout << ' ' << student.getCode() << endl;
 
-    cout << '\n' << sm.getClasses().size() << ' ' << sm.getStudents().size();
-/*
-    cout << s.getClasses()[0].getClassCode() << ' ' << s.getClasses()[0].getUcCode();
-    cout << s.getClasses()[1].getClassCode() << ' ' << s.getClasses()[1].getUcCode();
-    cout << s.getClasses()[2].getClassCode() << ' ' << s.getClasses()[2].getUcCode();
-    cout << s.getClasses()[3].getClassCode() << ' ' << s.getClasses()[3].getUcCode();
-    cout << s.getClasses()[4].getClassCode() << ' ' << s.getClasses()[4].getUcCode();
-    cout << s.getClasses()[5].getClassCode() << ' ' << s.getClasses()[5].getUcCode();
-*/
+    cout << '\n' << sm.getClassesVector().size() << ' ' << sm.getStudentsSet().size() << '\n';
+
+    testSlots();
+    testStudents(sm);
+    testStudentsPrint(sm);
+
     return 0;
 }

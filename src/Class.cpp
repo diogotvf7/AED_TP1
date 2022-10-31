@@ -2,6 +2,7 @@
 // Created by diogotvf7 on 27-10-2022.
 //
 
+#include <algorithm>
 #include "Class.h"
 
 using namespace std;
@@ -25,5 +26,19 @@ std::list<Slot> Class::getSlots() const {
 
 void Class::addSlot(const Slot &slot) {
     slots.push_back(slot);
+    slots.sort();
 }
+
+bool Class::operator==(const Class &c) const {
+    return classCode == c.classCode && ucCode == c.ucCode;
+}
+
+ostream &operator<<(ostream &os, const Class &c) {
+
+    os << "     - UC Code: " << c.ucCode << "      Class Code: " << c.classCode << endl;
+    for (const Slot &s : c.slots)
+        os << "       - " << s;
+    return os;
+}
+
 
