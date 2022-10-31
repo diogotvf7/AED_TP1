@@ -14,7 +14,9 @@ add_executable(AED_TP1
         src/Slot.cpp
         src/Slot.h
         src/Student.cpp
-        src/Student.h)
+        src/Student.h
+        src/Request.cpp
+        src/Request.h)
 
 # Doxygen Build
 find_package(Doxygen)
