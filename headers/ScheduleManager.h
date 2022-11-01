@@ -32,7 +32,7 @@ public:
      * @brief Get functions for the Students Set;
      * @return a set<Student> with all the Students from the input file;
      */
-    std::set<Student, StudentCmp> getStudentsSet() const;
+    std::set<Student*, StudentCmp> getStudentsSet() const;
     /**
      * @brief Function that finds a Student by Code and Name in the Student's set;
      * @param code the Code to look for;
@@ -48,10 +48,11 @@ public:
      * @brief Reads the students_classes.csv file and stores the input in set<Student> students;
      */
     void readStudentsFile();
+    void updateStudent();
 
 private:
-    std::vector<Class> classes;
-    std::set<Student, StudentCmp> students;
+    std::vector<Class*> classes;
+    std::set<Student*, StudentCmp> students;
 };
 
 

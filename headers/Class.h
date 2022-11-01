@@ -7,6 +7,8 @@
 
 #include <string>
 #include <list>
+#include <utility>
+#include "Class.h"
 #include "Slot.h"
 
 class Class {
@@ -33,11 +35,15 @@ public:
      * @return returns a list with all the Slots occupied by the Class;
      */
     std::list<Slot> getSlots() const;
+    //TODO
+    unsigned countStudents() const;
     /**
      * @bried Function that adds Slots to a Class;
      * @param slot the slot to be added;
      */
     void addSlot(const Slot &slot);
+    //TODO
+    void printStudents() const;
     /**
      * @brief Overload of operator== to check equality between Class objects;
      * @param c the right hand side Class;
@@ -56,6 +62,7 @@ private:
     std::string classCode;
     std::string ucCode;
     std::list<Slot> slots;
+    std::vector<Student> students;
 };
 
 
