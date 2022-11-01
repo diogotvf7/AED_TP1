@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "ScheduleManager.h"
+#include "../headers/ScheduleManager.h"
 
 using namespace std;
 

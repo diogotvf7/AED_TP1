@@ -2,7 +2,7 @@
 // Created by diogotvf7 on 28-10-2022.
 //
 
-#include "Student.h"
+#include "../headers/Student.h"
 
 using namespace std;
 

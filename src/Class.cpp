@@ -3,7 +3,7 @@
 //
 
 #include <algorithm>
-#include "Class.h"
+#include "../headers/Class.h"
 
 using namespace std;
 

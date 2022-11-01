@@ -7,7 +7,7 @@
 #include <sstream>
 #include <algorithm>
 
-#include "ScheduleManager.h"
+#include "../headers/ScheduleManager.h"
 
 using namespace std;
 

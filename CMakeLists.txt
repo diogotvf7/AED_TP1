@@ -7,14 +7,14 @@ include_directories(src)
 
 add_executable(AED_TP1
         src/Class.cpp
-        src/Class.h
+        headers/Class.h
         src/main.cpp
         src/ScheduleManager.cpp
-        src/ScheduleManager.h
+        headers/ScheduleManager.h
         src/Slot.cpp
-        src/Slot.h
+        headers/Slot.h
         src/Student.cpp
-        src/Student.h)
+        headers/Student.h)
 
 # Doxygen Build
 find_package(Doxygen)

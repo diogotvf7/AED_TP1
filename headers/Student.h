@@ -20,6 +20,9 @@ public:
      * @param status boolean that determines whether a Student has a special status or not (default is false);
      */
     Student(std::string code, std::string name, bool status = false);
+
+    Student();
+
     /**
      * @brief Get function for the Student's Code;
      * @return returns an int with the Student's Code;
