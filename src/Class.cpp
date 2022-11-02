@@ -7,17 +7,17 @@
 
 using namespace std;
 
-Class::Class(const string &classCode, const string &ucCode) {
+Class::Class(const string &classCode, UC *uc) {
     this->classCode = classCode;
-    this->ucCode = ucCode;
+    this->uc = uc;
 }
 
 string Class::getClassCode() const {
     return classCode;
 }
 
-string Class::getUcCode() const {
-    return ucCode;
+UC *Class::getUc() const {
+    return uc;
 }
 
 list<Slot*> Class::getSlots() const {
@@ -37,12 +37,12 @@ unsigned Class::countStudents() const {
 }
 
 bool Class::operator==(const Class &c) const {
-    return classCode == c.classCode && ucCode == c.ucCode;
+    return classCode == c.classCode && uc->getUcCode() == c.uc->getUcCode();
 }
 
 ostream &operator<<(ostream &os, const Class &c) {
 
-    os << "     - UC Code: " << c.ucCode << "      Class Code: " << c.classCode << endl;
+    os << "     - UC Code: " << c.uc->getUcCode() << "      Class Code: " << c.classCode << endl;
     for (Slot *s : c.slots)
         os << "       - " << *s;
     return os;

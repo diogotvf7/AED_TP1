@@ -50,7 +50,7 @@ void ScheduleManager::readClassesPerUcFile() {
             currentUC = new UC(ucCode);
             ucs.push_back(currentUC);
         }
-        Class *newClass = new Class(classCode, ucCode);
+        Class *newClass = new Class(classCode, currentUC);
         classes.push_back(newClass);
         currentUC->addClassToUc(newClass);
     }
@@ -75,7 +75,7 @@ void ScheduleManager::readClassesFile() {
         getline(input, duration, ',');
         getline(input, type, '\r');
 
-        auto itr = find_if(classes.begin(), classes.end(),[ucCode, classCode](Class *c){return c->getClassCode() == classCode && c->getUcCode() == ucCode;});
+        auto itr = find_if(classes.begin(), classes.end(),[ucCode, classCode](Class *c){return c->getClassCode() == classCode && c->getUc()->getUcCode() == ucCode;});
         (*itr)->addSlot(new Slot(weekday, start, duration, type));
     }
 }
@@ -100,7 +100,7 @@ void ScheduleManager::readStudentsClassesFile() {
         getline(input, ucCode, ',');
         getline(input, classCode, '\r');
 
-        auto itr = find_if(classes.begin(), classes.end(),[classCode, ucCode](Class *c) {return c->getClassCode() == classCode && c->getUcCode() == ucCode;});
+        auto itr = find_if(classes.begin(), classes.end(),[classCode, ucCode](Class *c) {return c->getClassCode() == classCode && c->getUc()->getUcCode() == ucCode;});
 
         if (currentStudent == nullptr) {
             currentStudent = new Student(code, name);

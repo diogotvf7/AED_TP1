@@ -9,9 +9,11 @@
 #include <list>
 #include <vector>
 
+#include "UC.h"
 #include "Student.h"
 #include "Slot.h"
 
+class UC;
 class Student;
 
 class Class {
@@ -23,7 +25,7 @@ public:
      * @param classCode string for the Class's Code;
      * @param ucCode string for the US's Code;
      */
-    Class(const std::string &classCode, const std::string &ucCode);
+    Class(const std::string &classCode, UC *uc);
     /**
      * @brief Get function for the Class's Code;
      * @return returns a string with the Class's Code;
@@ -33,7 +35,7 @@ public:
      * @brief Get function for the UC's Code;
      * @return returns a string with the UC's Code;
      */
-    std::string getUcCode() const;
+    UC *getUc() const;
     /**
      * @brief Get functions for the Class's Slots;
      * @return returns a list with all the Slots pointers occupied by the Class;
@@ -71,7 +73,7 @@ public:
 
 private:
     std::string classCode;
-    std::string ucCode;
+    UC *uc;
     std::list<Slot*> slots;
     std::vector<Student*> students;
 };

@@ -61,7 +61,7 @@ int main() {
 
     ScheduleManager sm;
 
-    cout << '\n' << sm.getClassesVector().size() << ' ' << sm.getStudentsSet().size() << '\n';
+    cout << '\n' << sm.getUCsVector().size() << ' ' << sm.getClassesVector().size() << ' ' << sm.getStudentsSet().size() << '\n';
 
     // testSlots();
 

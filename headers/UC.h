@@ -10,6 +10,8 @@
 
 #include "Class.h"
 
+class Class;
+
 class UC {
 
 public:
