@@ -3,6 +3,7 @@
 //
 
 #include "../headers/Student.h"
+#include "../headers/Class.h"
 
 using namespace std;
 
@@ -20,16 +21,16 @@ string Student::getName() const {
     return name;
 }
 
-list<Class> Student::getClasses() const {
+vector<Class*> Student::getClasses() const {
     return schedule;
 }
 
-void Student::addClass(const Class &c) {
+void Student::addClassToStudent(Class *c) {
     schedule.push_back(c);
 }
 
 //TODO
-void Student::removeClass() {
+void Student::removeClass(Class *c) {
 
 }
 
@@ -40,7 +41,7 @@ bool Student::operator==(const Student &s) const {
 ostream &operator<<(ostream &os, const Student &s) {
 
     os << " - Code: " << s.code << "      Name: " << s.name << "\n" << endl;
-    for (const Class &c : s.schedule)
+    for (Class *c : s.schedule)
         os << c;
     return os;
 }

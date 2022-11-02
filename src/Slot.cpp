@@ -23,14 +23,23 @@ Slot::Slot(std::string weekday, std::string start, std::string duration, std::st
 string Slot::getWeekday() const {
     return weekday;
 }
+
 float Slot::getStart() const {
     return start;
 }
+
 float Slot::getDuration() const {
     return duration;
 }
+
 string Slot::getType() const {
     return type;
+}
+
+bool Slot::overlaps(const Slot &s) {
+    if (type == "T" || s.type == "T")
+        return false;
+    return (weekday == s.weekday) && ((start < s.start + s.duration) && (s.start < start + duration));
 }
 
 bool Slot::operator<(const Slot &s) const {

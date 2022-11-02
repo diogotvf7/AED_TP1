@@ -8,42 +8,64 @@
 #include <algorithm>
 
 #include "../headers/ScheduleManager.h"
+#include "../headers/UC.h"
+#include "../headers/Student.h"
 
 using namespace std;
 
 ScheduleManager::ScheduleManager() {
+    readClassesPerUcFile();
     readClassesFile();
-    readStudentsFile();
+    readStudentsClassesFile();
 }
 
-vector<Class> ScheduleManager::getClassesVector() const {
+vector<UC*> ScheduleManager::getUCsVector() const {
+    return ucs;
+}
+
+vector<Class*> ScheduleManager::getClassesVector() const {
     return classes;
 }
 
-set<Student, StudentCmp> ScheduleManager::getStudentsSet() const {
+set<Student*, StudentCmp> ScheduleManager::getStudentsSet() const {
     return students;
 }
 
-Student ScheduleManager::findStudent(string code, const string &name) const {
-    auto i = students.find(Student(code, name));
-    if (i == students.end())
-        throw invalid_argument("No Student with that code!");
-    if (i->getName() != name)
-        throw invalid_argument("Code and Name do not match!");
-    return *i;
+void ScheduleManager::readClassesPerUcFile() {
+
+    ifstream in("../data/input/classes_per_uc.csv");
+    string line; getline(in, line); // Ignore Header
+
+    UC *currentUC;
+
+    while (getline(in, line)) {
+
+        string ucCode, classCode;
+        stringstream input(line);
+
+        getline(input, ucCode, ',');
+        getline(input, classCode, '\r');
+
+        if (ucs.empty() || ucCode != currentUC->getUcCode()) {
+            currentUC = new UC(ucCode);
+            ucs.push_back(currentUC);
+        }
+        Class *newClass = new Class(classCode, ucCode);
+        classes.push_back(newClass);
+        currentUC->addClassToUc(newClass);
+    }
 }
 
 void ScheduleManager::readClassesFile() {
 
     ifstream in("../data/input/classes.csv");
-    string line;
+    string line; getline(in, line); // Ignore first line
 
-    getline(in, line); // Ignore first line
+    UC *currentUC = nullptr;
 
     while (getline(in, line)) {
 
         string classCode, ucCode, weekday, start, duration, type;
-
         stringstream input(line);
 
         getline(input, classCode, ',');
@@ -53,30 +75,19 @@ void ScheduleManager::readClassesFile() {
         getline(input, duration, ',');
         getline(input, type, '\r');
 
-        auto i = find_if(classes.begin(), classes.end(),[classCode, ucCode](const Class &c) { return c.getClassCode() == classCode && c.getUcCode() == ucCode; });
-
-        if (i == classes.end()) {
-
-            Class c(classCode, ucCode);
-            c.addSlot(Slot(weekday, start, duration, type));
-            classes.push_back(c);
-
-        } else {
-
-            i->addSlot(Slot(weekday, start, duration, type));
-        }
+        auto itr = find_if(classes.begin(), classes.end(),[ucCode, classCode](Class *c){return c->getClassCode() == classCode && c->getUcCode() == ucCode;});
+        (*itr)->addSlot(new Slot(weekday, start, duration, type));
     }
 }
 
-void ScheduleManager::readStudentsFile() {
+void ScheduleManager::readStudentsClassesFile() {
 
     ifstream in("../data/input/students_classes.csv");
     string line;
 
     getline(in, line); // Ignore first line
 
-    string previousCode = "0";
-    Student previousStudent = Student("0", "D");
+    Student *currentStudent = nullptr;
 
     while (getline(in, line)) {
 
@@ -89,21 +100,19 @@ void ScheduleManager::readStudentsFile() {
         getline(input, ucCode, ',');
         getline(input, classCode, '\r');
 
-        auto i = find_if(classes.begin(), classes.end(),[classCode, ucCode](const Class &c) { return c.getClassCode() == classCode && c.getUcCode() == ucCode; });
+        auto itr = find_if(classes.begin(), classes.end(),[classCode, ucCode](Class *c) {return c->getClassCode() == classCode && c->getUcCode() == ucCode;});
 
-
-        if (code == previousCode) {
-
-            previousStudent.addClass(*i);
-        } else {
-            if (previousStudent.getCode() != 0)
-                students.insert(previousStudent);
-            previousStudent = Student(code, name);
-            previousStudent.addClass(*i);
+        if (currentStudent == nullptr) {
+            currentStudent = new Student(code, name);
         }
-        previousCode = code;
+        if (currentStudent->getCode() != stoi(code)) {
+            students.insert(currentStudent);
+            currentStudent = new Student(code, name);
+        }
+        (*itr)->addStudent(currentStudent);
+        currentStudent->addClassToStudent(*itr);
     }
-    students.insert(previousStudent);
+    students.insert(currentStudent);
 }
 
 

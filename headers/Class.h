@@ -7,19 +7,23 @@
 
 #include <string>
 #include <list>
-#include <utility>
-#include "Class.h"
+#include <vector>
+
+#include "Student.h"
 #include "Slot.h"
+
+class Student;
 
 class Class {
 
 public:
+    Class();
     /**
      * @brief Constructor for Class's class;
      * @param classCode string for the Class's Code;
      * @param ucCode string for the US's Code;
      */
-    Class(std::string classCode, std::string ucCode);
+    Class(const std::string &classCode, const std::string &ucCode);
     /**
      * @brief Get function for the Class's Code;
      * @return returns a string with the Class's Code;
@@ -32,16 +36,23 @@ public:
     std::string getUcCode() const;
     /**
      * @brief Get functions for the Class's Slots;
-     * @return returns a list with all the Slots occupied by the Class;
+     * @return returns a list with all the Slots pointers occupied by the Class;
      */
-    std::list<Slot> getSlots() const;
-    //TODO
-    unsigned countStudents() const;
+    std::list<Slot*> getSlots() const;
     /**
-     * @bried Function that adds Slots to a Class;
+     * @brief Function that adds Student pointers to vector<Student*> students;
+     */
+    void addStudent(Student *student);
+    /**
+     * @bried Function that adds Slot pointers to a Class;
      * @param slot the slot to be added;
      */
-    void addSlot(const Slot &slot);
+    void addSlot(Slot *slot);
+    /**
+     * @brief Function to check the size of the Class;
+     * @return the size of vector<Student*> students;
+     */
+    unsigned countStudents() const;
     //TODO
     void printStudents() const;
     /**
@@ -56,13 +67,13 @@ public:
      * @param s the Class that we want to output;
      * @return returns a reference to the original output stream;
      */
-    friend std::ostream& operator<<(std::ostream& os, const Class& c);
+    friend std::ostream& operator<<(std::ostream& os, const Class &c);
 
 private:
     std::string classCode;
     std::string ucCode;
-    std::list<Slot> slots;
-    std::vector<Student> students;
+    std::list<Slot*> slots;
+    std::vector<Student*> students;
 };
 
 

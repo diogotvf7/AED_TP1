@@ -2,12 +2,12 @@
 // Created by diogotvf7 on 27-10-2022.
 //
 
-#include <algorithm>
 #include "../headers/Class.h"
+#include "../headers/Student.h"
 
 using namespace std;
 
-Class::Class(std::string classCode, std::string ucCode) {
+Class::Class(const string &classCode, const string &ucCode) {
     this->classCode = classCode;
     this->ucCode = ucCode;
 }
@@ -20,13 +20,20 @@ string Class::getUcCode() const {
     return ucCode;
 }
 
-std::list<Slot> Class::getSlots() const {
+list<Slot*> Class::getSlots() const {
     return slots;
 }
 
-void Class::addSlot(const Slot &slot) {
+void Class::addStudent(Student *student) {
+    students.push_back(student);
+}
+
+void Class::addSlot(Slot *slot) {
     slots.push_back(slot);
-    slots.sort();
+}
+
+unsigned Class::countStudents() const {
+    return students.size();
 }
 
 bool Class::operator==(const Class &c) const {
@@ -36,8 +43,8 @@ bool Class::operator==(const Class &c) const {
 ostream &operator<<(ostream &os, const Class &c) {
 
     os << "     - UC Code: " << c.ucCode << "      Class Code: " << c.classCode << endl;
-    for (const Slot &s : c.slots)
-        os << "       - " << s;
+    for (Slot *s : c.slots)
+        os << "       - " << *s;
     return os;
 }
 

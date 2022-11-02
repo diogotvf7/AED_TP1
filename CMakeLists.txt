@@ -3,19 +3,6 @@ project(AED_TP1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(src)
-
-add_executable(AED_TP1
-        src/Class.cpp
-        headers/Class.h
-        src/main.cpp
-        src/ScheduleManager.cpp
-        headers/ScheduleManager.h
-        src/Slot.cpp
-        headers/Slot.h
-        src/Student.cpp
-        headers/Student.h)
-
 # Doxygen Build
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
@@ -37,3 +24,18 @@ if(DOXYGEN_FOUND)
 else(DOXYGEN_FOUND)
     message("Doxygen needs to be installed to generate the documentation.")
 endif(DOXYGEN_FOUND)
+
+include_directories(headers)
+
+add_executable(AED_TP1
+        src/main.cpp
+        headers/Slot.h
+        src/Slot.cpp
+        headers/Class.h
+        src/Class.cpp
+        headers/UC.h
+        src/UC.cpp
+        headers/Student.h
+        src/Student.cpp
+        headers/ScheduleManager.h
+        src/ScheduleManager.cpp)

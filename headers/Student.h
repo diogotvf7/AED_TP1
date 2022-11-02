@@ -5,10 +5,13 @@
 #ifndef AED_TP1_STUDENT_H
 #define AED_TP1_STUDENT_H
 
-#include <string>
+#include <ostream>
 #include <vector>
+#include <string>
 
 #include "Class.h"
+
+class Class;
 
 class Student {
 
@@ -20,9 +23,6 @@ public:
      * @param status boolean that determines whether a Student has a special status or not (default is false);
      */
     Student(std::string code, std::string name, bool status = false);
-
-    Student();
-
     /**
      * @brief Get function for the Student's Code;
      * @return returns an int with the Student's Code;
@@ -37,14 +37,14 @@ public:
      * @brief Get function for the Student's Classes;
      * @return returns a list with all the Student's Classes;
      */
-    std::list<Class> getClasses() const;
+    std::vector<Class*> getClasses() const;
     /**
      * @brief Function that adds a Class to the Student's schedule;
      * @param c the class to be added;
      */
-    void addClass(const Class &c);
+    void addClassToStudent(Class *c);
     //TODO
-    void removeClass();
+    void removeClass(Class *c);
     /**
      * @brief Overload of operator== to check equality between Student objects;
      * @param s the right hand side Student;
@@ -63,7 +63,8 @@ private:
     int code;
     std::string name;
     bool status;
-    std::list<Class> schedule;
+    // std::vector<UC*> ucs;
+    std::vector<Class*> schedule;
 };
 
 

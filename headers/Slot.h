@@ -6,6 +6,7 @@
 #define AED_TP1_SLOT_H
 
 #include <ostream>
+#include <string>
 
 class Slot {
 
@@ -38,6 +39,12 @@ public:
      * @return returns a string with the Slot's Type;
      */
     std::string getType() const;
+    /**
+     * @brief Function that checks if there is overlap between to Slots;
+     * @param s the right hand side Slot;
+     * @return returns true if there is overlap between TP-TP, PL-PL, or TP-PL classes, returns false otherwise;
+     */
+    bool overlaps(const Slot &s);
     /**
      * @brief Overload of operator< to check if lhs Slot starts before rhs Slot
      * @param s the right hand side Slot;

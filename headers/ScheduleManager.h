@@ -7,11 +7,13 @@
 
 #include <vector>
 #include <set>
+
 #include "Student.h"
+#include "UC.h"
 
 struct StudentCmp {
-    bool operator() (const Student& left, const Student& right) const {
-        return left.getCode() < right.getCode();
+    bool operator() (Student *left, Student *right) const {
+        return left->getCode() < right->getCode();
     }
 };
 
@@ -24,13 +26,18 @@ public:
      */
     ScheduleManager();
     /**
-     * @brief Get function for the Class's Vector;
-     * @return a vector<Class> with all the Classes from input the file;
+     * Get function for the UC's vector;
+     * @return a vector<UC*> with all the UCs pointers from the input file;
      */
-    std::vector<Class> getClassesVector() const;
+    std::vector<UC*> getUCsVector() const;
     /**
-     * @brief Get functions for the Students Set;
-     * @return a set<Student> with all the Students from the input file;
+     * @brief Get function for the Class's Vector;
+     * @return a vector<Class*> with all the Classes pointers from input the file;
+     */
+    std::vector<Class*> getClassesVector() const;
+    /**
+     * @brief Get function for the Students Set;
+     * @return a set<Student*> with all the Students pointers from the input file;
      */
     std::set<Student*, StudentCmp> getStudentsSet() const;
     /**
@@ -39,18 +46,22 @@ public:
      * @param name the Name to look for;
      * @return returns a reference to the Student in case it finds him, returns Student("", "") otherwise;
      */
-    Student findStudent(std::string code, const std::string& name) const;
+    Student *findStudent(const std::string &code, const std::string &name) const;
     /**
-     * @brief Reads the classes_per_uc.csv file and stores the input in vector<Class> classes;
+     * @brief Reads the classes_per_uc.csv file and stores the input in vector<Uc> ucs;
+     */
+    void readClassesPerUcFile();
+    /**
+     * @brief Reads the classes.csv file and stores the input in vector<Class> classes;
      */
     void readClassesFile();
     /**
      * @brief Reads the students_classes.csv file and stores the input in set<Student> students;
      */
-    void readStudentsFile();
-    void updateStudent();
+    void readStudentsClassesFile();
 
 private:
+    std::vector<UC*> ucs;
     std::vector<Class*> classes;
     std::set<Student*, StudentCmp> students;
 };
