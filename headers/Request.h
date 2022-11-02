@@ -5,14 +5,9 @@
 #ifndef AED_TP1_REQUEST_H
 #define AED_TP1_REQUEST_H
 
-#include "Student.h"
-
 class Request {
 
-public:
-    Request(Student *student);
-private:
-    Student *student;
+    virtual bool isPossible() const = 0;
 };
 
 #endif //AED_TP1_REQUEST_H

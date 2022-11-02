@@ -37,14 +37,19 @@ public:
      */
     UC *getUc() const;
     /**
-     * @brief Get functions for the Class's Slots;
+     * @brief Get function for the Class's Slots list;
      * @return returns a list with all the Slots pointers occupied by the Class;
      */
     std::list<Slot*> getSlots() const;
     /**
+     * @brief Get function for the Class's Students vector;
+     * @return returns a vector with all the pointers form Student's who are in this Class;
+     */
+    std::vector<Student*> getStudents() const;
+    /**
      * @brief Function that adds Student pointers to vector<Student*> students;
      */
-    void addStudent(Student *student);
+    void addStudent(Student *s);
     /**
      * @bried Function that adds Slot pointers to a Class;
      * @param slot the slot to be added;

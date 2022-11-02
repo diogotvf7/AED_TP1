@@ -9,8 +9,10 @@
 #include <vector>
 
 #include "Class.h"
+#include "Student.h"
 
 class Class;
+class Student;
 
 class UC {
 
@@ -18,12 +20,14 @@ public:
     explicit UC(const std::string& ucCode);
     std::string getUcCode() const;
     std::vector<Class*> getClasses() const;
-    void addClassToUc(Class *c);
+    unsigned getMinClassStudents() const;
+    unsigned getMaxClassStudents() const;
+    void addClass(Class *c);
+    void addStudent(Student *s);
 private:
     std::string ucCode;
     std::vector<Class*> classes;
-    unsigned minStudentsInClass;
-    unsigned maxStudentsInClass;
+    std::vector<Student*> students;
 };
 
 

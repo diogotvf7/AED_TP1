@@ -24,8 +24,13 @@ list<Slot*> Class::getSlots() const {
     return slots;
 }
 
-void Class::addStudent(Student *student) {
-    students.push_back(student);
+vector<Student*> Class::getStudents() const {
+    return students;
+}
+
+void Class::addStudent(Student *s) {
+    students.push_back(s);
+    uc->addStudent(s);
 }
 
 void Class::addSlot(Slot *slot) {

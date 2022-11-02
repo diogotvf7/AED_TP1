@@ -52,7 +52,7 @@ void ScheduleManager::readClassesPerUcFile() {
         }
         Class *newClass = new Class(classCode, currentUC);
         classes.push_back(newClass);
-        currentUC->addClassToUc(newClass);
+        currentUC->addClass(newClass);
     }
 }
 
@@ -110,7 +110,7 @@ void ScheduleManager::readStudentsClassesFile() {
             currentStudent = new Student(code, name);
         }
         (*itr)->addStudent(currentStudent);
-        currentStudent->addClassToStudent(*itr);
+        currentStudent->addClass(*itr);
     }
     students.insert(currentStudent);
 }

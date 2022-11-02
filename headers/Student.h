@@ -42,7 +42,7 @@ public:
      * @brief Function that adds a Class to the Student's schedule;
      * @param c the class to be added;
      */
-    void addClassToStudent(Class *c);
+    void addClass(Class *c);
     //TODO
     void removeClass(Class *c);
     /**

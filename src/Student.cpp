@@ -25,8 +25,10 @@ vector<Class*> Student::getClasses() const {
     return schedule;
 }
 
-void Student::addClassToStudent(Class *c) {
+void Student::addClass(Class *c) {
     schedule.push_back(c);
+    c->addStudent(this);    // Adds Student to Class Student's vector
+    c->getUc()->addStudent(this);   // Adds Student to UC Student's vector
 }
 
 //TODO
