@@ -42,11 +42,6 @@ public:
      */
     std::vector<Class*> getClasses() const;
     /**
-     * @brief Get function for the Student's Requests;
-     * @return return a queue with all the Student's Requests;
-     */
-    std::queue<Request*> getRequests() const;
-    /**
      * @brief Function that adds a Class to the Student's classes;
      * @param c the Class to be added;
      */
@@ -75,7 +70,6 @@ private:
     std::string name;
     bool status;
     std::vector<Class*> classes;
-    std::queue<Request*> requests;
 };
 
 

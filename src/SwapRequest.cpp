@@ -31,12 +31,14 @@ bool SwapRequest::isPossible() const {
 
     for (Slot *slot1 : class1->getSlots())
         for (Class *c : student2->getClasses())
-            for (Slot *slot2 : c->getSlots())
-                if (slot1->overlaps(*slot2)) return false;
+            if (c != class2)
+                for (Slot *slot2 : c->getSlots())
+                    if (slot1->overlaps(*slot2)) return false;
     for (Slot *slot1 : class2->getSlots())
         for (Class *c : student1->getClasses())
-            for (Slot *slot2 : c->getSlots())
-                if (slot1->overlaps(*slot2)) return false;
+            if (c != class1)
+                for (Slot *slot2 : c->getSlots())
+                    if (slot1->overlaps(*slot2)) return false;
     return true;
 }
 

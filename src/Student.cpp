@@ -24,10 +24,6 @@ vector<Class*> Student::getClasses() const {
     return classes;
 }
 
-queue<Request*> Student::getRequests() const {
-    return requests;
-}
-
 void Student::addClass(Class *c) {
     classes.push_back(c);
     c->addStudent(this);    // Adds Student to Class Student's vector

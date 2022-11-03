@@ -194,11 +194,13 @@ void testSwapRequest() {
 
     Class *c1 = new Class("Class1", uc); c1->addSlot(new Slot("Wednesday", "10", "2", "T"));
     Class *c2 = new Class("Class2", uc); c2->addSlot(new Slot("Wednesday", "11", "1", "TP"));
-    Class *c3 = new Class("Class3", uc); c3->addSlot(new Slot("Wednesday", "11", "1", "PL"));
+    Class *c3 = new Class("Class3", uc); c3->addSlot(new Slot("Wednesday", "11", "1", "TP"));
+    Class *c4 = new Class("Class4", uc); c4->addSlot(new Slot("Wednesday", "11", "1", "PL"));
 
     s1->addClass(c1);
     s2->addClass(c2);
-    s3->addClass(c3);
+    s2->addClass(c3);
+    s3->addClass(c4);
 
     cout << "Test 1: ";
     SwapRequest sr1(s1, s2, c1, c2);
@@ -222,12 +224,15 @@ void testRequest(ScheduleManager *sm) {
     testSwitchRequest();
     testSwapRequest();
 
+    Student *s = new Student("0", "");
+    UC *u = new UC("");
+    Class *c = new Class("", u);
+    Request r = AddRequest(s, c);
 }
 int main() {
 
     ScheduleManager sm;
 
-Request *ar = new AddRequest("");
 // TESTAR O ADD REQUEST PARA VER SE IMPRIME O TYPE
 /*
     for (UC *uc : sm.getUCsVector())
@@ -236,9 +241,6 @@ Request *ar = new AddRequest("");
 */
     cout << '\n' << sm.getUCsVector().size() << ' ' << sm.getClassesVector().size() << ' ' << sm.getStudentsSet().size() << '\n';
 
-    testSlots();
-    testAddRequest();
-    testSwitchRequest();
     testRequest(&sm);
 
     return 0;
