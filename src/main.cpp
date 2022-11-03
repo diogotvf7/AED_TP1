@@ -11,6 +11,7 @@
 #include "../headers/Request.h"
 #include "../headers/AddRequest.h"
 #include "../headers/SwitchRequest.h"
+#include "../headers/SwapRequest.h"
 
 class Request;
 
@@ -18,53 +19,33 @@ using namespace std;
 
 void testSlots() {
 
-    Slot s1("Tuesday", "12.5", "5", "T");
-    Slot s2("Tuesday", "14", "2", "T");
-    Slot s3("Friday", "0", "0", "");
-    Slot s4("Friday", "0", "0", "");
-    Slot s5("Monday", "15", "0", "");
+    cout << ":::::::::::::SLOTS TESTS:::::::::::::\n";
 
-    cout << "::::::::::::::SLOT TESTS:::::::::::::\n";
+    Slot s1("Wednesday", "10", "2", "T");
+    Slot s2("Wednesday", "11", "1", "TP");
+    Slot s3("Wednesday", "11", "1", "PL");
+    Slot s4("Wednesday", "11.5", "1", "TP");
 
     cout << "Test 1: ";
-    if (s1 < s2) cout << "passed" << endl;
+    if (!s1.overlaps(s2)) cout << "passed" << endl;
     else cout << "failed" << endl;
 
     cout << "Test 2: ";
-    if (!(s3 < s5)) cout << "passed" << endl;
+    if (!s1.overlaps(s3)) cout << "passed" << endl;
     else cout << "failed" << endl;
 
     cout << "Test 3: ";
-    if (!(s3 < s4)) cout << "passed" << endl;
+    if (s2.overlaps(s3)) cout << "passed" << endl;
     else cout << "failed" << endl;
 
     cout << "Test 4: ";
-    if ((s5 < s1)) cout << "passed" << endl;
-    else cout << "failed" << endl;
-
-    Slot s6("Wednesday", "10", "2", "T");
-    Slot s7("Wednesday", "11", "1", "TP");
-    Slot s8("Wednesday", "11", "1", "PL");
-    Slot s9("Wednesday", "11.5", "1", "TP");
-
-    cout << "Test 5: ";
-    if (!s6.overlaps(s7)) cout << "passed" << endl;
-    else cout << "failed" << endl;
-
-    cout << "Test 6: ";
-    if (!s6.overlaps(s8)) cout << "passed" << endl;
-    else cout << "failed" << endl;
-
-    cout << "Test 7: ";
-    if (s7.overlaps(s8)) cout << "passed" << endl;
-    else cout << "failed" << endl;
-
-    cout << "Test 8: ";
-    if (s7.overlaps(s9)) cout << "passed" << endl;
+    if (s2.overlaps(s4)) cout << "passed" << endl;
     else cout << "failed" << endl;
 }
 
 void testAddRequest() {
+
+    cout << "::::::::::ADD REQUEST TESTS::::::::::\n";
 
     Student *s1 = new Student("202108752", "Diogo");
     UC *uc1 = new UC("AED");
@@ -72,8 +53,6 @@ void testAddRequest() {
     class1->addSlot(new Slot("Monday", "10", "3", "TP"));
     class1->addSlot(new Slot("Tuesday", "10.5", "3", "T"));
     s1->addClass(class1);
-
-    cout << "::::::::::ADD REQUEST TESTS::::::::::\n";
 
     UC *uc2 = new UC("LDTS");
 
@@ -203,6 +182,40 @@ void testSwitchRequest() {
     else cout << "failed" << endl;
  }
 
+void testSwapRequest() {
+
+    cout << ":::::::::SWAP REQUEST TESTS::::::::::\n";
+
+    UC *uc = new UC("Street");
+
+    Student *s1 = new Student("0", "Diogo");
+    Student *s2 = new Student("0", "Chico");
+    Student *s3 = new Student("0", "Belchior");
+
+    Class *c1 = new Class("Class1", uc); c1->addSlot(new Slot("Wednesday", "10", "2", "T"));
+    Class *c2 = new Class("Class2", uc); c2->addSlot(new Slot("Wednesday", "11", "1", "TP"));
+    Class *c3 = new Class("Class3", uc); c3->addSlot(new Slot("Wednesday", "11", "1", "PL"));
+
+    s1->addClass(c1);
+    s2->addClass(c2);
+    s3->addClass(c3);
+
+    cout << "Test 1: ";
+    SwapRequest sr1(s1, s2, c1, c2);
+    if (sr1.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    cout << "Test 2: ";
+    SwapRequest sr2(s1, s3, c1, c3);
+    if (sr2.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    cout << "Test 3: ";
+    SwapRequest sr3(s2, s3, c2, c3);
+    if (!sr3.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+}
+
 int main() {
 
     ScheduleManager sm;
@@ -216,6 +229,7 @@ int main() {
     testSlots();
     testAddRequest();
     testSwitchRequest();
+    testSwapRequest();
 
     return 0;
 }

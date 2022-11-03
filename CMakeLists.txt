@@ -45,4 +45,6 @@ add_executable(AED_TP1
         headers/RemoveRequest.h
         src/RemoveRequest.cpp
         headers/SwitchRequest.h
-        src/SwitchRequest.cpp)
+        src/SwitchRequest.cpp
+        headers/SwapRequest.h
+        src/SwapRequest.cpp)
