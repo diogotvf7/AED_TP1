@@ -19,11 +19,11 @@ class Student;
 class Class {
 
 public:
-    Class();
     /**
-     * @brief Constructor for Class's class;
+     * @brief Constructor for Class object.
+     * This constructor calls the UC class function addClass(Class *c) with a pointer to this object as a parameter;
      * @param classCode string for the Class's Code;
-     * @param ucCode string for the US's Code;
+     * @param uc the US's pointer;
      */
     Class(const std::string &classCode, UC *uc);
     /**
@@ -32,8 +32,8 @@ public:
      */
     std::string getClassCode() const;
     /**
-     * @brief Get function for the UC's Code;
-     * @return returns a string with the UC's Code;
+     * @brief Get function for the UC's pointer;
+     * @return returns a pointer to the Class's UC;
      */
     UC *getUc() const;
     /**

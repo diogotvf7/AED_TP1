@@ -21,7 +21,7 @@ vector<Class *> UC::getClasses() const {
 unsigned UC::getMinClassStudents() const {
     unsigned min = INT16_MAX;
     for (Class *c : classes)
-        if (c->countStudents() > min)
+        if (c->countStudents() < min)
             min = c->countStudents();
     return min;
 }
@@ -37,10 +37,3 @@ unsigned UC::getMaxClassStudents() const {
 void UC::addClass(Class *c) {
     classes.push_back(c);
 }
-
-void UC::addStudent(Student *s) {
-    students.push_back(s);
-}
-
-
-

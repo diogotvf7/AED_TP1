@@ -3,7 +3,6 @@
 //
 
 #include "../headers/Student.h"
-#include "../headers/Class.h"
 
 using namespace std;
 
@@ -28,7 +27,6 @@ vector<Class*> Student::getClasses() const {
 void Student::addClass(Class *c) {
     schedule.push_back(c);
     c->addStudent(this);    // Adds Student to Class Student's vector
-    c->getUc()->addStudent(this);   // Adds Student to UC Student's vector
 }
 
 //TODO

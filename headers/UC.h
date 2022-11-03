@@ -12,22 +12,43 @@
 #include "Student.h"
 
 class Class;
-class Student;
 
 class UC {
 
 public:
+    /**
+     * @brief Constructor for UC object
+     * @param ucCode string for the UC's code
+     */
     explicit UC(const std::string& ucCode);
+    /**
+     * @brief Get function for the UC's UC Code;
+     * @return returns a string with the UC code;
+     */
     std::string getUcCode() const;
+    /**
+     * @brief Get function for the UC's Classes vector;
+     * @return returns a vector<Class*> with pointers to all the UC's classes;
+     */
     std::vector<Class*> getClasses() const;
+    /**
+     * @brief Function to get the number of students of the class with the least students in the UC;
+     * @return returns an unsigned value for the number of students of the class with the least students in the UC;
+     */
     unsigned getMinClassStudents() const;
+    /**
+     * @brief Function to get the number of students of the class with the most students in the UC;
+     * @return returns an unsigned value for the number of students of the class with the most students in the UC;
+     */
     unsigned getMaxClassStudents() const;
+    /**
+     * @brief Function that adds a Class to the UC;
+     * @param c a pointer to the class to be added to the UC;
+     */
     void addClass(Class *c);
-    void addStudent(Student *s);
 private:
     std::string ucCode;
     std::vector<Class*> classes;
-    std::vector<Student*> students;
 };
 
 

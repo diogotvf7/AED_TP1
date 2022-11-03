@@ -6,8 +6,9 @@
 #include <vector>
 
 #include "../headers/ScheduleManager.h"
-#include "Request.h"
-#include "AddRequest.h"
+#include "../headers/UC.h"
+#include "../headers/Request.h"
+#include "../headers/AddRequest.h"
 
 class Request;
 
@@ -61,7 +62,7 @@ void testSlots() {
     else cout << "failed" << endl;
 }
 
-void testAddRequest(const ScheduleManager &sm) {
+void testAddRequest() {
 
     Student *s1 = new Student("202108752", "Diogo");
     UC *uc1 = new UC("AED");
@@ -72,8 +73,9 @@ void testAddRequest(const ScheduleManager &sm) {
 
     cout << ":::::ADD REQUEST TESTS:::::\n";
 
-    cout << "Test 1: ";
     UC *uc2 = new UC("LDTS");
+
+    cout << "Test 1: ";
     Class *class2 = new Class("Turma2", uc2);
     class2->addSlot(new Slot("Monday", "11", "1", "TP"));
     class2->addSlot(new Slot("Friday", "6", "0", "T"));
@@ -86,7 +88,7 @@ void testAddRequest(const ScheduleManager &sm) {
     class3->addSlot(new Slot("Monday", "10.5", "2", "PL"));
     class2->addSlot(new Slot("Friday", "6", "0", "T"));
     AddRequest ar2(s1, class3);
-    if (!ar1.isPossible()) cout << "passed" << endl;
+    if (!ar2.isPossible()) cout << "passed" << endl;
     else cout << "failed" << endl;
 
     cout << "Test 3: ";
@@ -96,8 +98,38 @@ void testAddRequest(const ScheduleManager &sm) {
     class3->addSlot(new Slot("Wednesday", "0", "24", "T"));
     class2->addSlot(new Slot("Thursday", "0", "24", "T"));
     class3->addSlot(new Slot("Friday", "0", "24", "T"));
-    AddRequest ar3(s1, class3);
-    if (ar1.isPossible()) cout << "passed" << endl;
+    AddRequest ar3(s1, class4);
+    if (ar3.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    UC *uc3 = new UC("BD"); Slot *slot = new Slot("", "0", "0", "T");
+    Class *class23 = new Class("", uc3); class23->addSlot(slot);
+    for (int i = 0; i < 23; i++) class23->addStudent(new Student(to_string(i), to_string(i)));
+    Class *class26 = new Class("", uc3); class26->addSlot(slot);
+    for (int i = 0; i < 26; i++) class26->addStudent(new Student(to_string(i), to_string(i)));
+    Class *class27 = new Class("", uc3); class27->addSlot(slot);
+    for (int i = 0; i < 27; i++) class27->addStudent(new Student(to_string(i), to_string(i)));
+    Class *class30 = new Class("", uc3); class30->addSlot(slot);
+    for (int i = 0; i < 30; i++) class30->addStudent(new Student(to_string(i), to_string(i)));
+
+    cout << "Test 4: ";
+    AddRequest ar4(s1, class23);
+    if (ar4.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    cout << "Test 5: ";
+    AddRequest ar5(s1, class26);
+    if (ar5.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    cout << "Test 6: ";
+    AddRequest ar6(s1, class27);
+    if (!ar6.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    cout << "Test 7: ";
+    AddRequest ar7(s1, class30);
+    if (!ar7.isPossible()) cout << "passed" << endl;
     else cout << "failed" << endl;
 
 }
@@ -105,18 +137,15 @@ void testAddRequest(const ScheduleManager &sm) {
 int main() {
 
     ScheduleManager sm;
-
-    for (Class *c : sm.getClassesVector()) {
-        int i = 0;
-        for (Slot *s : c->getSlots())
-            if (s->getType() != "T") i++;
-        cout << i << endl;
-    }
-
+/*
+    for (UC *uc : sm.getUCsVector())
+        // cout << uc->getClasses().size() << endl;
+        // cout << uc->getUcCode() << ":  " << uc->getMinClassStudents() << "   " << uc->getMaxClassStudents() << endl;
+*/
     cout << '\n' << sm.getUCsVector().size() << ' ' << sm.getClassesVector().size() << ' ' << sm.getStudentsSet().size() << '\n';
 
     testSlots();
-    testAddRequest(sm);
+    testAddRequest();
 
     return 0;
 }

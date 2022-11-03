@@ -7,9 +7,13 @@
 
 #include <vector>
 #include <set>
+#include <queue>
 
 #include "Student.h"
 #include "UC.h"
+#include "Request.h"
+#include "AddRequest.h"
+#include "RemoveRequest.h"
 
 struct StudentCmp {
     bool operator() (Student *left, Student *right) const {
@@ -64,6 +68,8 @@ private:
     std::vector<UC*> ucs;
     std::vector<Class*> classes;
     std::set<Student*, StudentCmp> students;
+    std::queue<Request> normalRequests;
+    std::queue<Request> statusRequests;
 };
 
 

@@ -3,20 +3,20 @@
 //
 
 #include "../headers/Class.h"
-#include "../headers/Student.h"
 
 using namespace std;
 
 Class::Class(const string &classCode, UC *uc) {
     this->classCode = classCode;
     this->uc = uc;
+    uc->addClass(this);
 }
 
 string Class::getClassCode() const {
     return classCode;
 }
 
-UC *Class::getUc() const {
+UC * Class::getUc() const {
     return uc;
 }
 
@@ -30,7 +30,6 @@ vector<Student*> Class::getStudents() const {
 
 void Class::addStudent(Student *s) {
     students.push_back(s);
-    uc->addStudent(s);
 }
 
 void Class::addSlot(Slot *slot) {
@@ -47,7 +46,7 @@ bool Class::operator==(const Class &c) const {
 
 ostream &operator<<(ostream &os, const Class &c) {
 
-    os << "     - UC Code: " << c.uc->getUcCode() << "      Class Code: " << c.classCode << endl;
+    os << "     - UC Code: " << c.getUc()->getUcCode() << "      Class Code: " << c.classCode << endl;
     for (Slot *s : c.slots)
         os << "       - " << *s;
     return os;

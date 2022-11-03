@@ -5,9 +5,6 @@
 #ifndef AED_TP1_REQUEST_H
 #define AED_TP1_REQUEST_H
 
-class Request {
-
-    virtual bool isPossible() const = 0;
-};
+class Request {};
 
 #endif //AED_TP1_REQUEST_H

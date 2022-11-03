@@ -41,4 +41,6 @@ add_executable(AED_TP1
         src/ScheduleManager.cpp
         headers/Request.h
         headers/AddRequest.h
-        src/AddRequest.cpp)
+        src/AddRequest.cpp
+        headers/RemoveRequest.h
+        src/RemoveRequest.cpp)

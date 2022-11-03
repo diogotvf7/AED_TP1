@@ -52,16 +52,13 @@ void ScheduleManager::readClassesPerUcFile() {
         }
         Class *newClass = new Class(classCode, currentUC);
         classes.push_back(newClass);
-        currentUC->addClass(newClass);
     }
 }
 
 void ScheduleManager::readClassesFile() {
 
     ifstream in("../data/input/classes.csv");
-    string line; getline(in, line); // Ignore first line
-
-    UC *currentUC = nullptr;
+    string line; getline(in, line); // Ignore Header
 
     while (getline(in, line)) {
 
@@ -85,7 +82,7 @@ void ScheduleManager::readStudentsClassesFile() {
     ifstream in("../data/input/students_classes.csv");
     string line;
 
-    getline(in, line); // Ignore first line
+    getline(in, line); // Ignore Header
 
     Student *currentStudent = nullptr;
 
@@ -109,7 +106,6 @@ void ScheduleManager::readStudentsClassesFile() {
             students.insert(currentStudent);
             currentStudent = new Student(code, name);
         }
-        (*itr)->addStudent(currentStudent);
         currentStudent->addClass(*itr);
     }
     students.insert(currentStudent);

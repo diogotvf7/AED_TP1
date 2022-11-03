@@ -12,7 +12,7 @@ class Slot {
 
 public:
     /**
-     * @brief Constructor for the Slot's class
+     * @brief Constructor for Slot object;
      * @param weekday string for the Slot's weekday;
      * @param start string for the Slot's start hour which will be converted to a float;
      * @param duration string for the Slot's duration which will be converted to a float;

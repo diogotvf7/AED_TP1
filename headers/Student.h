@@ -17,7 +17,7 @@ class Student {
 
 public:
     /**
-     * @brief Constructor for Student's class;
+     * @brief Constructor for Student object;
      * @param code string for the Student's code which will be converted to an int;
      * @param name string for the Student's name;
      * @param status boolean that determines whether a Student has a special status or not (default is false);
