@@ -31,6 +31,16 @@ set<Student*, StudentCmp> ScheduleManager::getStudentsSet() const {
     return students;
 }
 
+void addRequest(Request *r) {
+    string s = typeid(r).name();
+    cout << s << endl;
+}
+
+void processAddRequest(AddRequest *ar);
+void processSwitchRequest(SwitchRequest *sr);
+void processSwapRequest(SwapRequest *sr);
+void processRequests();
+
 void ScheduleManager::readClassesPerUcFile() {
 
     ifstream in("../data/input/classes_per_uc.csv");

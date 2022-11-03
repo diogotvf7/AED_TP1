@@ -12,6 +12,9 @@
 #include "Student.h"
 #include "UC.h"
 #include "Request.h"
+#include "AddRequest.h"
+#include "SwitchRequest.h"
+#include "SwapRequest.h"
 
 struct StudentCmp {
     bool operator() (Student *left, Student *right) const {
@@ -49,6 +52,11 @@ public:
      * @return returns a reference to the Student in case it finds him, returns Student("", "") otherwise;
      */
     Student *findStudent(const std::string &code, const std::string &name) const;
+    void addRequest(Request *r);
+    void processAddRequest(AddRequest *ar);
+    void processSwitchRequest(SwitchRequest *sr);
+    void processSwapRequest(SwapRequest *sr);
+    void processRequests();
     /**
      * @brief Reads the classes_per_uc.csv file and stores the input in vector<Uc> ucs;
      */

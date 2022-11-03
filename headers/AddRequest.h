@@ -18,7 +18,7 @@ public:
      * @param student pointer to the Student who placed the request;
      * @param intended pointer to the Class the Student wants to join;
      */
-    AddRequest(Student *sstudent, Class *intended);
+    AddRequest(Student *student, Class *intended);
     /**
      * @brief Get function for the AddRequest's Student pointer;
      * @return returns a pointer to the Student who placed the request;

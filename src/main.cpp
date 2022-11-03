@@ -216,9 +216,19 @@ void testSwapRequest() {
     else cout << "failed" << endl;
 }
 
+void testRequest(ScheduleManager *sm) {
+
+    testAddRequest();
+    testSwitchRequest();
+    testSwapRequest();
+
+}
 int main() {
 
     ScheduleManager sm;
+
+Request *ar = new AddRequest("");
+// TESTAR O ADD REQUEST PARA VER SE IMPRIME O TYPE
 /*
     for (UC *uc : sm.getUCsVector())
         // cout << uc->getClasses().size() << endl;
@@ -229,7 +239,7 @@ int main() {
     testSlots();
     testAddRequest();
     testSwitchRequest();
-    testSwapRequest();
+    testRequest(&sm);
 
     return 0;
 }

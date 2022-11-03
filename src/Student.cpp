@@ -21,19 +21,21 @@ string Student::getName() const {
 }
 
 vector<Class*> Student::getClasses() const {
-    return schedule;
+    return classes;
+}
+
+queue<Request*> Student::getRequests() const {
+    return requests;
 }
 
 void Student::addClass(Class *c) {
-    schedule.push_back(c);
+    classes.push_back(c);
     c->addStudent(this);    // Adds Student to Class Student's vector
 }
 
-//TODO
 void Student::removeClass(Class *c) {
-    remove(schedule.begin(), schedule.end(), c);
+    remove(classes.begin(), classes.end(), c);
     c->removeStudent(this);
-
 }
 
 bool Student::operator==(const Student &s) const {
@@ -43,8 +45,9 @@ bool Student::operator==(const Student &s) const {
 ostream &operator<<(ostream &os, const Student &s) {
 
     os << " - Code: " << s.code << "      Name: " << s.name << "\n" << endl;
-    for (Class *c : s.schedule)
+    for (Class *c : s.classes)
         os << c;
     return os;
 }
+
 

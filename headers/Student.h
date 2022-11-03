@@ -9,8 +9,10 @@
 #include <algorithm>
 #include <vector>
 #include <string>
+#include <queue>
 
 #include "Class.h"
+#include "Request.h"
 
 class Class;
 
@@ -40,11 +42,19 @@ public:
      */
     std::vector<Class*> getClasses() const;
     /**
-     * @brief Function that adds a Class to the Student's schedule;
-     * @param c the class to be added;
+     * @brief Get function for the Student's Requests;
+     * @return return a queue with all the Student's Requests;
+     */
+    std::queue<Request*> getRequests() const;
+    /**
+     * @brief Function that adds a Class to the Student's classes;
+     * @param c the Class to be added;
      */
     void addClass(Class *c);
-    //TODO
+    /**
+     * @brief Function that removes a Class from the Student's classes;
+     * @param c the Class to be removed;
+     */
     void removeClass(Class *c);
     /**
      * @brief Overload of operator== to check equality between Student objects;
@@ -64,7 +74,8 @@ private:
     int code;
     std::string name;
     bool status;
-    std::vector<Class*> schedule;
+    std::vector<Class*> classes;
+    std::queue<Request*> requests;
 };
 
 
