@@ -14,9 +14,12 @@ class RemoveRequest : public Request {
 public:
 
     RemoveRequest(Student *s, Class *c);
+    Student *getStudent() const;
+    Class *getIntendedClass() const;
+    bool isPossible();
 private:
-    Student *s;
-    Class *c;
+    Student *student;
+    Class *intended;
 };
 
 
