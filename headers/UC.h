@@ -33,14 +33,16 @@ public:
     std::vector<Class*> getClasses() const;
     /**
      * @brief Function to get the number of students of the class with the least students in the UC;
+     * @param ignore optional parameter if any Class is to be ignored in the count;
      * @return returns an unsigned value for the number of students of the class with the least students in the UC;
      */
-    unsigned getMinClassStudents() const;
+    unsigned getMinClassStudents(Class *ignore = nullptr) const;
     /**
      * @brief Function to get the number of students of the class with the most students in the UC;
+     * @param ignore optional parameter if any Class is to be ignored in the count;
      * @return returns an unsigned value for the number of students of the class with the most students in the UC;
      */
-    unsigned getMaxClassStudents() const;
+    unsigned getMaxClassStudents(Class *ignore = nullptr) const;
     /**
      * @brief Function that adds a Class to the UC;
      * @param c a pointer to the class to be added to the UC;

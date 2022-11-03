@@ -6,28 +6,29 @@
 
 using namespace std;
 
-AddRequest::AddRequest(Student *s, Class *c) {
-    this->s = s;
-    this->c = c;
+AddRequest::AddRequest(Student *student, Class *intended) {
+    this->student = student;
+    this->intended = intended;
 }
 
 Student *AddRequest::getStudent() const {
-    return s;
+    return student;
 }
 
-Class *AddRequest::getRequestedClass() const {
-    return c;
+Class *AddRequest::getIntendedClass() const {
+    return intended;
 }
 
 bool AddRequest::isPossible() const {
 
-    unsigned maxStudents = max(c->getUc()->getMaxClassStudents(), c->countStudents() + 1);
-    unsigned minStudents = c->getUc()->getMinClassStudents();
+    unsigned tmpMax = intended->getUc()->getMaxClassStudents();
+    unsigned maxStudents = tmpMax + (intended->countStudents() == tmpMax);
+    unsigned minStudents = min(intended->getUc()->getMinClassStudents(intended), intended->countStudents() + 1);
+    if (intended->countStudents() >= 30) return false;
+    if (maxStudents - minStudents >= 4 && intended->countStudents() >= maxStudents - 4) return false;
 
-    if (c->countStudents() >= 30) return false;
-    if (maxStudents - minStudents >= 4 && c->countStudents() >= maxStudents - 3) return false;
-    for (Slot *slot : c->getSlots())
-        for (Class *c2 : s->getClasses())
+    for (Slot *slot : intended->getSlots())
+        for (Class *c2 : student->getClasses())
             for (Slot *slot2 : c2->getSlots())
                 if (slot->overlaps(*slot2)) return false;
     return true;

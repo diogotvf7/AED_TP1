@@ -12,8 +12,6 @@
 #include "Student.h"
 #include "UC.h"
 #include "Request.h"
-#include "AddRequest.h"
-#include "RemoveRequest.h"
 
 struct StudentCmp {
     bool operator() (Student *left, Student *right) const {

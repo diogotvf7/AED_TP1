@@ -36,6 +36,10 @@ void Class::addSlot(Slot *slot) {
     slots.push_back(slot);
 }
 
+void Class::removeStudent(Student *s) {
+    remove(students.begin(), students.end(), s);
+}
+
 unsigned Class::countStudents() const {
     return students.size();
 }
@@ -51,5 +55,6 @@ ostream &operator<<(ostream &os, const Class &c) {
         os << "       - " << *s;
     return os;
 }
+
 
 

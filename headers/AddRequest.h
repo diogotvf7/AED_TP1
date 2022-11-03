@@ -5,7 +5,6 @@
 #ifndef AED_TP1_ADDREQUEST_H
 #define AED_TP1_ADDREQUEST_H
 
-
 #include "Request.h"
 #include "Student.h"
 #include "Class.h"
@@ -16,10 +15,10 @@ class AddRequest : public Request {
 public:
     /**
      * @brief Constructor for the AddRequest class;
-     * @param s the Student who placed the request;
-     * @param c the Class the Student wants to join;
+     * @param student pointer to the Student who placed the request;
+     * @param intended pointer to the Class the Student wants to join;
      */
-    AddRequest(Student *s, Class *c);
+    AddRequest(Student *sstudent, Class *intended);
     /**
      * @brief Get function for the AddRequest's Student pointer;
      * @return returns a pointer to the Student who placed the request;
@@ -29,7 +28,7 @@ public:
      * @brief Get function for the AddRequest's Class pointer;
      * @return returns a pointer to the Class the Student wants to join;
      */
-    Class *getRequestedClass() const;
+    Class *getIntendedClass() const;
     /**
      * @brief Function that checks if the AddRequest is possible or not.
      * This function attends to the maximum of students in a class (30) and tries to create balance in the number of students in all Class's of an UC;
@@ -38,9 +37,8 @@ public:
      */
     bool isPossible() const;
 private:
-    Student *s;
-    Class *c;
+    Student *student;
+    Class *intended;
 };
-
 
 #endif //AED_TP1_ADDREQUEST_H

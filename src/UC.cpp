@@ -18,18 +18,18 @@ vector<Class *> UC::getClasses() const {
     return classes;
 }
 
-unsigned UC::getMinClassStudents() const {
+unsigned UC::getMinClassStudents(Class *ignore) const {
     unsigned min = INT16_MAX;
     for (Class *c : classes)
-        if (c->countStudents() < min)
+        if (c != ignore && c->countStudents() < min)
             min = c->countStudents();
     return min;
 }
 
-unsigned UC::getMaxClassStudents() const {
+unsigned UC::getMaxClassStudents(Class *ignore) const {
     unsigned max = 0;
     for (Class *c : classes)
-        if (c->countStudents() > max)
+        if (c != ignore && c->countStudents() > max)
             max = c->countStudents();
     return max;
 }

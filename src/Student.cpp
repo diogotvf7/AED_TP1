@@ -31,6 +31,8 @@ void Student::addClass(Class *c) {
 
 //TODO
 void Student::removeClass(Class *c) {
+    remove(schedule.begin(), schedule.end(), c);
+    c->removeStudent(this);
 
 }
 

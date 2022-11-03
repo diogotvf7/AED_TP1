@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <algorithm>
 #include <fstream>
 #include <sstream>
@@ -9,6 +10,7 @@
 #include "../headers/UC.h"
 #include "../headers/Request.h"
 #include "../headers/AddRequest.h"
+#include "../headers/SwitchRequest.h"
 
 class Request;
 
@@ -22,7 +24,7 @@ void testSlots() {
     Slot s4("Friday", "0", "0", "");
     Slot s5("Monday", "15", "0", "");
 
-    cout << ":::::SLOT TESTS:::::\n";
+    cout << "::::::::::::::SLOT TESTS:::::::::::::\n";
 
     cout << "Test 1: ";
     if (s1 < s2) cout << "passed" << endl;
@@ -71,7 +73,7 @@ void testAddRequest() {
     class1->addSlot(new Slot("Tuesday", "10.5", "3", "T"));
     s1->addClass(class1);
 
-    cout << ":::::ADD REQUEST TESTS:::::\n";
+    cout << "::::::::::ADD REQUEST TESTS::::::::::\n";
 
     UC *uc2 = new UC("LDTS");
 
@@ -102,14 +104,14 @@ void testAddRequest() {
     if (ar3.isPossible()) cout << "passed" << endl;
     else cout << "failed" << endl;
 
-    UC *uc3 = new UC("BD"); Slot *slot = new Slot("", "0", "0", "T");
-    Class *class23 = new Class("", uc3); class23->addSlot(slot);
+    UC *uc3 = new UC("BD"); Slot *slot1 = new Slot("", "0", "0", "T");
+    Class *class23 = new Class("", uc3); class23->addSlot(slot1);
     for (int i = 0; i < 23; i++) class23->addStudent(new Student(to_string(i), to_string(i)));
-    Class *class26 = new Class("", uc3); class26->addSlot(slot);
+    Class *class25 = new Class("", uc3); class25->addSlot(slot1);
+    for (int i = 0; i < 25; i++) class25->addStudent(new Student(to_string(i), to_string(i)));
+    Class *class26 = new Class("", uc3); class26->addSlot(slot1);
     for (int i = 0; i < 26; i++) class26->addStudent(new Student(to_string(i), to_string(i)));
-    Class *class27 = new Class("", uc3); class27->addSlot(slot);
-    for (int i = 0; i < 27; i++) class27->addStudent(new Student(to_string(i), to_string(i)));
-    Class *class30 = new Class("", uc3); class30->addSlot(slot);
+    Class *class30 = new Class("", uc3); class30->addSlot(slot1);
     for (int i = 0; i < 30; i++) class30->addStudent(new Student(to_string(i), to_string(i)));
 
     cout << "Test 4: ";
@@ -118,12 +120,12 @@ void testAddRequest() {
     else cout << "failed" << endl;
 
     cout << "Test 5: ";
-    AddRequest ar5(s1, class26);
+    AddRequest ar5(s1, class25);
     if (ar5.isPossible()) cout << "passed" << endl;
     else cout << "failed" << endl;
 
     cout << "Test 6: ";
-    AddRequest ar6(s1, class27);
+    AddRequest ar6(s1, class26);
     if (!ar6.isPossible()) cout << "passed" << endl;
     else cout << "failed" << endl;
 
@@ -132,7 +134,74 @@ void testAddRequest() {
     if (!ar7.isPossible()) cout << "passed" << endl;
     else cout << "failed" << endl;
 
+
+    UC *uc4 = new UC("BD"); Slot *slot2 = new Slot("", "0", "0", "T");
+    Class *class25_ = new Class("", uc3); class25_->addSlot(slot2);
+    for (int i = 0; i < 25; i++) class25_->addStudent(new Student(to_string(i), to_string(i)));
+    Class *class26_ = new Class("", uc3); class26_->addSlot(slot2);
+    for (int i = 0; i < 26; i++) class26_->addStudent(new Student(to_string(i), to_string(i)));
+    Class *class30_ = new Class("", uc3); class30_->addSlot(slot2);
+    for (int i = 0; i < 30; i++) class30_->addStudent(new Student(to_string(i), to_string(i)));
+
+    cout << "Test 8: ";
+    AddRequest ar8(s1, class25_);
+    if (ar8.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
 }
+
+void testSwitchRequest() {
+
+    cout << "::::::::SWITCH REQUEST TESTS:::::::::\n";
+
+    Student *s1 = new Student("202108752", "Diogo");
+
+    UC *uc3 = new UC("BD"); Slot *slot = new Slot("", "0", "0", "T");
+    Class *class23 = new Class("", uc3); class23->addSlot(slot);
+    for (int i = 0; i < 23; i++) class23->addStudent(new Student(to_string(i), to_string(i)));
+    Class *class25 = new Class("", uc3); class25->addSlot(slot);
+    for (int i = 0; i < 25; i++) class25->addStudent(new Student(to_string(i), to_string(i)));
+    Class *class26 = new Class("", uc3); class26->addSlot(slot);
+    for (int i = 0; i < 26; i++) class26->addStudent(new Student(to_string(i), to_string(i)));
+    Class *class27 = new Class("", uc3); class27->addSlot(slot);
+    for (int i = 0; i < 27; i++) class27->addStudent(new Student(to_string(i), to_string(i)));
+    Class *class30 = new Class("", uc3); class30->addSlot(slot);
+    for (int i = 0; i < 30; i++) class30->addStudent(new Student(to_string(i), to_string(i)));
+
+    s1->addClass(class23);
+
+    cout << "Test 1: ";
+    SwitchRequest sr1(s1, class23, class25);
+    if (sr1.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    cout << "Test 2: ";
+    SwitchRequest sr2(s1, class23, class26);
+    if (!sr2.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    s1->removeClass(class23);
+    s1->addClass(class30);
+
+    cout << "Test 3: ";
+    SwitchRequest sr3(s1, class30, class23);
+    if (sr2.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    cout << "Test 4: ";
+    SwitchRequest sr4(s1, class30, class25);
+    if (sr2.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    cout << "Test 5: ";
+    SwitchRequest sr5(s1, class30, class26);
+    if (sr2.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    cout << "Test 6: ";
+    SwitchRequest sr6(s1, class30, class27);
+    if (sr2.isPossible()) cout << "passed" << endl;
+    else cout << "failed" << endl;
+ }
 
 int main() {
 
@@ -146,6 +215,7 @@ int main() {
 
     testSlots();
     testAddRequest();
+    testSwitchRequest();
 
     return 0;
 }

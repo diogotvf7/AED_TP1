@@ -6,6 +6,7 @@
 #define AED_TP1_STUDENT_H
 
 #include <ostream>
+#include <algorithm>
 #include <vector>
 #include <string>
 
@@ -63,7 +64,6 @@ private:
     int code;
     std::string name;
     bool status;
-    // std::vector<UC*> ucs;
     std::vector<Class*> schedule;
 };
 

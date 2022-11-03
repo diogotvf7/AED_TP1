@@ -5,6 +5,7 @@
 #ifndef AED_TP1_CLASS_H
 #define AED_TP1_CLASS_H
 
+#include <algorithm>
 #include <string>
 #include <list>
 #include <vector>
@@ -48,6 +49,7 @@ public:
     std::vector<Student*> getStudents() const;
     /**
      * @brief Function that adds Student pointers to vector<Student*> students;
+     * @param s the Student pointer to be added;
      */
     void addStudent(Student *s);
     /**
@@ -55,6 +57,11 @@ public:
      * @param slot the slot to be added;
      */
     void addSlot(Slot *slot);
+    /**
+     * @brief Function that removes Student pointers from the vector<Student*> students;
+     * @param s the Student pointer to be deleted;
+     */
+    void removeStudent(Student *s);
     /**
      * @brief Function to check the size of the Class;
      * @return the size of vector<Student*> students;
