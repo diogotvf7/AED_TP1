@@ -6,14 +6,14 @@
 
 RemoveRequest::RemoveRequest(Student *s, Class *c) {
     this->student = s;
-    this->intended = c;
+    this->current = c;
 }
 
 Student *RemoveRequest::getStudent() const {
     return student;
 }
 
-Class *RemoveRequest::getIntendedClass() const {
-    return intended;
+Class *RemoveRequest::getCurrentClass() const {
+    return current;
 }
 

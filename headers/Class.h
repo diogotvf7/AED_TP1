@@ -64,7 +64,7 @@ public:
     void removeStudent(Student *s);
     /**
      * @brief Function to check the size of the Class;
-     * @return the size of vector<Student*> students;
+     * @return returns the size of vector<Student*> students as an unsigned value;
      */
     unsigned countStudents() const;
     //TODO

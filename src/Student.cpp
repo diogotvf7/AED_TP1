@@ -2,13 +2,15 @@
 // Created by diogotvf7 on 28-10-2022.
 //
 
+#include <utility>
+
 #include "../headers/Student.h"
 
 using namespace std;
 
-Student::Student(string code, string name, bool status) {
+Student::Student(const string& code, string name, bool status) {
     this->code = stoi(code);
-    this->name = name;
+    this->name = std::move(name);
     this->status = status;
 }
 
@@ -22,6 +24,18 @@ string Student::getName() const {
 
 vector<Class*> Student::getClasses() const {
     return classes;
+}
+
+bool Student::getStatus() const {
+    return status;
+}
+
+void Student::setStatus(bool s) {
+    this->status = s;
+}
+
+unsigned Student::countClasses() const {
+    return classes.size();
 }
 
 void Student::addClass(Class *c) {

@@ -5,6 +5,7 @@
 #ifndef AED_TP1_SWITCHREQUEST_H
 #define AED_TP1_SWITCHREQUEST_H
 
+#include "Oopsie.h"
 #include "Request.h"
 #include "Student.h"
 #include "Class.h"
@@ -24,7 +25,7 @@ public:
      * @brief Get function for the SwitchRequest's Student pointer;
      * @return returns a pointer to the Student who placed the request;
      */
-    Student *getStudent() const;
+    Student *getStudent() const override;
     /**
      * @brief Get function for the SwitchRequest's current Class pointer;
      * @return returns a pointer to the Class the Student is in currently;
@@ -36,7 +37,7 @@ public:
      */
     Class *getIntendedClass() const;
     /**
-     *
+     * Is possible if intended class has less students;
      * @return
      */
     bool isPossible() const;

@@ -5,6 +5,14 @@
 #ifndef AED_TP1_REQUEST_H
 #define AED_TP1_REQUEST_H
 
-class Request {};
+#include "Student.h"
+
+class Student;
+
+class Request {
+
+public:
+    virtual Student *getStudent() const = 0;
+};
 
 #endif //AED_TP1_REQUEST_H

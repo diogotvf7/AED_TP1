@@ -46,6 +46,7 @@ public:
      * @return a set<Student*> with all the Students pointers from the input file;
      */
     std::set<Student*, StudentCmp> getStudentsSet() const;
+    std::queue<std::string> getFailedRequests() const;
     /**
      * @brief Function that finds a Student by Code and Name in the Student's set;
      * @param code the Code to look for;
@@ -56,6 +57,8 @@ public:
 
     void addRequest(Request *r);
     void processRequests();
+    void processStatusRequests();
+    void processRegularRequests();
     void processAddRequest(AddRequest *ar);
     void processRemoveRequest(RemoveRequest *rr);
     void processSwitchRequest(SwitchRequest *sr);
@@ -77,8 +80,9 @@ private:
     std::vector<UC*> ucs;
     std::vector<Class*> classes;
     std::set<Student*, StudentCmp> students;
-    std::queue<Request*> normalRequests;
+    std::queue<Request*> regularRequests;
     std::queue<Request*> statusRequests;
+    std::queue<std::string> failedRequests;
 };
 
 

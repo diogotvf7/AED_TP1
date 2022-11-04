@@ -5,6 +5,7 @@
 #ifndef AED_TP1_ADDREQUEST_H
 #define AED_TP1_ADDREQUEST_H
 
+#include "Oopsie.h"
 #include "Request.h"
 #include "Student.h"
 #include "Class.h"
@@ -23,7 +24,7 @@ public:
      * @brief Get function for the AddRequest's Student pointer;
      * @return returns a pointer to the Student who placed the request;
      */
-    Student *getStudent() const;
+    Student *getStudent() const override;
     /**
      * @brief Get function for the AddRequest's Class pointer;
      * @return returns a pointer to the Class the Student wants to join;

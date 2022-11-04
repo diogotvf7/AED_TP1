@@ -14,12 +14,12 @@ class RemoveRequest : public Request {
 public:
 
     RemoveRequest(Student *s, Class *c);
-    Student *getStudent() const;
-    Class *getIntendedClass() const;
+    Student *getStudent() const override;
+    Class *getCurrentClass() const;
     
 private:
     Student *student;
-    Class *intended;
+    Class *current;
 };
 
 

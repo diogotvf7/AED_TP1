@@ -31,15 +31,86 @@ set<Student*, StudentCmp> ScheduleManager::getStudentsSet() const {
     return students;
 }
 
-void addRequest(Request *r) {
-    string s = typeid(r).name();
-    cout << s << endl;
+queue<string> ScheduleManager::getFailedRequests() const {
+    return failedRequests;
 }
 
-void processAddRequest(AddRequest *ar);
-void processSwitchRequest(SwitchRequest *sr);
-void processSwapRequest(SwapRequest *sr);
-void processRequests();
+void ScheduleManager::addRequest(Request *r) {
+    if (r->getStudent()->getStatus())
+        statusRequests.push(r);
+    else
+        regularRequests.push(r);
+}
+
+void ScheduleManager::processAddRequest(AddRequest *ar) {
+    if (ar->isPossible())
+        ar->getStudent()->addClass(ar->getIntendedClass());
+}
+
+void ScheduleManager::processRemoveRequest(RemoveRequest *rr) {
+    rr->getStudent()->removeClass(rr->getCurrentClass());
+}
+
+void ScheduleManager::processSwitchRequest(SwitchRequest *sr) {
+    if (sr->isPossible()) {
+        sr->getStudent()->removeClass(sr->getCurrentClass());
+        sr->getStudent()->addClass(sr->getIntendedClass());
+    }
+}
+
+void ScheduleManager::processSwapRequest(SwapRequest *sr) {
+    if (sr->isPossible()) {
+        sr->getStudent()->removeClass(sr->getCurrentClass());
+        sr->getColleague()->removeClass(sr->getIntendedClass());
+        sr->getStudent()->addClass(sr->getIntendedClass());
+        sr->getColleague()->addClass(sr->getCurrentClass());
+    }
+}
+
+void ScheduleManager::processRequests() {
+    processStatusRequests();
+    processRegularRequests();
+}
+//TODO
+void ScheduleManager::processStatusRequests() {
+
+    unsigned i = 0;
+    while (!statusRequests.empty()) {
+
+        Request *r = statusRequests.front();
+
+        try {
+            processAddRequest(dynamic_cast<AddRequest*>(r));
+            processRemoveRequest(dynamic_cast<RemoveRequest*>(r));
+            processSwitchRequest(dynamic_cast<SwitchRequest*>(r));
+            processSwapRequest(dynamic_cast<SwapRequest*>(r));
+        } catch (Oopsie &e) {
+            failedRequests.push("Failed request " + to_string(++i) + ": " +  e.what());
+        }
+
+        statusRequests.pop();
+    }
+}
+
+void ScheduleManager::processRegularRequests() {
+
+    unsigned i = 0;
+    while (!regularRequests.empty()) {
+
+        Request *r = regularRequests.front();
+
+        try {
+            processAddRequest(dynamic_cast<AddRequest*>(r));
+            processRemoveRequest(dynamic_cast<RemoveRequest*>(r));
+            processSwitchRequest(dynamic_cast<SwitchRequest*>(r));
+            processSwapRequest(dynamic_cast<SwapRequest*>(r));
+        } catch (Oopsie &e) {
+            failedRequests.push("Failed request " + to_string(++i) + ": " +  e.what());
+        }
+
+        regularRequests.pop();
+    }
+}
 
 void ScheduleManager::readClassesPerUcFile() {
 

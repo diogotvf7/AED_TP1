@@ -4,41 +4,41 @@
 
 #include "SwapRequest.h"
 
-SwapRequest::SwapRequest(Student *student1, Student *student2, Class *class1, Class *class2) {
-    this->student1 = student1;
-    this->student2 = student2;
-    this->class1 = class1;
-    this->class2 = class2;
+SwapRequest::SwapRequest(Student *student, Student *colleague, Class *current, Class *intended) {
+    this->student = student;
+    this->colleague = colleague;
+    this->current = current;
+    this->intended = intended;
 }
 
-Student *SwapRequest::getStudent1() const {
-    return student1;
+Student *SwapRequest::getStudent() const {
+    return student;
 }
 
-Student *SwapRequest::getStudent2() const {
-    return student2;
+Student *SwapRequest::getColleague() const {
+    return colleague;
 }
 
-Class *SwapRequest::getClass1() const {
-    return class1;
+Class *SwapRequest::getCurrentClass() const {
+    return current;
 }
 
-Class *SwapRequest::getClass2() const {
-    return class2;
+Class *SwapRequest::getIntendedClass() const {
+    return intended;
 }
 
 bool SwapRequest::isPossible() const {
 
-    for (Slot *slot1 : class1->getSlots())
-        for (Class *c : student2->getClasses())
-            if (c != class2)
+    for (Slot *slot1 : current->getSlots())
+        for (Class *c : colleague->getClasses())
+            if (c != intended)
                 for (Slot *slot2 : c->getSlots())
-                    if (slot1->overlaps(*slot2)) return false;
-    for (Slot *slot1 : class2->getSlots())
-        for (Class *c : student1->getClasses())
-            if (c != class1)
+                    if (slot1->overlaps(*slot2)) throw Oopsie("Can't swap " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " with " + colleague->getName() + "'s " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " overlaps with " + colleague->getName() + "'s " + c->getUc()->getUcCode() + ' ' + c->getClassCode());
+    for (Slot *slot1 : intended->getSlots())
+        for (Class *c : student->getClasses())
+            if (c != current)
                 for (Slot *slot2 : c->getSlots())
-                    if (slot1->overlaps(*slot2)) return false;
+                    if (slot1->overlaps(*slot2)) throw Oopsie("Can't swap " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " with " + colleague->getName() + "'s " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + colleague->getName() + "'s " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " overlaps with " + student->getName() + "'s " + c->getUc()->getUcCode() + ' ' + c->getClassCode());
     return true;
 }
 

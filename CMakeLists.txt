@@ -47,4 +47,6 @@ add_executable(AED_TP1
         headers/SwitchRequest.h
         src/SwitchRequest.cpp
         headers/SwapRequest.h
-        src/SwapRequest.cpp)
+        src/SwapRequest.cpp
+        headers/Oopsie.h
+        src/Oopsie.cpp)

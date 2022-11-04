@@ -30,14 +30,14 @@ bool SwitchRequest::isPossible() const {
     unsigned tmpMin = intended->getUc()->getMinClassStudents();
     unsigned maxStudents = max(intended->getUc()->getMaxClassStudents(current), tmpMax + (intended->countStudents() == tmpMax) - (current->countStudents() == tmpMax));
     unsigned minStudents = intended->getUc()->getMinClassStudents(current) == tmpMin ? tmpMin - (current->countStudents() == tmpMin) : tmpMin + (intended->countStudents() == tmpMin);
-    if (intended->countStudents() >= 30) return false;
-    if (current->countStudents() <= intended->countStudents() && maxStudents - minStudents >= 4 && intended->countStudents() >= maxStudents - 4) return false;
+    if (intended->countStudents() >= 30) throw Oopsie("Can't switch " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " to " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " is full.");
+    if (current->countStudents() <= intended->countStudents() && maxStudents - minStudents >= 4 && intended->countStudents() >= maxStudents - 4) throw Oopsie("Can't switch " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " to " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + "Adding " + student->getName() + " to " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " will cause imbalance.");
 
     for (Slot *slot : intended->getSlots())
-        for (Class *c2 : student->getClasses())
-            if (c2 != current)
-                for (Slot *slot2 : c2->getSlots())
-                    if (slot->overlaps(*slot2)) return false;
+        for (Class *c : student->getClasses())
+            if (c != current)
+                for (Slot *slot2 : c->getSlots())
+                    if (slot->overlaps(*slot2))  throw Oopsie("Can't switch " + student->getName() + "'s" + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " to " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + student->getName() + "'s " + c->getUc()->getUcCode() + ' ' + c->getClassCode() + " overlaps with " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + '.');;
     return true;
 
 }
