@@ -37,10 +37,15 @@ public:
      */
     Class *getIntendedClass() const;
     /**
+     * @brief Get function for the Request's type;
+     * @return returns string "switch";
+     */
+    std::string getType() const override;
+    /**
      * Is possible if intended class has less students;
      * @return
      */
-    bool isPossible() const;
+    bool isPossible() const override;
 private:
     Student *student;
     Class *current;

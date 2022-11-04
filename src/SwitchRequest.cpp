@@ -24,14 +24,20 @@ Class *SwitchRequest::getIntendedClass() const {
     return intended;
 }
 
-bool SwitchRequest::isPossible() const {
+string SwitchRequest::getType() const {
+    return "switch";
+}
 
+bool SwitchRequest::isPossible() const {
+    if (current->getUc() != intended->getUc()) throw Oopsie("Can't switch " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " to " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: both classes are from different UC's.");
+    if (!student->isInClass(current)) throw Oopsie("Can't switch " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " to " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + student->getName() + " insn't in " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + '.');
+    if (student->isInClass(intended)) throw Oopsie("Can't switch " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " to " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + student->getName() + " already is in " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + '.');
     unsigned tmpMax = intended->getUc()->getMaxClassStudents();
     unsigned tmpMin = intended->getUc()->getMinClassStudents();
     unsigned maxStudents = max(intended->getUc()->getMaxClassStudents(current), tmpMax + (intended->countStudents() == tmpMax) - (current->countStudents() == tmpMax));
     unsigned minStudents = intended->getUc()->getMinClassStudents(current) == tmpMin ? tmpMin - (current->countStudents() == tmpMin) : tmpMin + (intended->countStudents() == tmpMin);
     if (intended->countStudents() >= 30) throw Oopsie("Can't switch " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " to " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " is full.");
-    if (current->countStudents() <= intended->countStudents() && maxStudents - minStudents >= 4 && intended->countStudents() >= maxStudents - 4) throw Oopsie("Can't switch " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " to " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + "Adding " + student->getName() + " to " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " will cause imbalance.");
+    if (!student->getStatus() && current->countStudents() <= intended->countStudents() && maxStudents - minStudents >= 4 && intended->countStudents() >= maxStudents - 4) throw Oopsie("Can't switch " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " to " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + "Adding " + student->getName() + " to " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " will cause imbalance.");
 
     for (Slot *slot : intended->getSlots())
         for (Class *c : student->getClasses())
@@ -41,4 +47,6 @@ bool SwitchRequest::isPossible() const {
     return true;
 
 }
+
+
 

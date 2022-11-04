@@ -19,7 +19,12 @@ public:
     Student *getColleague() const;
     Class *getCurrentClass() const;
     Class *getIntendedClass() const;
-    bool isPossible() const;
+    /**
+     * @brief Get function for the Request's type;
+     * @return returns string "swap";
+     */
+    std::string getType() const override;
+    bool isPossible() const override;
 private:
     Student *student;
     Student *colleague;

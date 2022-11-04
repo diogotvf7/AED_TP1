@@ -27,8 +27,16 @@ Class *SwapRequest::getIntendedClass() const {
     return intended;
 }
 
-bool SwapRequest::isPossible() const {
+std::string SwapRequest::getType() const {
+    return "swap";
+}
 
+bool SwapRequest::isPossible() const {
+    if (current->getUc() != intended->getUc()) throw Oopsie("Can't swap " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " with " + colleague->getName() + "'s " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: both classes are from different UC's.");
+    if (!student->isInClass(current)) throw Oopsie("Can't swap " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " with " + colleague->getName() + "'s " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + student->getName() + " insn't in " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + '.');
+    if (student->isInClass(intended)) throw Oopsie("Can't swap " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " with " + colleague->getName() + "'s " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " already is in " + student->getName() + "'s schedule.");
+    if (!colleague->isInClass(intended)) throw Oopsie("Can't swap " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " with " + colleague->getName() + "'s " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + colleague->getName() + " insn't in " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + '.');
+    if (colleague->isInClass(current)) throw Oopsie("Can't swap " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " with " + colleague->getName() + "'s " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " already is in " + colleague->getName() + "'s schedule.");
     for (Slot *slot1 : current->getSlots())
         for (Class *c : colleague->getClasses())
             if (c != intended)
@@ -41,4 +49,5 @@ bool SwapRequest::isPossible() const {
                     if (slot1->overlaps(*slot2)) throw Oopsie("Can't swap " + student->getName() + "'s " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " with " + colleague->getName() + "'s " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " because: " + colleague->getName() + "'s " + intended->getUc()->getUcCode() + ' ' + intended->getClassCode() + " overlaps with " + student->getName() + "'s " + c->getUc()->getUcCode() + ' ' + c->getClassCode());
     return true;
 }
+
 

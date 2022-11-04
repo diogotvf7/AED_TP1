@@ -13,6 +13,8 @@ class Request {
 
 public:
     virtual Student *getStudent() const = 0;
+    virtual std::string getType() const = 0;
+    virtual bool isPossible() const = 0;
 };
 
 #endif //AED_TP1_REQUEST_H

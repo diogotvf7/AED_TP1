@@ -16,6 +16,12 @@ public:
     RemoveRequest(Student *s, Class *c);
     Student *getStudent() const override;
     Class *getCurrentClass() const;
+    /**
+     * @brief Get function for the Request's type;
+     * @return returns string "remove";
+     */
+    std::string getType() const override;
+    bool isPossible() const override;
     
 private:
     Student *student;

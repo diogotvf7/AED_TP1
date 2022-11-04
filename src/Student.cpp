@@ -22,7 +22,7 @@ string Student::getName() const {
     return name;
 }
 
-vector<Class*> Student::getClasses() const {
+list<Class*> Student::getClasses() const {
     return classes;
 }
 
@@ -44,8 +44,22 @@ void Student::addClass(Class *c) {
 }
 
 void Student::removeClass(Class *c) {
-    remove(classes.begin(), classes.end(), c);
+    classes.erase(find(classes.begin(), classes.end(), c));
     c->removeStudent(this);
+}
+
+bool Student::isInClass(Class *c) const {
+    for (Class *sc : classes)
+        if (c == sc)
+            return true;
+    return false;
+}
+
+bool Student::isInUc(UC *uc) const {
+    for (Class *sc : classes)
+        if (uc->getUcCode() == sc->getUc()->getUcCode())
+            return true;
+    return false;
 }
 
 bool Student::operator==(const Student &s) const {
@@ -53,11 +67,11 @@ bool Student::operator==(const Student &s) const {
 }
 
 ostream &operator<<(ostream &os, const Student &s) {
-
     os << " - Code: " << s.code << "      Name: " << s.name << "\n" << endl;
     for (Class *c : s.classes)
         os << c;
     return os;
 }
+
 
 

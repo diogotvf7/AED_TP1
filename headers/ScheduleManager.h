@@ -5,6 +5,7 @@
 #ifndef AED_TP1_SCHEDULEMANAGER_H
 #define AED_TP1_SCHEDULEMANAGER_H
 
+#include <fstream>
 #include <vector>
 #include <set>
 #include <queue>
@@ -46,16 +47,15 @@ public:
      * @return a set<Student*> with all the Students pointers from the input file;
      */
     std::set<Student*, StudentCmp> getStudentsSet() const;
-    std::queue<std::string> getFailedRequests() const;
+    std::list<std::string> getFailedRequests() const;
     /**
-     * @brief Function that finds a Student by Code and Name in the Student's set;
+     * @brief Function that finds a Student by Code in the Student's set;
      * @param code the Code to look for;
-     * @param name the Name to look for;
-     * @return returns a reference to the Student in case it finds him, returns Student("", "") otherwise;
+     * @return returns a reference to the Student in case it finds him, returns nullptr otherwise;
      */
-    Student *findStudent(const std::string &code, const std::string &name) const;
+    Student *findStudent(const std::string &key) const;
 
-    void addRequest(Request *r);
+    void createRequest(Request *r);
     void processRequests();
     void processStatusRequests();
     void processRegularRequests();
@@ -82,7 +82,6 @@ private:
     std::set<Student*, StudentCmp> students;
     std::queue<Request*> regularRequests;
     std::queue<Request*> statusRequests;
-    std::queue<std::string> failedRequests;
 };
 
 

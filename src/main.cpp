@@ -19,6 +19,18 @@ class Request;
 
 using namespace std;
 
+void testRandom(ScheduleManager *sm) {
+
+    cout << "::::::::::::RANDOM TESTS:::::::::::::\n";
+
+    Student *s1 = *sm->getStudentsSet().begin();
+    Class *c1 = s1->getClasses().front();
+    s1->removeClass(c1);
+    cout << "Test 1: ";
+    if (s1->isInClass(c1)) cout << "failed" << endl;
+    else cout << "passed" << endl;
+}
+
 void testSlots() {
 
     cout << ":::::::::::::SLOTS TESTS:::::::::::::\n";
@@ -67,7 +79,7 @@ void testAddRequest() {
         ar1.isPossible();
         cout << "failed" << endl;
     } catch (Oopsie &e) {
-        cout << "passed // " << e.what() << endl;
+        cout << "passed" << endl;
     }
 
     cout << "Test 2: ";
@@ -79,7 +91,7 @@ void testAddRequest() {
         ar2.isPossible();
         cout << "failed" << endl;
     } catch (Oopsie &e) {
-        cout << "passed // " << e.what() << endl;
+        cout << "passed" << endl;
     }
 
     cout << "Test 3: ";
@@ -94,7 +106,7 @@ void testAddRequest() {
         ar3.isPossible();
         cout << "passed" << endl;
     } catch (Oopsie &e) {
-        cout << "failed // " << e.what() << endl;
+        cout << "failed" << endl;
     }
 
     UC *uc3 = new UC("BD"); Slot *slot1 = new Slot("", "0", "0", "T");
@@ -113,7 +125,7 @@ void testAddRequest() {
         ar4.isPossible();
         cout << "passed" << endl;
     } catch (Oopsie &e) {
-        cout << "failed // " << e.what() << endl;
+        cout << "failed" << endl;
     }
 
     cout << "Test 5: ";
@@ -122,7 +134,7 @@ void testAddRequest() {
         ar5.isPossible();
         cout << "passed" << endl;
     } catch (Oopsie &e) {
-        cout << "failed // " << e.what() << endl;
+        cout << "failed" << endl;
     }
 
     cout << "Test 6: ";
@@ -131,7 +143,7 @@ void testAddRequest() {
         ar6.isPossible();
         cout << "failed" << endl;
     } catch (Oopsie &e) {
-        cout << "passed // " << e.what() << endl;
+        cout << "passed" << endl;
     }
 
     cout << "Test 7: ";
@@ -140,7 +152,7 @@ void testAddRequest() {
         ar7.isPossible();
         cout << "failed" << endl;
     } catch (Oopsie &e) {
-        cout << "passed // " << e.what() << endl;
+        cout << "passed" << endl;
     }
 
     UC *uc4 = new UC("BD"); Slot *slot2 = new Slot("", "0", "0", "T");
@@ -157,7 +169,7 @@ void testAddRequest() {
         ar8.isPossible();
         cout << "passed" << endl;
     } catch (Oopsie &e) {
-        cout << "failed // " << e.what() << endl;
+        cout << "failed" << endl;
     }
 }
 
@@ -187,7 +199,7 @@ void testSwitchRequest() {
         sr1.isPossible();
         cout << "passed" << endl;
     } catch (Oopsie &e) {
-        cout << "failed // " << e.what() << endl;
+        cout << "failed" << endl;
     }
 
     cout << "Test 2: ";
@@ -196,7 +208,7 @@ void testSwitchRequest() {
         sr2.isPossible();
         cout << "failed" << endl;
     } catch (Oopsie &e) {
-        cout << "passed // " << e.what() << endl;
+        cout << "passed" << endl;
     }
 
     s1->removeClass(class23);
@@ -208,7 +220,7 @@ void testSwitchRequest() {
         sr3.isPossible();
         cout << "passed" << endl;
     } catch (Oopsie &e) {
-        cout << "failed // " << e.what() << endl;
+        cout << "failed" << endl;
     }
 
     cout << "Test 4: ";
@@ -217,7 +229,7 @@ void testSwitchRequest() {
         sr4.isPossible();
         cout << "passed" << endl;
     } catch (Oopsie &e) {
-        cout << "failed // " << e.what() << endl;
+        cout << "failed" << endl;
     }
 
     cout << "Test 5: ";
@@ -226,7 +238,7 @@ void testSwitchRequest() {
         sr5.isPossible();
         cout << "passed" << endl;
     } catch (Oopsie &e) {
-        cout << "failed // " << e.what() << endl;
+        cout << "failed" << endl;
     }
 
     s1->removeClass(class30);
@@ -238,7 +250,7 @@ void testSwitchRequest() {
         sr6.isPossible();
         cout << "failed" << endl;
     } catch (Oopsie &e) {
-        cout << "passed // " << e.what() << endl;
+        cout << "passed" << endl;
     }
 }
 
@@ -272,7 +284,7 @@ void testSwapRequest() {
     }
 
     cout << "Test 2: ";
-    SwapRequest sr2(s1, s3, c1, c3);
+    SwapRequest sr2(s1, s3, c1, c4);
     try {
         sr2.isPossible();
         cout << "passed" << endl;
@@ -286,7 +298,7 @@ void testSwapRequest() {
         sr3.isPossible();
         cout << "failed" << endl;
     } catch (Oopsie &e) {
-        cout << "passed // " << e.what() << endl;
+        cout << "passed" << endl;
     }
 }
 
@@ -294,26 +306,99 @@ void testRequests(ScheduleManager *sm) {
 
     cout << "::::::::::::REQUEST TESTS::::::::::::\n";
 
-    Student *s1 = new Student("200000000", "Lino Marcolino");
-    string ucCode = "L.EIC015", classCode1 = "2LEIC01", classCode3 = "2LEIC03";
-    auto class19 = find_if(sm->getClassesVector().begin(), sm->getClassesVector().end(), [ucCode, classCode1](Class *c){return ((c->getUc()->getUcCode() == ucCode) && (c->getClassCode() == classCode1));});
-    auto class25 = find_if(sm->getClassesVector().begin(), sm->getClassesVector().end(), [ucCode, classCode3](Class *c){return ((c->getUc()->getUcCode() == ucCode) && (c->getClassCode() == classCode3));});
-    sm->addRequest(new AddRequest(s1, *class19));
-    sm->addRequest(new SwitchRequest(s1, *class19, *class25));
-    sm->addRequest(new RemoveRequest(s1, *class25));
+    Student *linoMarcolino = new Student("200000000", "Lino Marcolino");
+    string ucc = "L.EIC015", cc1 = "2LEIC01", cc3 = "2LEIC03";
 
-    Student *s2 = new Student("200000001", "Tiago Oliveira");
+    Class *_2leic01 = nullptr, *_2leic03 = nullptr;
+    for (Class *c : sm->getClassesVector()) {
+        if (_2leic01 != nullptr && _2leic03 != nullptr) break;
+        if (c->getUc()->getUcCode() == ucc && c->getClassCode() == cc3) _2leic03 = c;
+        if (c->getUc()->getUcCode() == ucc && c->getClassCode() == cc1) _2leic01 = c;
+    }
 
+    sm->createRequest(new AddRequest(linoMarcolino, _2leic01));
     sm->processRequests();
 
-    while (!sm->getFailedRequests().empty()) {
+    cout << "Test 1: ";
+    if (linoMarcolino->isInClass(_2leic01)) cout << "passed" << endl;
+    else cout << "failed" << endl;
 
-        cout << sm->getFailedRequests().front() << endl;
-        sm->getFailedRequests().pop();
+    sm->createRequest(new SwitchRequest(linoMarcolino, _2leic01, _2leic03));
+    sm->processRequests();
+
+    cout << "Test 2: ";
+    if (linoMarcolino->isInClass(_2leic01) && !linoMarcolino->isInClass(_2leic03)) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    Student *tiagoOliveira = new Student("200000001", "Tiago Oliveira");
+    Student *tiagoOliveiraFan = new Student("200000002", "Tiago Olivera Fan", true);
+    string ucCode = "L.EIC021", classCode1 = "3LEIC01", classCode2 = "3LEIC02", classCode3 = "3LEIC05";
+
+    Class *_3leic01 = nullptr, *_3leic02 = nullptr, *_3leic05 = nullptr;
+    for (Class *c : sm->getClassesVector()) {
+        if (_3leic01 != nullptr && _3leic02 != nullptr && _3leic05 != nullptr) break;
+        if (c->getUc()->getUcCode() == ucCode && c->getClassCode() == classCode1) _3leic01 = c;
+        if (c->getUc()->getUcCode() == ucCode && c->getClassCode() == classCode2) _3leic02 = c;
+        if (c->getUc()->getUcCode() == ucCode && c->getClassCode() == classCode3) _3leic05 = c;
     }
+    sm->createRequest(new AddRequest(tiagoOliveira, _3leic01));
+    sm->processRequests();
+
+    cout << "Test 3: ";
+    if (tiagoOliveira->isInClass(_3leic01)) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    sm->createRequest(new AddRequest(tiagoOliveiraFan, _3leic05));
+    sm->createRequest(new AddRequest(tiagoOliveiraFan, _3leic02));
+    sm->processRequests();
+
+    cout << "Test 4: ";
+    if (!tiagoOliveiraFan->isInClass(_3leic02)) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    cout << "Test 5: ";
+    if (tiagoOliveiraFan->isInClass(_3leic05)) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    ucCode = "L.EIC005";
+
+    Class *_1leic10 = nullptr, *_1leic09 = nullptr, *_1leic06 = nullptr;
+    for (Class *c : sm->getClassesVector()) {
+        if (_1leic10 != nullptr && _1leic09 != nullptr && _1leic06 != nullptr) break;
+        if (c->getUc()->getUcCode() == ucCode && c->countStudents() == 0) _1leic10 = c;
+        if (c->getUc()->getUcCode() == ucCode && c->countStudents() == 1) _1leic09 = c;
+        if (c->getUc()->getUcCode() == ucCode && c->countStudents() == 2) _1leic06 = c;
+    }
+
+    sm->createRequest(new RemoveRequest(tiagoOliveira, _3leic01));
+    sm->processRequests();
+
+    cout << "Test 6: ";
+    if (!tiagoOliveira->isInClass(_3leic01)) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    sm->createRequest(new AddRequest(tiagoOliveira, _1leic10));
+    sm->createRequest(new AddRequest(tiagoOliveiraFan, _1leic09));
+    sm->processRequests();
+
+    cout << "Test 7: ";
+    if (tiagoOliveira->isInClass(_1leic10) && !tiagoOliveiraFan->isInClass(_1leic09)) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    sm->createRequest(new SwitchRequest(tiagoOliveira, _1leic10, _1leic06));
+    sm->createRequest(new SwapRequest(tiagoOliveira, tiagoOliveiraFan, _1leic06, _1leic09));
+    sm->processRequests();
+
+    cout << "Test 8: ";
+    if (tiagoOliveira->isInClass(_1leic06) && !tiagoOliveiraFan->isInClass(_1leic06)) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+
 }
 
 void runTests(ScheduleManager *sm) {
+
+    testRandom(sm);
     testSlots();
     testAddRequest();
     testSwitchRequest();
@@ -326,11 +411,6 @@ int main() {
     ScheduleManager sm;
 
     runTests(&sm);
-/*
-    for (UC *uc : sm.getUCsVector())
-        // cout << uc->getClasses().size() << endl;
-        // cout << uc->getUcCode() << ":  " << uc->getMinClassStudents() << "   " << uc->getMaxClassStudents() << endl;
-*/
     cout << '\n' << sm.getUCsVector().size() << ' ' << sm.getClassesVector().size() << ' ' << sm.getStudentsSet().size() << '\n';
 
     return 0;

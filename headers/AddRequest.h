@@ -31,12 +31,17 @@ public:
      */
     Class *getIntendedClass() const;
     /**
+     * @brief Get function for the Request's type;
+     * @return returns string "add";
+     */
+    std::string getType() const override;
+    /**
      * @brief Function that checks if the AddRequest is possible or not.
      * This function attends to the maximum of students in a class (30) and tries to create balance in the number of students in all Class's of an UC;
      * It will not be possible to add a student to a Class if there is a gap greater or equal to 4 between the students of the Class with the most Students and the Class with the least Students and the requested Class has three less Students than the Class with the most Students or less;
      * @return returns false if there are 30 or more students in the requested class, if adding the Student would spoil the UC balance or if the Class overlaps with at least one of the Student's Classes;
      */
-    bool isPossible() const;
+    bool isPossible() const override;
 private:
     Student *student;
     Class *intended;

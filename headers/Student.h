@@ -15,6 +15,7 @@
 #include "Request.h"
 
 class Class;
+class UC;
 
 class Student {
 
@@ -40,7 +41,7 @@ public:
      * @brief Get function for the Student's Classes;
      * @return returns a list with all the Student's Classes;
      */
-    std::vector<Class*> getClasses() const;
+    std::list<Class*> getClasses() const;
     /**
      * @brief Get function for the Student's Status;
      * @return returns the bool value of Status;
@@ -66,6 +67,8 @@ public:
      * @param c the Class to be removed;
      */
     void removeClass(Class *c);
+    bool isInClass(Class *c) const;
+    bool isInUc(UC *uc) const;
     /**
      * @brief Overload of operator== to check equality between Student objects;
      * @param s the right hand side Student;
@@ -84,7 +87,7 @@ private:
     int code;
     std::string name;
     bool status;
-    std::vector<Class*> classes;
+    std::list<Class*> classes;
 };
 
 

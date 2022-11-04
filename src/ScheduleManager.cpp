@@ -31,11 +31,12 @@ set<Student*, StudentCmp> ScheduleManager::getStudentsSet() const {
     return students;
 }
 
-queue<string> ScheduleManager::getFailedRequests() const {
-    return failedRequests;
+Student *ScheduleManager::findStudent(const string &code) const {
+    auto i = find_if(students.begin(), students.end(), [code](Student *s){return to_string(s->getCode()) == code;});
+    return *i;
 }
 
-void ScheduleManager::addRequest(Request *r) {
+void ScheduleManager::createRequest(Request *r) {
     if (r->getStudent()->getStatus())
         statusRequests.push(r);
     else
@@ -43,49 +44,61 @@ void ScheduleManager::addRequest(Request *r) {
 }
 
 void ScheduleManager::processAddRequest(AddRequest *ar) {
-    if (ar->isPossible())
+    try {ar->isPossible();} catch (Oopsie &e) {
+        throw Oopsie(e);
+    }
         ar->getStudent()->addClass(ar->getIntendedClass());
 }
 
 void ScheduleManager::processRemoveRequest(RemoveRequest *rr) {
+    try {rr->isPossible();} catch (Oopsie &e) {
+        throw Oopsie(e);
+    }
     rr->getStudent()->removeClass(rr->getCurrentClass());
 }
 
 void ScheduleManager::processSwitchRequest(SwitchRequest *sr) {
-    if (sr->isPossible()) {
-        sr->getStudent()->removeClass(sr->getCurrentClass());
-        sr->getStudent()->addClass(sr->getIntendedClass());
+    try {sr->isPossible();} catch (Oopsie &e) {
+        throw Oopsie(e);
     }
+    sr->getStudent()->removeClass(sr->getCurrentClass());
+    sr->getStudent()->addClass(sr->getIntendedClass());
 }
 
 void ScheduleManager::processSwapRequest(SwapRequest *sr) {
-    if (sr->isPossible()) {
-        sr->getStudent()->removeClass(sr->getCurrentClass());
-        sr->getColleague()->removeClass(sr->getIntendedClass());
-        sr->getStudent()->addClass(sr->getIntendedClass());
-        sr->getColleague()->addClass(sr->getCurrentClass());
+    try {sr->isPossible();} catch (Oopsie &e) {
+        throw Oopsie(e);
     }
+    sr->getStudent()->removeClass(sr->getCurrentClass());
+    sr->getColleague()->removeClass(sr->getIntendedClass());
+    sr->getStudent()->addClass(sr->getIntendedClass());
+    sr->getColleague()->addClass(sr->getCurrentClass());
 }
 
 void ScheduleManager::processRequests() {
     processStatusRequests();
     processRegularRequests();
 }
-//TODO
+
 void ScheduleManager::processStatusRequests() {
 
-    unsigned i = 0;
+    ofstream output_file("../data/output/output_log", std::ios_base::app);
+
     while (!statusRequests.empty()) {
 
         Request *r = statusRequests.front();
 
         try {
-            processAddRequest(dynamic_cast<AddRequest*>(r));
-            processRemoveRequest(dynamic_cast<RemoveRequest*>(r));
-            processSwitchRequest(dynamic_cast<SwitchRequest*>(r));
-            processSwapRequest(dynamic_cast<SwapRequest*>(r));
+            if (r->getType() == "add")
+                processAddRequest(dynamic_cast<AddRequest*>(r));
+            else if (r->getType() == "remove")
+                processRemoveRequest(dynamic_cast<RemoveRequest*>(r));
+            else if (r->getType() == "switch")
+                processSwitchRequest(dynamic_cast<SwitchRequest*>(r));
+            else if (r->getType() == "swap")
+                processSwapRequest(dynamic_cast<SwapRequest*>(r));
         } catch (Oopsie &e) {
-            failedRequests.push("Failed request " + to_string(++i) + ": " +  e.what());
+            output_file << "Failed request: " + e.what() << endl;
         }
 
         statusRequests.pop();
@@ -94,18 +107,23 @@ void ScheduleManager::processStatusRequests() {
 
 void ScheduleManager::processRegularRequests() {
 
-    unsigned i = 0;
+    ofstream output_file("../data/output/output_log", std::ios_base::app);
+
     while (!regularRequests.empty()) {
 
         Request *r = regularRequests.front();
 
         try {
-            processAddRequest(dynamic_cast<AddRequest*>(r));
-            processRemoveRequest(dynamic_cast<RemoveRequest*>(r));
-            processSwitchRequest(dynamic_cast<SwitchRequest*>(r));
-            processSwapRequest(dynamic_cast<SwapRequest*>(r));
+            if (r->getType() == "add")
+                processAddRequest(static_cast<AddRequest*>(r));
+            else if (r->getType() == "remove")
+                processRemoveRequest(static_cast<RemoveRequest*>(r));
+            else if (r->getType() == "switch")
+                processSwitchRequest(static_cast<SwitchRequest*>(r));
+            else if (r->getType() == "swap")
+                processSwapRequest(static_cast<SwapRequest*>(r));
         } catch (Oopsie &e) {
-            failedRequests.push("Failed request " + to_string(++i) + ": " +  e.what());
+            output_file << "Failed request: " + e.what() << endl;
         }
 
         regularRequests.pop();
@@ -191,5 +209,6 @@ void ScheduleManager::readStudentsClassesFile() {
     }
     students.insert(currentStudent);
 }
+
 
 
