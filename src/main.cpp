@@ -1,19 +1,17 @@
 #include <iostream>
 #include <iomanip>
-#include <algorithm>
-#include <fstream>
 #include <sstream>
 #include <string>
 #include <vector>
 
-#include "../headers/ScheduleManager.h"
-#include "../headers/ScheduleManager.h"
-#include "../headers/UC.h"
-#include "../headers/Request.h"
-#include "../headers/AddRequest.h"
-#include "../headers/SwitchRequest.h"
-#include "../headers/SwapRequest.h"
+#include "ScheduleManager.h"
+#include "UC.h"
+#include "Request.h"
+#include "AddRequest.h"
+#include "SwitchRequest.h"
+#include "SwapRequest.h"
 #include "Oopsie.h"
+#include "Menu.h"
 
 class Request;
 
@@ -23,12 +21,22 @@ void testRandom(ScheduleManager *sm) {
 
     cout << "::::::::::::RANDOM TESTS:::::::::::::\n";
 
-    Student *s1 = *sm->getStudentsSet().begin();
+    Student *s1 = sm->findStudentByName("Renata");
     Class *c1 = s1->getClasses().front();
     s1->removeClass(c1);
     cout << "Test 1: ";
     if (s1->isInClass(c1)) cout << "failed" << endl;
     else cout << "passed" << endl;
+
+    Student *s2 = sm->findStudentByCode("202040617");
+    cout << "Test 2: ";
+    if (s2) cout << "passed" << endl;
+    else cout << "failed" << endl;
+
+    Student *s3 = sm->findStudentByName("Aramis");
+    cout << "Test 3: ";
+    if (s3) cout << "passed" << endl;
+    else cout << "failed" << endl;
 }
 
 void testSlots() {
@@ -155,7 +163,7 @@ void testAddRequest() {
         cout << "passed" << endl;
     }
 
-    UC *uc4 = new UC("BD"); Slot *slot2 = new Slot("", "0", "0", "T");
+    Slot *slot2 = new Slot("", "0", "0", "T");
     Class *class25_ = new Class("", uc3); class25_->addSlot(slot2);
     for (int i = 0; i < 25; i++) class25_->addStudent(new Student(to_string(i), to_string(i)));
     Class *class26_ = new Class("", uc3); class26_->addSlot(slot2);
@@ -312,8 +320,8 @@ void testRequests(ScheduleManager *sm) {
     Class *_2leic01 = nullptr, *_2leic03 = nullptr;
     for (Class *c : sm->getClassesVector()) {
         if (_2leic01 != nullptr && _2leic03 != nullptr) break;
-        if (c->getUc()->getUcCode() == ucc && c->getClassCode() == cc3) _2leic03 = c;
-        if (c->getUc()->getUcCode() == ucc && c->getClassCode() == cc1) _2leic01 = c;
+        if (c->getUc()->getName() == ucc && c->getName() == cc3) _2leic03 = c;
+        if (c->getUc()->getName() == ucc && c->getName() == cc1) _2leic01 = c;
     }
 
     sm->createRequest(new AddRequest(linoMarcolino, _2leic01));
@@ -337,9 +345,9 @@ void testRequests(ScheduleManager *sm) {
     Class *_3leic01 = nullptr, *_3leic02 = nullptr, *_3leic05 = nullptr;
     for (Class *c : sm->getClassesVector()) {
         if (_3leic01 != nullptr && _3leic02 != nullptr && _3leic05 != nullptr) break;
-        if (c->getUc()->getUcCode() == ucCode && c->getClassCode() == classCode1) _3leic01 = c;
-        if (c->getUc()->getUcCode() == ucCode && c->getClassCode() == classCode2) _3leic02 = c;
-        if (c->getUc()->getUcCode() == ucCode && c->getClassCode() == classCode3) _3leic05 = c;
+        if (c->getUc()->getName() == ucCode && c->getName() == classCode1) _3leic01 = c;
+        if (c->getUc()->getName() == ucCode && c->getName() == classCode2) _3leic02 = c;
+        if (c->getUc()->getName() == ucCode && c->getName() == classCode3) _3leic05 = c;
     }
     sm->createRequest(new AddRequest(tiagoOliveira, _3leic01));
     sm->processRequests();
@@ -365,9 +373,9 @@ void testRequests(ScheduleManager *sm) {
     Class *_1leic10 = nullptr, *_1leic09 = nullptr, *_1leic06 = nullptr;
     for (Class *c : sm->getClassesVector()) {
         if (_1leic10 != nullptr && _1leic09 != nullptr && _1leic06 != nullptr) break;
-        if (c->getUc()->getUcCode() == ucCode && c->countStudents() == 0) _1leic10 = c;
-        if (c->getUc()->getUcCode() == ucCode && c->countStudents() == 1) _1leic09 = c;
-        if (c->getUc()->getUcCode() == ucCode && c->countStudents() == 2) _1leic06 = c;
+        if (c->getUc()->getName() == ucCode && c->countStudents() == 0) _1leic10 = c;
+        if (c->getUc()->getName() == ucCode && c->countStudents() == 1) _1leic09 = c;
+        if (c->getUc()->getName() == ucCode && c->countStudents() == 2) _1leic06 = c;
     }
 
     sm->createRequest(new RemoveRequest(tiagoOliveira, _3leic01));
@@ -409,10 +417,11 @@ void runTests(ScheduleManager *sm) {
 int main() {
 
     ScheduleManager sm;
+    Menu menu(&sm);
+    menu.run();
 
-    runTests(&sm);
-    cout << '\n' << sm.getUCsVector().size() << ' ' << sm.getClassesVector().size() << ' ' << sm.getStudentsSet().size() << '\n';
+//    runTests(&sm);
+//    cout << '\n' << sm.getUcVector().size() << ' ' << sm.getClassesVector().size() << ' ' << sm.getStudentsByCodeSet().size() << '\n';
 
     return 0;
 }
-

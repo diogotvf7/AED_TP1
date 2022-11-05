@@ -25,16 +25,21 @@ public:
      * @brief Get function for the UC's UC Code;
      * @return returns a string with the UC code;
      */
-    std::string getUcCode() const;
+    std::string getName() const;
     /**
      * @brief Get function for the UC's Classes vector;
      * @return returns a vector<Class*> with pointers to all the UC's classes;
      */
     std::vector<Class*> getClasses() const;
     /**
+     * @brief Funtion that counts the amount of Students in an UC;
+     * @return returns an unsigned value for the total number of Students registered in the UC;
+     */
+    unsigned countStudents() const;
+    /**
      * @brief Function to get the number of students of the class with the least students in the UC;
      * @param ignore optional parameter if any Class is to be ignored in the count;
-     * @return returns an unsigned value for the number of students of the class with the least students in the UC;
+     * @return returns an unsigned value for the number of Students of the class with the least students in the UC;
      */
     unsigned getMinClassStudents(Class *ignore = nullptr) const;
     /**

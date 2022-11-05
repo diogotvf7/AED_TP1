@@ -4,7 +4,7 @@
 
 #include <utility>
 
-#include "../headers/Student.h"
+#include "Student.h"
 
 using namespace std;
 
@@ -57,13 +57,9 @@ bool Student::isInClass(Class *c) const {
 
 bool Student::isInUc(UC *uc) const {
     for (Class *sc : classes)
-        if (uc->getUcCode() == sc->getUc()->getUcCode())
+        if (uc->getName() == sc->getUc()->getName())
             return true;
     return false;
-}
-
-bool Student::operator==(const Student &s) const {
-    return code == s.code && name == s.name;
 }
 
 ostream &operator<<(ostream &os, const Student &s) {

@@ -7,9 +7,9 @@
 #include <sstream>
 #include <algorithm>
 
-#include "../headers/ScheduleManager.h"
-#include "../headers/UC.h"
-#include "../headers/Student.h"
+#include "ScheduleManager.h"
+#include "UC.h"
+#include "Student.h"
 
 using namespace std;
 
@@ -19,7 +19,7 @@ ScheduleManager::ScheduleManager() {
     readStudentsClassesFile();
 }
 
-vector<UC*> ScheduleManager::getUCsVector() const {
+std::vector<UC *> ScheduleManager::getUcVector() const {
     return ucs;
 }
 
@@ -27,12 +27,25 @@ vector<Class*> ScheduleManager::getClassesVector() const {
     return classes;
 }
 
-set<Student*, StudentCmp> ScheduleManager::getStudentsSet() const {
-    return students;
+set<Student*,StudentCodeCmp> ScheduleManager::getStudentsByCodeSet() const {
+    return studentsByCode;
 }
 
-Student *ScheduleManager::findStudent(const string &code) const {
-    auto i = find_if(students.begin(), students.end(), [code](Student *s){return to_string(s->getCode()) == code;});
+set<Student*,StudentNameCmp> ScheduleManager::getStudentsByNameSet() const {
+    return studentsByName;
+}
+
+Student *ScheduleManager::findStudentByCode(const string &code) const {
+    auto i = studentsByCode.find(new Student(code, ""));
+    if (i == studentsByCode.end())
+        return nullptr;
+    return *i;
+}
+
+Student *ScheduleManager::findStudentByName(const string &name) const {
+    auto i = studentsByName.find(new Student("0", name));
+    if (i == studentsByName.end())
+        return nullptr;
     return *i;
 }
 
@@ -145,7 +158,7 @@ void ScheduleManager::readClassesPerUcFile() {
         getline(input, ucCode, ',');
         getline(input, classCode, '\r');
 
-        if (ucs.empty() || ucCode != currentUC->getUcCode()) {
+        if (ucs.empty() || ucCode != currentUC->getName()) {
             currentUC = new UC(ucCode);
             ucs.push_back(currentUC);
         }
@@ -171,7 +184,8 @@ void ScheduleManager::readClassesFile() {
         getline(input, duration, ',');
         getline(input, type, '\r');
 
-        auto itr = find_if(classes.begin(), classes.end(),[ucCode, classCode](Class *c){return c->getClassCode() == classCode && c->getUc()->getUcCode() == ucCode;});
+        auto itr = find_if(classes.begin(), classes.end(),[ucCode, classCode](Class *c){return c->getName() == classCode &&
+                c->getUc()->getName() == ucCode;});
         (*itr)->addSlot(new Slot(weekday, start, duration, type));
     }
 }
@@ -196,18 +210,22 @@ void ScheduleManager::readStudentsClassesFile() {
         getline(input, ucCode, ',');
         getline(input, classCode, '\r');
 
-        auto itr = find_if(classes.begin(), classes.end(),[classCode, ucCode](Class *c) {return c->getClassCode() == classCode && c->getUc()->getUcCode() == ucCode;});
+        auto itr = find_if(classes.begin(), classes.end(),[classCode, ucCode](Class *c) {return
+                c->getName() == classCode &&
+                c->getUc()->getName() == ucCode;});
 
         if (currentStudent == nullptr) {
             currentStudent = new Student(code, name);
         }
         if (currentStudent->getCode() != stoi(code)) {
-            students.insert(currentStudent);
+            studentsByCode.insert(currentStudent);
+            studentsByName.insert(currentStudent);
             currentStudent = new Student(code, name);
         }
         currentStudent->addClass(*itr);
     }
-    students.insert(currentStudent);
+    studentsByCode.insert(currentStudent);
+    studentsByName.insert(currentStudent);
 }
 
 

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>LEIC SCHEDULES: headers/SwitchRequest.h Source File</title>
+<title>LEIC SCHEDULES: /home/diogotvf7/Documents/2Year/AED/TP/AED_TP1/headers/SwitchRequest.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,39 +83,43 @@ $(function() {
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef AED_TP1_SWITCHREQUEST_H</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define AED_TP1_SWITCHREQUEST_H</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="_request_8h.html">Request.h</a>&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="_student_8h.html">Student.h</a>&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="_class_8h.html">Class.h</a>&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="_slot_8h.html">Slot.h</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_switch_request.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="class_switch_request.html">SwitchRequest</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_request.html">Request</a> {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="class_switch_request.html#a6c7bc1c6f5603024305d32f842167d05">   22</a></span>    <a class="code hl_function" href="class_switch_request.html#a6c7bc1c6f5603024305d32f842167d05">SwitchRequest</a>(<a class="code hl_class" href="class_student.html">Student</a> *s, <a class="code hl_class" href="class_class.html">Class</a> *current, <a class="code hl_class" href="class_class.html">Class</a> *intended);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_switch_request.html#abbcd3e8d873ecbc1e4ea4641ba1f83e5">   27</a></span>    <a class="code hl_class" href="class_student.html">Student</a> *<a class="code hl_function" href="class_switch_request.html#abbcd3e8d873ecbc1e4ea4641ba1f83e5">getStudent</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="class_switch_request.html#a253c17cbdba5d6946f624eace2b3e7fb">   32</a></span>    <a class="code hl_class" href="class_class.html">Class</a> *<a class="code hl_function" href="class_switch_request.html#a253c17cbdba5d6946f624eace2b3e7fb">getCurrentClass</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_switch_request.html#a53de29a3c4fa45f2e2f3f6b5aabc8838">   37</a></span>    <a class="code hl_class" href="class_class.html">Class</a> *<a class="code hl_function" href="class_switch_request.html#a53de29a3c4fa45f2e2f3f6b5aabc8838">getIntendedClass</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="class_switch_request.html#a9959a5b1ab3162661f4a5c805d94bc89">   42</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_switch_request.html#a9959a5b1ab3162661f4a5c805d94bc89">isPossible</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_class" href="class_student.html">Student</a> *student;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_class" href="class_class.html">Class</a> *current;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_class" href="class_class.html">Class</a> *intended;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif </span><span class="comment">//AED_TP1_SWITCHREQUEST_H</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="_oopsie_8h.html">Oopsie.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="_request_8h.html">Request.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="_student_8h.html">Student.h</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="_class_8h.html">Class.h</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="_slot_8h.html">Slot.h</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_switch_request.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="class_switch_request.html">SwitchRequest</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_request.html">Request</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="class_switch_request.html#a6c7bc1c6f5603024305d32f842167d05">   23</a></span>    <a class="code hl_function" href="class_switch_request.html#a6c7bc1c6f5603024305d32f842167d05">SwitchRequest</a>(<a class="code hl_class" href="class_student.html">Student</a> *s, <a class="code hl_class" href="class_class.html">Class</a> *current, <a class="code hl_class" href="class_class.html">Class</a> *intended);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="class_switch_request.html#abbcd3e8d873ecbc1e4ea4641ba1f83e5">   28</a></span>    <a class="code hl_class" href="class_student.html">Student</a> *<a class="code hl_function" href="class_switch_request.html#abbcd3e8d873ecbc1e4ea4641ba1f83e5">getStudent</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="class_switch_request.html#a253c17cbdba5d6946f624eace2b3e7fb">   33</a></span>    <a class="code hl_class" href="class_class.html">Class</a> *<a class="code hl_function" href="class_switch_request.html#a253c17cbdba5d6946f624eace2b3e7fb">getCurrentClass</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="class_switch_request.html#a53de29a3c4fa45f2e2f3f6b5aabc8838">   38</a></span>    <a class="code hl_class" href="class_class.html">Class</a> *<a class="code hl_function" href="class_switch_request.html#a53de29a3c4fa45f2e2f3f6b5aabc8838">getIntendedClass</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="class_switch_request.html#a52c89645d6fbb31ff500c4c1ed2c9625">   43</a></span>    std::string <a class="code hl_function" href="class_switch_request.html#a52c89645d6fbb31ff500c4c1ed2c9625">getType</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="class_switch_request.html#ac4d83548a27af215a0b90f0eea6a04de">   48</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_switch_request.html#ac4d83548a27af215a0b90f0eea6a04de">isPossible</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_class" href="class_student.html">Student</a> *student;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_class" href="class_class.html">Class</a> *current;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_class" href="class_class.html">Class</a> *intended;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>};</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif </span><span class="comment">//AED_TP1_SWITCHREQUEST_H</span></div>
 <div class="ttc" id="a_class_8h_html"><div class="ttname"><a href="_class_8h.html">Class.h</a></div></div>
+<div class="ttc" id="a_oopsie_8h_html"><div class="ttname"><a href="_oopsie_8h.html">Oopsie.h</a></div></div>
 <div class="ttc" id="a_request_8h_html"><div class="ttname"><a href="_request_8h.html">Request.h</a></div></div>
 <div class="ttc" id="a_slot_8h_html"><div class="ttname"><a href="_slot_8h.html">Slot.h</a></div></div>
 <div class="ttc" id="a_student_8h_html"><div class="ttname"><a href="_student_8h.html">Student.h</a></div></div>
 <div class="ttc" id="aclass_class_html"><div class="ttname"><a href="class_class.html">Class</a></div><div class="ttdef"><b>Definition:</b> Class.h:20</div></div>
-<div class="ttc" id="aclass_request_html"><div class="ttname"><a href="class_request.html">Request</a></div><div class="ttdef"><b>Definition:</b> Request.h:10</div></div>
-<div class="ttc" id="aclass_student_html"><div class="ttname"><a href="class_student.html">Student</a></div><div class="ttdef"><b>Definition:</b> Student.h:19</div></div>
-<div class="ttc" id="aclass_switch_request_html"><div class="ttname"><a href="class_switch_request.html">SwitchRequest</a></div><div class="ttdef"><b>Definition:</b> SwitchRequest.h:13</div></div>
+<div class="ttc" id="aclass_request_html"><div class="ttname"><a href="class_request.html">Request</a></div><div class="ttdef"><b>Definition:</b> Request.h:12</div></div>
+<div class="ttc" id="aclass_student_html"><div class="ttname"><a href="class_student.html">Student</a></div><div class="ttdef"><b>Definition:</b> Student.h:20</div></div>
+<div class="ttc" id="aclass_switch_request_html"><div class="ttname"><a href="class_switch_request.html">SwitchRequest</a></div><div class="ttdef"><b>Definition:</b> SwitchRequest.h:14</div></div>
 <div class="ttc" id="aclass_switch_request_html_a253c17cbdba5d6946f624eace2b3e7fb"><div class="ttname"><a href="class_switch_request.html#a253c17cbdba5d6946f624eace2b3e7fb">SwitchRequest::getCurrentClass</a></div><div class="ttdeci">Class * getCurrentClass() const</div><div class="ttdoc">Get function for the SwitchRequest's current Class pointer;.</div></div>
+<div class="ttc" id="aclass_switch_request_html_a52c89645d6fbb31ff500c4c1ed2c9625"><div class="ttname"><a href="class_switch_request.html#a52c89645d6fbb31ff500c4c1ed2c9625">SwitchRequest::getType</a></div><div class="ttdeci">std::string getType() const override</div><div class="ttdoc">Get function for the Request's type;.</div></div>
 <div class="ttc" id="aclass_switch_request_html_a53de29a3c4fa45f2e2f3f6b5aabc8838"><div class="ttname"><a href="class_switch_request.html#a53de29a3c4fa45f2e2f3f6b5aabc8838">SwitchRequest::getIntendedClass</a></div><div class="ttdeci">Class * getIntendedClass() const</div><div class="ttdoc">Get function for the SwitchRequest's intended Class pointer;.</div></div>
 <div class="ttc" id="aclass_switch_request_html_a6c7bc1c6f5603024305d32f842167d05"><div class="ttname"><a href="class_switch_request.html#a6c7bc1c6f5603024305d32f842167d05">SwitchRequest::SwitchRequest</a></div><div class="ttdeci">SwitchRequest(Student *s, Class *current, Class *intended)</div><div class="ttdoc">Constructor for the SwitchRequest class;.</div></div>
-<div class="ttc" id="aclass_switch_request_html_a9959a5b1ab3162661f4a5c805d94bc89"><div class="ttname"><a href="class_switch_request.html#a9959a5b1ab3162661f4a5c805d94bc89">SwitchRequest::isPossible</a></div><div class="ttdeci">bool isPossible() const</div></div>
 <div class="ttc" id="aclass_switch_request_html_abbcd3e8d873ecbc1e4ea4641ba1f83e5"><div class="ttname"><a href="class_switch_request.html#abbcd3e8d873ecbc1e4ea4641ba1f83e5">SwitchRequest::getStudent</a></div><div class="ttdeci">Student * getStudent() const override</div><div class="ttdoc">Get function for the SwitchRequest's Student pointer;.</div></div>
+<div class="ttc" id="aclass_switch_request_html_ac4d83548a27af215a0b90f0eea6a04de"><div class="ttname"><a href="class_switch_request.html#ac4d83548a27af215a0b90f0eea6a04de">SwitchRequest::isPossible</a></div><div class="ttdeci">bool isPossible() const override</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

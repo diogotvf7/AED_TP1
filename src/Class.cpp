@@ -2,7 +2,7 @@
 // Created by diogotvf7 on 27-10-2022.
 //
 
-#include "../headers/Class.h"
+#include "Class.h"
 
 using namespace std;
 
@@ -12,7 +12,7 @@ Class::Class(const string &classCode, UC *uc) {
     uc->addClass(this);
 }
 
-string Class::getClassCode() const {
+string Class::getName() const {
     return classCode;
 }
 
@@ -45,12 +45,12 @@ unsigned Class::countStudents() const {
 }
 
 bool Class::operator==(const Class &c) const {
-    return classCode == c.classCode && uc->getUcCode() == c.uc->getUcCode();
+    return classCode == c.classCode && uc->getName() == c.uc->getName();
 }
 
 ostream &operator<<(ostream &os, const Class &c) {
 
-    os << "     - UC Code: " << c.getUc()->getUcCode() << "      Class Code: " << c.classCode << endl;
+    os << "     - UC Code: " << c.getUc()->getName() << "      Class Code: " << c.classCode << endl;
     for (Slot *s : c.slots)
         os << "       - " << *s;
     return os;

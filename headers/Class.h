@@ -31,7 +31,7 @@ public:
      * @brief Get function for the Class's Code;
      * @return returns a string with the Class's Code;
      */
-    std::string getClassCode() const;
+    std::string getName() const;
     /**
      * @brief Get function for the UC's pointer;
      * @return returns a pointer to the Class's UC;

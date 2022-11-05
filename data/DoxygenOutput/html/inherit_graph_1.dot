@@ -5,13 +5,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="LR";
-  Node0 [label="Request",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_request.html",tooltip=" "];
-  Node0 -> Node1 [dir="back",color="steelblue1",style="solid"];
-  Node1 [label="AddRequest",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_add_request.html",tooltip=" "];
-  Node0 -> Node2 [dir="back",color="steelblue1",style="solid"];
-  Node2 [label="RemoveRequest",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_remove_request.html",tooltip=" "];
-  Node0 -> Node3 [dir="back",color="steelblue1",style="solid"];
-  Node3 [label="SwapRequest",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_swap_request.html",tooltip=" "];
-  Node0 -> Node4 [dir="back",color="steelblue1",style="solid"];
-  Node4 [label="SwitchRequest",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_switch_request.html",tooltip=" "];
+  Node0 [label="Menu",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_menu.html",tooltip=" "];
 }

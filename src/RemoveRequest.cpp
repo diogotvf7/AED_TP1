@@ -23,7 +23,9 @@ std::string RemoveRequest::getType() const {
 }
 
 bool RemoveRequest::isPossible() const {
-    if (!student->isInClass(current)) throw Oopsie("Can't remove " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " from " + student->getName() + "'s schedule because: " + current->getUc()->getUcCode() + ' ' + current->getClassCode() + " already isn't in " + student->getName() + "'s schedule.");
+    if (!student->isInClass(current)) throw Oopsie("Can't remove " + current->getUc()->getName() + ' ' +
+                                                           current->getName() + " from " + student->getName() + "'s schedule because: " +
+                                                   current->getUc()->getName() + ' ' + current->getName() + " already isn't in " + student->getName() + "'s schedule.");
     return true;
 }
 

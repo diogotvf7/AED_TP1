@@ -18,9 +18,15 @@
 #include "SwapRequest.h"
 #include "RemoveRequest.h"
 
-struct StudentCmp {
+struct StudentCodeCmp {
     bool operator() (Student *left, Student *right) const {
         return left->getCode() < right->getCode();
+    }
+};
+
+struct StudentNameCmp {
+    bool operator() (Student *left, Student *right) const {
+        return left->getName() < right->getName();
     }
 };
 
@@ -36,24 +42,34 @@ public:
      * Get function for the UC's vector;
      * @return a vector<UC*> with all the UCs pointers from the input file;
      */
-    std::vector<UC*> getUCsVector() const;
+    std::vector<UC *> getUcVector() const;
     /**
      * @brief Get function for the Class's Vector;
      * @return a vector<Class*> with all the Classes pointers from input the file;
      */
     std::vector<Class*> getClassesVector() const;
     /**
-     * @brief Get function for the Students Set;
-     * @return a set<Student*> with all the Students pointers from the input file;
+     * @brief Get function for the Students By Code Set;
+     * @return a set<Student*,StudentCodeCmp> with all the Students pointers from the input file;
      */
-    std::set<Student*, StudentCmp> getStudentsSet() const;
-    std::list<std::string> getFailedRequests() const;
+    std::set<Student*,StudentCodeCmp> getStudentsByCodeSet() const;
+    /**
+     * @brief Get function for the Students By Name Set;
+     * @return a set<Student*,StudentNameCmp> with all the Students pointers from the input file;
+     */
+    std::set<Student*,StudentNameCmp> getStudentsByNameSet() const;
     /**
      * @brief Function that finds a Student by Code in the Student's set;
      * @param code the Code to look for;
      * @return returns a reference to the Student in case it finds him, returns nullptr otherwise;
      */
-    Student *findStudent(const std::string &key) const;
+    Student *findStudentByCode(const std::string &code) const;
+    /**
+     * @brief Function that finds a Student by name in the Student's set;
+     * @param name the Name to look for;
+     * @return returns a reference to the Student in case it finds him, returns nullptr otherwise;
+     */
+    Student *findStudentByName(const std::string &name) const;
 
     void createRequest(Request *r);
     void processRequests();
@@ -79,7 +95,8 @@ public:
 private:
     std::vector<UC*> ucs;
     std::vector<Class*> classes;
-    std::set<Student*, StudentCmp> students;
+    std::set<Student*, StudentCodeCmp> studentsByCode;
+    std::set<Student*, StudentNameCmp> studentsByName;
     std::queue<Request*> regularRequests;
     std::queue<Request*> statusRequests;
 };

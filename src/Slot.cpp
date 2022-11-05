@@ -8,7 +8,7 @@
 #include <map>
 #include <string>
 
-#include "../headers/Slot.h"
+#include "Slot.h"
 
 using namespace std;
 

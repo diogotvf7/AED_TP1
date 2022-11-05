@@ -83,19 +83,25 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a01e612817374dc034ba3869d5ab38afb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#a01e612817374dc034ba3869d5ab38afb">ScheduleManager</a> ()</td></tr>
 <tr class="memdesc:a01e612817374dc034ba3869d5ab38afb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the Schedule Manager's class. Runs the input reading functions;.  <a href="class_schedule_manager.html#a01e612817374dc034ba3869d5ab38afb">More...</a><br /></td></tr>
 <tr class="separator:a01e612817374dc034ba3869d5ab38afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac77cb80ed367d7fe1d2c573aa145fdf5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_u_c.html">UC</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#ac77cb80ed367d7fe1d2c573aa145fdf5">getUCsVector</a> () const</td></tr>
+<tr class="memitem:ac77cb80ed367d7fe1d2c573aa145fdf5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_u_c.html">UC</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#ac77cb80ed367d7fe1d2c573aa145fdf5">getUcVector</a> () const</td></tr>
 <tr class="separator:ac77cb80ed367d7fe1d2c573aa145fdf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47627adcb234c02432d70bc650a5cba0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_class.html">Class</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#a47627adcb234c02432d70bc650a5cba0">getClassesVector</a> () const</td></tr>
 <tr class="memdesc:a47627adcb234c02432d70bc650a5cba0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get function for the <a class="el" href="class_class.html">Class</a>'s Vector;.  <a href="class_schedule_manager.html#a47627adcb234c02432d70bc650a5cba0">More...</a><br /></td></tr>
 <tr class="separator:a47627adcb234c02432d70bc650a5cba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a44eca2aa74ffe8ba9f925a663909d0"><td class="memItemLeft" align="right" valign="top">std::set&lt; <a class="el" href="class_student.html">Student</a> *, <a class="el" href="struct_student_cmp.html">StudentCmp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#a4a44eca2aa74ffe8ba9f925a663909d0">getStudentsSet</a> () const</td></tr>
-<tr class="memdesc:a4a44eca2aa74ffe8ba9f925a663909d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get function for the Students Set;.  <a href="class_schedule_manager.html#a4a44eca2aa74ffe8ba9f925a663909d0">More...</a><br /></td></tr>
-<tr class="separator:a4a44eca2aa74ffe8ba9f925a663909d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6af281091b78f9ccf751876f966fa0ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_student.html">Student</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#a6af281091b78f9ccf751876f966fa0ed">findStudent</a> (const std::string &amp;code, const std::string &amp;name) const</td></tr>
-<tr class="memdesc:a6af281091b78f9ccf751876f966fa0ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that finds a <a class="el" href="class_student.html">Student</a> by Code and Name in the <a class="el" href="class_student.html">Student</a>'s set;.  <a href="class_schedule_manager.html#a6af281091b78f9ccf751876f966fa0ed">More...</a><br /></td></tr>
-<tr class="separator:a6af281091b78f9ccf751876f966fa0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5d5705f440bcb154b4a89757c9db64a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#aa5d5705f440bcb154b4a89757c9db64a">createRequest</a> (<a class="el" href="class_request.html">Request</a> *r)</td></tr>
-<tr class="separator:aa5d5705f440bcb154b4a89757c9db64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a415cbef35c388c2c4a6f095ef51b7833"><td class="memItemLeft" align="right" valign="top">std::set&lt; <a class="el" href="class_student.html">Student</a> *, <a class="el" href="struct_student_code_cmp.html">StudentCodeCmp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#a415cbef35c388c2c4a6f095ef51b7833">getStudentsByCodeSet</a> () const</td></tr>
+<tr class="memdesc:a415cbef35c388c2c4a6f095ef51b7833"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get function for the Students By Code Set;.  <a href="class_schedule_manager.html#a415cbef35c388c2c4a6f095ef51b7833">More...</a><br /></td></tr>
+<tr class="separator:a415cbef35c388c2c4a6f095ef51b7833"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaeb00c3e358cfcfee0124f42b63a99f"><td class="memItemLeft" align="right" valign="top">std::set&lt; <a class="el" href="class_student.html">Student</a> *, <a class="el" href="struct_student_name_cmp.html">StudentNameCmp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#aeaeb00c3e358cfcfee0124f42b63a99f">getStudentsByNameSet</a> () const</td></tr>
+<tr class="memdesc:aeaeb00c3e358cfcfee0124f42b63a99f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get function for the Students By Name Set;.  <a href="class_schedule_manager.html#aeaeb00c3e358cfcfee0124f42b63a99f">More...</a><br /></td></tr>
+<tr class="separator:aeaeb00c3e358cfcfee0124f42b63a99f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13856fb2a5dea0c7f8e0dce9953e3b0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_student.html">Student</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#a13856fb2a5dea0c7f8e0dce9953e3b0b">findStudentByCode</a> (const std::string &amp;code) const</td></tr>
+<tr class="memdesc:a13856fb2a5dea0c7f8e0dce9953e3b0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that finds a <a class="el" href="class_student.html">Student</a> by Code in the <a class="el" href="class_student.html">Student</a>'s set;.  <a href="class_schedule_manager.html#a13856fb2a5dea0c7f8e0dce9953e3b0b">More...</a><br /></td></tr>
+<tr class="separator:a13856fb2a5dea0c7f8e0dce9953e3b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35b5c55c5a0b8d2a109bb1fa296b4759"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_student.html">Student</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#a35b5c55c5a0b8d2a109bb1fa296b4759">findStudentByName</a> (const std::string &amp;name) const</td></tr>
+<tr class="memdesc:a35b5c55c5a0b8d2a109bb1fa296b4759"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that finds a <a class="el" href="class_student.html">Student</a> by name in the <a class="el" href="class_student.html">Student</a>'s set;.  <a href="class_schedule_manager.html#a35b5c55c5a0b8d2a109bb1fa296b4759">More...</a><br /></td></tr>
+<tr class="separator:a35b5c55c5a0b8d2a109bb1fa296b4759"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c4133b9a47b30cb491c883811d96a6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#a9c4133b9a47b30cb491c883811d96a6b">createRequest</a> (<a class="el" href="class_request.html">Request</a> *r)</td></tr>
+<tr class="separator:a9c4133b9a47b30cb491c883811d96a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79ee65db8004ceaf84b8cc46ba9d22ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#a79ee65db8004ceaf84b8cc46ba9d22ca">processRequests</a> ()</td></tr>
 <tr class="separator:a79ee65db8004ceaf84b8cc46ba9d22ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab83478cbf6f5bf6f408342ecff7bbb7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_manager.html#ab83478cbf6f5bf6f408342ecff7bbb7a">processStatusRequests</a> ()</td></tr>
@@ -141,8 +147,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa5d5705f440bcb154b4a89757c9db64a" name="aa5d5705f440bcb154b4a89757c9db64a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5d5705f440bcb154b4a89757c9db64a">&#9670;&#160;</a></span>createRequest()</h2>
+<a id="a9c4133b9a47b30cb491c883811d96a6b" name="a9c4133b9a47b30cb491c883811d96a6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c4133b9a47b30cb491c883811d96a6b">&#9670;&#160;</a></span>createRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -159,41 +165,57 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6af281091b78f9ccf751876f966fa0ed" name="a6af281091b78f9ccf751876f966fa0ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6af281091b78f9ccf751876f966fa0ed">&#9670;&#160;</a></span>findStudent()</h2>
+<a id="a13856fb2a5dea0c7f8e0dce9953e3b0b" name="a13856fb2a5dea0c7f8e0dce9953e3b0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13856fb2a5dea0c7f8e0dce9953e3b0b">&#9670;&#160;</a></span>findStudentByCode()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_student.html">Student</a> * ScheduleManager::findStudent </td>
+          <td class="memname"><a class="el" href="class_student.html">Student</a> * ScheduleManager::findStudentByCode </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>code</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function that finds a <a class="el" href="class_student.html">Student</a> by Code and Name in the <a class="el" href="class_student.html">Student</a>'s set;. </p>
+<p>Function that finds a <a class="el" href="class_student.html">Student</a> by Code in the <a class="el" href="class_student.html">Student</a>'s set;. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">code</td><td>the Code to look for; </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>returns a reference to the <a class="el" href="class_student.html">Student</a> in case it finds him, returns nullptr otherwise; </dd></dl>
+
+</div>
+</div>
+<a id="a35b5c55c5a0b8d2a109bb1fa296b4759" name="a35b5c55c5a0b8d2a109bb1fa296b4759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35b5c55c5a0b8d2a109bb1fa296b4759">&#9670;&#160;</a></span>findStudentByName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_student.html">Student</a> * ScheduleManager::findStudentByName </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that finds a <a class="el" href="class_student.html">Student</a> by name in the <a class="el" href="class_student.html">Student</a>'s set;. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
     <tr><td class="paramname">name</td><td>the Name to look for; </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>returns a reference to the <a class="el" href="class_student.html">Student</a> in case it finds him, returns <a class="el" href="class_student.html">Student</a>("", "") otherwise; </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>returns a reference to the <a class="el" href="class_student.html">Student</a> in case it finds him, returns nullptr otherwise; </dd></dl>
 
 </div>
 </div>
@@ -217,14 +239,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4a44eca2aa74ffe8ba9f925a663909d0" name="a4a44eca2aa74ffe8ba9f925a663909d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a44eca2aa74ffe8ba9f925a663909d0">&#9670;&#160;</a></span>getStudentsSet()</h2>
+<a id="a415cbef35c388c2c4a6f095ef51b7833" name="a415cbef35c388c2c4a6f095ef51b7833"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a415cbef35c388c2c4a6f095ef51b7833">&#9670;&#160;</a></span>getStudentsByCodeSet()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::set&lt; <a class="el" href="class_student.html">Student</a> *, <a class="el" href="struct_student_cmp.html">StudentCmp</a> &gt; ScheduleManager::getStudentsSet </td>
+          <td class="memname">std::set&lt; <a class="el" href="class_student.html">Student</a> *, <a class="el" href="struct_student_code_cmp.html">StudentCodeCmp</a> &gt; ScheduleManager::getStudentsByCodeSet </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -232,19 +254,39 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get function for the Students Set;. </p>
-<dl class="section return"><dt>Returns</dt><dd>a set&lt;Student*&gt; with all the Students pointers from the input file; </dd></dl>
+<p>Get function for the Students By Code Set;. </p>
+<dl class="section return"><dt>Returns</dt><dd>a set&lt;Student*,StudentCodeCmp&gt; with all the Students pointers from the input file; </dd></dl>
 
 </div>
 </div>
-<a id="ac77cb80ed367d7fe1d2c573aa145fdf5" name="ac77cb80ed367d7fe1d2c573aa145fdf5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac77cb80ed367d7fe1d2c573aa145fdf5">&#9670;&#160;</a></span>getUCsVector()</h2>
+<a id="aeaeb00c3e358cfcfee0124f42b63a99f" name="aeaeb00c3e358cfcfee0124f42b63a99f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaeb00c3e358cfcfee0124f42b63a99f">&#9670;&#160;</a></span>getStudentsByNameSet()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="class_u_c.html">UC</a> * &gt; ScheduleManager::getUCsVector </td>
+          <td class="memname">std::set&lt; <a class="el" href="class_student.html">Student</a> *, <a class="el" href="struct_student_name_cmp.html">StudentNameCmp</a> &gt; ScheduleManager::getStudentsByNameSet </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get function for the Students By Name Set;. </p>
+<dl class="section return"><dt>Returns</dt><dd>a set&lt;Student*,StudentNameCmp&gt; with all the Students pointers from the input file; </dd></dl>
+
+</div>
+</div>
+<a id="ac77cb80ed367d7fe1d2c573aa145fdf5" name="ac77cb80ed367d7fe1d2c573aa145fdf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac77cb80ed367d7fe1d2c573aa145fdf5">&#9670;&#160;</a></span>getUcVector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_u_c.html">UC</a> * &gt; ScheduleManager::getUcVector </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -436,7 +478,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>headers/<a class="el" href="_schedule_manager_8h_source.html">ScheduleManager.h</a></li>
+<li>/home/diogotvf7/Documents/2Year/AED/TP/AED_TP1/headers/<a class="el" href="_schedule_manager_8h_source.html">ScheduleManager.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

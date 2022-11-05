@@ -2,7 +2,7 @@
 // Created by diogotvf7 on 01-11-2022.
 //
 
-#include "../headers/UC.h"
+#include "UC.h"
 
 using namespace std;
 
@@ -10,12 +10,18 @@ UC::UC(const string &ucCode) {
     this->ucCode = ucCode;
 }
 
-string UC::getUcCode() const {
+string UC::getName() const {
     return ucCode;
 }
 
 vector<Class *> UC::getClasses() const {
     return classes;
+}
+
+unsigned UC::countStudents() const {
+    unsigned total = 0;
+    for (Class *c : classes) total += c->countStudents();
+    return total;
 }
 
 unsigned UC::getMinClassStudents(Class *ignore) const {
