@@ -183,9 +183,7 @@ void ScheduleManager::readClassesFile() {
     ifstream in("../data/input/classes.csv");
     string line; getline(in, line, '\r'); // Ignore Header
 
-    unsigned i = 0; // Índice da UC no vetor ucs
-
-    while (getline(in, line)) {
+    while (getline(in, line, '\r')) {
 
         string classCode, ucCode, weekday, start, duration, type;
         stringstream input(line);
@@ -195,21 +193,11 @@ void ScheduleManager::readClassesFile() {
         getline(input, weekday, ',');
         getline(input, start, ',');
         getline(input, duration, ',');
-        getline(input, type, '\r');
+        getline(input, type);
 
-        string previousUCCode = ucs[i]->getName();
-
-        if (ucCode != previousUCCode) i++;
-
-        vector<Class*> classesToAddSlots = ucs[i]->getClasses();
-
-        for (Class* classToAddSlot : classesToAddSlots) {
-            if (classCode == classToAddSlot->getName()) {
-                Slot* slot = new Slot(weekday, start, duration, type);
-                classToAddSlot->addSlot(slot);
-                break;
-            }
-        }
+        auto itr = find_if(classes.begin(), classes.end(),[ucCode, classCode](Class *c){return c->getName() == classCode &&
+                                                                                               c->getUc()->getName() == ucCode;});
+        (*itr)->addSlot(new Slot(weekday, start, duration, type));
     }
 }
 
