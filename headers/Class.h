@@ -67,8 +67,6 @@ public:
      * @return returns the size of vector<Student*> students as an unsigned value;
      */
     unsigned countStudents() const;
-    //TODO
-    void printStudents() const;
     /**
      * @brief Overload of operator== to check equality between Class objects;
      * @param c the right hand side Class;

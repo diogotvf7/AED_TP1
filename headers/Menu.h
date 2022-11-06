@@ -23,8 +23,6 @@ public:
     std::vector<UC*> getUcs();
     std::vector<Class*> getClasses(UC *uc = nullptr, Student *s = nullptr);
     std::vector<Student*> getStudents(Class *c);
-//    std::pair<std::set<Student*>::iterator,std::set<Student*>::iterator> getAllStudentsIter();
-    std::set<Student*> getAllStudentsIter();
     void run();
     void mainMenu();
     void ucMenu();
@@ -41,6 +39,7 @@ public:
     void configUcMenu();
     void configClassMenu();
     void configStudentMenu();
+    void findMenu();
     void configMenu();
     void close();
     static void cleanTerminal();

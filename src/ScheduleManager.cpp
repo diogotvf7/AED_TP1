@@ -3,7 +3,6 @@
 //
 
 #include <iostream>
-#include <fstream>
 #include <sstream>
 #include <algorithm>
 
@@ -58,6 +57,24 @@ Class *ScheduleManager::findClass(const string &ucCode, const string &classCode)
     if (i == classes.end())
         return nullptr;
     return *i;
+}
+
+UC *ScheduleManager::findUc(const std::string &ucCode) const {
+    auto i = find_if(ucs.begin(), ucs.end(), [ucCode](UC *uc){return uc->getName() == ucCode;});
+    if (i == ucs.end())
+        return nullptr;
+    return *i;
+}
+
+std::vector<UC*> ScheduleManager::ucsByYear (const int year) const {
+
+    vector<UC*> ucsByYear;
+
+    for (UC* uc : ucs) {
+        if (year == 0 && uc->getName()[6] - '0' + 1 == year) {
+            ucsByYear.push_back(uc);
+        }
+    }
 }
 
 void ScheduleManager::createRequest(Request *r) {
@@ -139,13 +156,13 @@ void ScheduleManager::processRegularRequests() {
 
         try {
             if (r->getType() == "add")
-                processAddRequest(static_cast<AddRequest*>(r));
+                processAddRequest(dynamic_cast<AddRequest*>(r));
             else if (r->getType() == "remove")
-                processRemoveRequest(static_cast<RemoveRequest*>(r));
+                processRemoveRequest(dynamic_cast<RemoveRequest*>(r));
             else if (r->getType() == "switch")
-                processSwitchRequest(static_cast<SwitchRequest*>(r));
+                processSwitchRequest(dynamic_cast<SwitchRequest*>(r));
             else if (r->getType() == "swap")
-                processSwapRequest(static_cast<SwapRequest*>(r));
+                processSwapRequest(dynamic_cast<SwapRequest*>(r));
         } catch (Oopsie &e) {
             out << "Failed request: " + e.what() << endl;
         }
@@ -173,7 +190,7 @@ void ScheduleManager::readClassesPerUcFile() {
             currentUC = new UC(ucCode);
             ucs.push_back(currentUC);
         }
-        Class *newClass = new Class(classCode, currentUC);
+        auto *newClass = new Class(classCode, currentUC);
         classes.push_back(newClass);
     }
 }

@@ -18,22 +18,7 @@ public:
      * @param duration string for the Slot's duration which will be converted to a float;
      * @param type string with the type of the Slot (T, TP or PL)
      */
-    Slot(std::string weekday, std::string start, std::string duration, std::string type);
-    /**
-     * @brief Get function for the Slot's Weekday;
-     * @return returns a string with the Slot's weekday;
-     */
-    std::string getWeekday() const;
-    /**
-     * @brief Get function for the Slot's Start Hour;
-     * @return returns a float with the Slot's start hour;
-     */
-    float getStart() const;
-    /**
-     * @brief Get function for the Slot's Duration;
-     * @return return a float with the Slot's duration;
-     */
-    float getDuration() const;
+    Slot(const std::string &weekday, const std::string& start, const std::string &duration, const std::string &type);
     /**
      * @brief Get function for the Slot's Type;
      * @return returns a string with the Slot's Type;

@@ -12,24 +12,12 @@
 
 using namespace std;
 
-Slot::Slot(std::string weekday, std::string start, std::string duration, std::string type) {
+Slot::Slot(const string &weekday, const string &start, const string &duration, const string &type) {
 
     this->weekday = weekday;
     this->start = stof(start,  nullptr);
     this->duration = stof(duration, nullptr);
     this->type = type;
-}
-
-string Slot::getWeekday() const {
-    return weekday;
-}
-
-float Slot::getStart() const {
-    return start;
-}
-
-float Slot::getDuration() const {
-    return duration;
 }
 
 string Slot::getType() const {

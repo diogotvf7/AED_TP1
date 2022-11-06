@@ -13,7 +13,7 @@
 class Oopsie : public std::exception {
 
 public:
-    Oopsie(std::string msg);
+    explicit Oopsie(std::string msg);
     std::string what();
 private:
     std::string message;

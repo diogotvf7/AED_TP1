@@ -43,7 +43,7 @@ public:
      * @brief Constructor for the Schedule Manager's class.
      * Runs the input reading functions;
      */
-    ScheduleManager(const std::string &path);
+    explicit ScheduleManager(const std::string &path);
     /**
      * Get function for the UC's vector;
      * @return a vector<UC*> with all the UCs pointers from the input file;
@@ -83,6 +83,10 @@ public:
     Student *findStudentByName(const std::string &name) const;
     //TODO
     Class *findClass(const std::string &ucCode, const std::string &classCode) const;
+    //TODO
+    UC *findUc(const std::string &ucCode) const;
+
+    std::vector<UC*> ucsByYear (const int year) const;
 
     void createRequest(Request *r);
     void processRequests();
