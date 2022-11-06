@@ -43,7 +43,7 @@ public:
      * @brief Constructor for the Schedule Manager's class.
      * Runs the input reading functions;
      */
-    ScheduleManager();
+    ScheduleManager(const std::string &path);
     /**
      * Get function for the UC's vector;
      * @return a vector<UC*> with all the UCs pointers from the input file;
@@ -103,11 +103,9 @@ public:
     /**
      * @brief Reads the students_classes.csv file and stores the input in set<Student> students;
      */
-    void readStudentsClassesFile();
+    void readStudentsClassesFile(const std::string &path);
 
-    void writeClassesPerUcFile();
-    void writeClassesFile();
-    void writeStudentsClassesFile();
+    void writeChanges();
 private:
     std::vector<UC*> ucs;
     std::vector<Class*> classes;

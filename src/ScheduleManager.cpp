@@ -13,10 +13,10 @@
 
 using namespace std;
 
-ScheduleManager::ScheduleManager() {
+ScheduleManager::ScheduleManager(const string &path) {
     readClassesPerUcFile();
     readClassesFile();
-    readStudentsClassesFile();
+    readStudentsClassesFile(path);
 }
 
 std::vector<UC *> ScheduleManager::getUcVector() const {
@@ -183,7 +183,9 @@ void ScheduleManager::readClassesFile() {
     ifstream in("../data/input/classes.csv");
     string line; getline(in, line, '\r'); // Ignore Header
 
-    while (getline(in, line, '\r')) {
+    unsigned i = 0; // Índice da UC no vetor ucs
+
+    while (getline(in, line)) {
 
         string classCode, ucCode, weekday, start, duration, type;
         stringstream input(line);
@@ -193,22 +195,32 @@ void ScheduleManager::readClassesFile() {
         getline(input, weekday, ',');
         getline(input, start, ',');
         getline(input, duration, ',');
-        getline(input, type);
+        getline(input, type, '\r');
 
-        auto itr = find_if(classes.begin(), classes.end(),[ucCode, classCode](Class *c){return c->getName() == classCode &&
-                c->getUc()->getName() == ucCode;});
-        (*itr)->addSlot(new Slot(weekday, start, duration, type));
+        string previousUCCode = ucs[i]->getName();
+
+        if (ucCode != previousUCCode) i++;
+
+        vector<Class*> classesToAddSlots = ucs[i]->getClasses();
+
+        for (Class* classToAddSlot : classesToAddSlots) {
+            if (classCode == classToAddSlot->getName()) {
+                Slot* slot = new Slot(weekday, start, duration, type);
+                classToAddSlot->addSlot(slot);
+                break;
+            }
+        }
     }
 }
 
-void ScheduleManager::readStudentsClassesFile() {
+void ScheduleManager::readStudentsClassesFile(const string &path) {
 
-    ifstream in("../data/input/students_classes.csv");
+    ifstream in(path);
     string line;
 
     getline(in, line, '\r'); // Ignore Header
 
-    Student *currentStudent = nullptr;
+    Student *currentStudent;
 
     while (getline(in, line, '\r')) {
 
@@ -219,48 +231,31 @@ void ScheduleManager::readStudentsClassesFile() {
         getline(input, code, ',');
         getline(input, name, ',');
         getline(input, ucCode, ',');
-        getline(input, classCode);
+        getline(input, classCode, '\r');
 
-        auto itr = find_if(classes.begin(), classes.end(),[classCode, ucCode](Class *c) {return
-                c->getName() == classCode &&
-                c->getUc()->getName() == ucCode;});
-
-        if (currentStudent == nullptr) {
+        if (studentsByCode.empty() || currentStudent->getName() != name) {
             currentStudent = new Student(code, name);
-        }
-        if (currentStudent->getCode() != stoi(code)) {
             studentsByCode.insert(currentStudent);
             studentsByName.insert(currentStudent);
             studentsByNumberOfClasses.insert(currentStudent);
-            currentStudent = new Student(code, name);
         }
-        currentStudent->addClass(*itr);
+
+        for (UC *uc: ucs)
+            if (uc->getName() == ucCode) {
+                for (Class *classToAddStudent: uc->getClasses()) {
+                    if (classToAddStudent->getName() == classCode) {
+                        currentStudent->addClass(classToAddStudent);
+                        break;
+                    }
+                }
+                break;
+            }
     }
-    studentsByCode.insert(currentStudent);
-    studentsByName.insert(currentStudent);
-    studentsByNumberOfClasses.insert(currentStudent);
 }
 
-void ScheduleManager::writeClassesPerUcFile() {
+void ScheduleManager::writeChanges() {
 
-    ofstream out("../data/input/classes_per_uc.csv");
-    out << "UcCode,ClassCode\r";
-    for (UC *uc : ucs)
-        for (Class *c : uc->getClasses())
-            out << uc->getName() << ',' << c->getName() << '\r';
-}
-void ScheduleManager::writeClassesFile() {
-
-    ofstream out("../data/input/classes.csv");
-    out << "ClassCode,UcCode,Weekday,StartHour,Duration,Type\r";
-    for (Class *c : classes)
-        for (Slot *s : c->getSlots())
-            out << c->getName() << ',' << c->getUc()->getName() << ',' << s->getWeekday() << ',' << s->getStart() << ',' << s->getDuration() << ',' << s->getType() << '\r';
-}
-
-void ScheduleManager::writeStudentsClassesFile() {
-
-    ofstream out("../data/input/students_classes.csv");
+    ofstream out("../data/input/students_classes_edited.csv");
     out << "StudentCode,StudentName,UcCode,ClassCode\r";
     for (Student *s : studentsByCode)
         for (Class *c : s->getClasses())

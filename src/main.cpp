@@ -416,7 +416,43 @@ void runTests(ScheduleManager *sm) {
 
 int main() {
 
-    ScheduleManager sm;
+    string path;
+
+    ifstream in ("../data/input/students_classes_edited.csv");
+
+    if (!in) {
+        path = "../data/input/students_classes.csv";
+    }
+
+    else {
+        cout << "Do you want the original or edited schedule?\n";
+        cout << "All changes to the edited will be lost if you choose the original\n";
+        cout << "0: original\n";
+        cout << "1: edited\n";
+
+        string option;
+
+        while (true) {
+
+            cin >> option;
+
+            if (option == "0") {
+                path = "../data/input/students_classes.csv";
+                break;
+            }
+
+            if (option == "1") {
+                path = "../data/input/students_classes_edited.csv";
+                break;
+            }
+
+            cout << "Invalid option";
+        }
+
+    }
+
+    ScheduleManager sm(path);
+
     Menu menu(&sm);
     menu.run();
 

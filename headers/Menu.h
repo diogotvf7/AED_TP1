@@ -22,7 +22,8 @@ public:
     explicit Menu(ScheduleManager *sm);
     std::vector<UC*> getUcs();
     std::vector<Class*> getClasses(UC *uc = nullptr, Student *s = nullptr);
-    std::vector<Student*> getStudents(Class *c = nullptr);
+    std::vector<Student*> getStudents(Class *c);
+    std::pair<std::set<Student*>::iterator,std::set<Student*>::iterator> getAllStudentsIter();
     void run();
     void mainMenu();
     void ucMenu();
