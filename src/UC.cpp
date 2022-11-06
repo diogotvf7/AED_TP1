@@ -14,7 +14,7 @@ string UC::getName() const {
     return ucCode;
 }
 
-vector<Class *> UC::getClasses() const {
+std::vector<Class *> UC::getClasses() const {
     return classes;
 }
 

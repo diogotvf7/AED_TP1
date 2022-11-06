@@ -22,7 +22,7 @@ string Student::getName() const {
     return name;
 }
 
-list<Class*> Student::getClasses() const {
+vector<Class*> Student::getClasses() const {
     return classes;
 }
 

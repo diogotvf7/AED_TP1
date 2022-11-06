@@ -27,10 +27,10 @@ public:
      */
     std::string getName() const;
     /**
-     * @brief Get function for the UC's Classes vector;
-     * @return returns a vector<Class*> with pointers to all the UC's classes;
+     * @brief Get function for the UC's Classes list;
+     * @return returns a list<Class*> with pointers to all the UC's classes;
      */
-    std::vector<Class*> getClasses() const;
+    std::vector<Class *> getClasses() const;
     /**
      * @brief Funtion that counts the amount of Students in an UC;
      * @return returns an unsigned value for the total number of Students registered in the UC;

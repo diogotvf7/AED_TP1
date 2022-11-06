@@ -41,7 +41,7 @@ public:
      * @brief Get function for the Student's Classes;
      * @return returns a list with all the Student's Classes;
      */
-    std::list<Class*> getClasses() const;
+    std::vector<Class*> getClasses() const;
     /**
      * @brief Get function for the Student's Status;
      * @return returns the bool value of Status;
@@ -81,7 +81,7 @@ private:
     int code;
     std::string name;
     bool status;
-    std::list<Class*> classes;
+    std::vector<Class*> classes;
 };
 
 

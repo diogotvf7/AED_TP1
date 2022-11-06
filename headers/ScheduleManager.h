@@ -42,7 +42,7 @@ public:
      * Get function for the UC's vector;
      * @return a vector<UC*> with all the UCs pointers from the input file;
      */
-    std::vector<UC *> getUcVector() const;
+    std::vector<UC*> getUcVector() const;
     /**
      * @brief Get function for the Class's Vector;
      * @return a vector<Class*> with all the Classes pointers from input the file;

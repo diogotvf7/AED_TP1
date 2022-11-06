@@ -7,25 +7,36 @@
 
 #include <iomanip>
 #include <algorithm>
+#include <list>
+#include <vector>
 #include <map>
 
+#include "UC.h"
+#include "Class.h"
+#include "Student.h"
 #include "ScheduleManager.h"
-
 
 class Menu {
 
 public:
     explicit Menu(ScheduleManager *sm);
+    std::vector<UC*> getUcs();
+    std::vector<Class*> getClasses(UC *uc = nullptr, Student *s = nullptr);
+    std::vector<Student*> getStudents(Class *c = nullptr);
     void run();
     void mainMenu();
-    void ucMenu();
-    void ucClassMenu(UC *uc);
+    bool ucMenu();
+    bool classMenu();
+    bool ucClassMenu(UC *uc);
+    bool classStudentMenu(Class *c);
+    bool studentMenu(Student *s);
     static void cleanTerminal() ;
 
 private:
     ScheduleManager *sm;
-    std::map<std::string,std::string> ucConfig;
-    std::map<std::string,std::string> classConfig;
+    std::map<std::string,std::string> ucPrintConfig;
+    std::map<std::string,std::string> classPrintConfig;
+    std::map<std::string,std::string> studentPrintConfig;
     std::string status;
 
 };
