@@ -53,8 +53,8 @@ Student *ScheduleManager::findStudentByName(const string &name) const {
     return *i;
 }
 
-Class *ScheduleManager::findClass(const std::string &code) const {
-    auto i = find_if(classes.begin(), classes.end(), [code](Class *c){return c->getName() == code;});
+Class *ScheduleManager::findClass(const string &ucCode, const string &classCode) const {
+    auto i = find_if(classes.begin(), classes.end(), [classCode, ucCode](Class *c){return c->getName() == classCode && c->getUc()->getName() == ucCode;});
     if (i == classes.end())
         return nullptr;
     return *i;
@@ -157,17 +157,17 @@ void ScheduleManager::processRegularRequests() {
 void ScheduleManager::readClassesPerUcFile() {
 
     ifstream in("../data/input/classes_per_uc.csv");
-    string line; getline(in, line); // Ignore Header
+    string line; getline(in, line, '\r'); // Ignore Header
 
     UC *currentUC;
 
-    while (getline(in, line)) {
+    while (getline(in, line, '\r')) {
 
         string ucCode, classCode;
         stringstream input(line);
 
         getline(input, ucCode, ',');
-        getline(input, classCode, '\r');
+        getline(input, classCode);
 
         if (ucs.empty() || ucCode != currentUC->getName()) {
             currentUC = new UC(ucCode);
@@ -181,9 +181,9 @@ void ScheduleManager::readClassesPerUcFile() {
 void ScheduleManager::readClassesFile() {
 
     ifstream in("../data/input/classes.csv");
-    string line; getline(in, line); // Ignore Header
+    string line; getline(in, line, '\r'); // Ignore Header
 
-    while (getline(in, line)) {
+    while (getline(in, line, '\r')) {
 
         string classCode, ucCode, weekday, start, duration, type;
         stringstream input(line);
@@ -193,7 +193,7 @@ void ScheduleManager::readClassesFile() {
         getline(input, weekday, ',');
         getline(input, start, ',');
         getline(input, duration, ',');
-        getline(input, type, '\r');
+        getline(input, type);
 
         auto itr = find_if(classes.begin(), classes.end(),[ucCode, classCode](Class *c){return c->getName() == classCode &&
                 c->getUc()->getName() == ucCode;});
@@ -206,11 +206,11 @@ void ScheduleManager::readStudentsClassesFile() {
     ifstream in("../data/input/students_classes.csv");
     string line;
 
-    getline(in, line); // Ignore Header
+    getline(in, line, '\r'); // Ignore Header
 
     Student *currentStudent = nullptr;
 
-    while (getline(in, line)) {
+    while (getline(in, line, '\r')) {
 
         string code, name, ucCode, classCode;
 
@@ -219,7 +219,7 @@ void ScheduleManager::readStudentsClassesFile() {
         getline(input, code, ',');
         getline(input, name, ',');
         getline(input, ucCode, ',');
-        getline(input, classCode, '\r');
+        getline(input, classCode);
 
         auto itr = find_if(classes.begin(), classes.end(),[classCode, ucCode](Class *c) {return
                 c->getName() == classCode &&

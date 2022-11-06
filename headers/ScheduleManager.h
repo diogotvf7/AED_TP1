@@ -82,7 +82,7 @@ public:
      */
     Student *findStudentByName(const std::string &name) const;
     //TODO
-    Class *findClass(const std::string &code) const;
+    Class *findClass(const std::string &ucCode, const std::string &classCode) const;
 
     void createRequest(Request *r);
     void processRequests();
@@ -111,9 +111,9 @@ public:
 private:
     std::vector<UC*> ucs;
     std::vector<Class*> classes;
-    std::set<Student*, StudentCodeCmp> studentsByCode;
-    std::set<Student*, StudentNameCmp> studentsByName;
-    std::set<Student*, StudentNumberOfClassesCmp> studentsByNumberOfClasses;
+    std::set<Student*,StudentCodeCmp> studentsByCode;
+    std::set<Student*,StudentNameCmp> studentsByName;
+    std::set<Student*,StudentNumberOfClassesCmp> studentsByNumberOfClasses;
     std::queue<Request*> regularRequests;
     std::queue<Request*> statusRequests;
 };

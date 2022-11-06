@@ -36,6 +36,10 @@ public:
     void switchRequest();
     void swapRequest();
     void requestMenu();
+    void configUcMenu();
+    void configClassMenu();
+    void configStudentMenu();
+    void configMenu();
     void close();
     static void cleanTerminal();
 
