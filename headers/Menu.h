@@ -25,12 +25,19 @@ public:
     std::vector<Student*> getStudents(Class *c = nullptr);
     void run();
     void mainMenu();
-    bool ucMenu();
-    bool classMenu();
+    void ucMenu();
+    void classMenu();
+    void studentMenu();
     bool ucClassMenu(UC *uc);
     bool classStudentMenu(Class *c);
     bool studentMenu(Student *s);
-    static void cleanTerminal() ;
+    void addRequest();
+    void removeRequest();
+    void switchRequest();
+    void swapRequest();
+    void requestMenu();
+    void close();
+    static void cleanTerminal();
 
 private:
     ScheduleManager *sm;

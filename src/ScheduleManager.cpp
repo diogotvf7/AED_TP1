@@ -35,6 +35,10 @@ set<Student*,StudentNameCmp> ScheduleManager::getStudentsByNameSet() const {
     return studentsByName;
 }
 
+set<Student*,StudentNumberOfClassesCmp> ScheduleManager::getStudentsByNumberOfClassesSet() const {
+    return studentsByNumberOfClasses;
+}
+
 Student *ScheduleManager::findStudentByCode(const string &code) const {
     auto i = studentsByCode.find(new Student(code, ""));
     if (i == studentsByCode.end())
@@ -45,6 +49,13 @@ Student *ScheduleManager::findStudentByCode(const string &code) const {
 Student *ScheduleManager::findStudentByName(const string &name) const {
     auto i = studentsByName.find(new Student("0", name));
     if (i == studentsByName.end())
+        return nullptr;
+    return *i;
+}
+
+Class *ScheduleManager::findClass(const std::string &code) const {
+    auto i = find_if(classes.begin(), classes.end(), [code](Class *c){return c->getName() == code;});
+    if (i == classes.end())
         return nullptr;
     return *i;
 }
@@ -120,7 +131,7 @@ void ScheduleManager::processStatusRequests() {
 
 void ScheduleManager::processRegularRequests() {
 
-    ofstream output_file("../data/output/output_log", std::ios_base::app);
+    ofstream out("../data/output/output_log", std::ios_base::app);
 
     while (!regularRequests.empty()) {
 
@@ -136,7 +147,7 @@ void ScheduleManager::processRegularRequests() {
             else if (r->getType() == "swap")
                 processSwapRequest(static_cast<SwapRequest*>(r));
         } catch (Oopsie &e) {
-            output_file << "Failed request: " + e.what() << endl;
+            out << "Failed request: " + e.what() << endl;
         }
 
         regularRequests.pop();
@@ -220,13 +231,38 @@ void ScheduleManager::readStudentsClassesFile() {
         if (currentStudent->getCode() != stoi(code)) {
             studentsByCode.insert(currentStudent);
             studentsByName.insert(currentStudent);
+            studentsByNumberOfClasses.insert(currentStudent);
             currentStudent = new Student(code, name);
         }
         currentStudent->addClass(*itr);
     }
     studentsByCode.insert(currentStudent);
     studentsByName.insert(currentStudent);
+    studentsByNumberOfClasses.insert(currentStudent);
 }
 
+void ScheduleManager::writeClassesPerUcFile() {
 
+    ofstream out("../data/input/classes_per_uc.csv");
+    out << "UcCode,ClassCode\r";
+    for (UC *uc : ucs)
+        for (Class *c : uc->getClasses())
+            out << uc->getName() << ',' << c->getName() << '\r';
+}
+void ScheduleManager::writeClassesFile() {
 
+    ofstream out("../data/input/classes.csv");
+    out << "ClassCode,UcCode,Weekday,StartHour,Duration,Type\r";
+    for (Class *c : classes)
+        for (Slot *s : c->getSlots())
+            out << c->getName() << ',' << c->getUc()->getName() << ',' << s->getWeekday() << ',' << s->getStart() << ',' << s->getDuration() << ',' << s->getType() << '\r';
+}
+
+void ScheduleManager::writeStudentsClassesFile() {
+
+    ofstream out("../data/input/students_classes.csv");
+    out << "StudentCode,StudentName,UcCode,ClassCode\r";
+    for (Student *s : studentsByCode)
+        for (Class *c : s->getClasses())
+            out << s->getCode() << ',' << s->getName() << ',' << c->getUc()->getName() << ',' << c->getName() << '\r';
+}

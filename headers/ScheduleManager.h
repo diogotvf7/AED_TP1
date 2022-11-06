@@ -19,14 +19,20 @@
 #include "RemoveRequest.h"
 
 struct StudentCodeCmp {
-    bool operator() (Student *left, Student *right) const {
-        return left->getCode() < right->getCode();
+    bool operator() (Student *lhs, Student *rhs) const {
+        return lhs->getCode() < rhs->getCode();
     }
 };
 
 struct StudentNameCmp {
-    bool operator() (Student *left, Student *right) const {
-        return left->getName() < right->getName();
+    bool operator() (Student *lhs, Student *rhs) const {
+        return lhs->getName() < rhs->getName();
+    }
+};
+
+struct StudentNumberOfClassesCmp {
+    bool operator() (Student *lhs, Student *rhs) const {
+        return lhs->countClasses() < rhs->countClasses();
     }
 };
 
@@ -59,6 +65,11 @@ public:
      */
     std::set<Student*,StudentNameCmp> getStudentsByNameSet() const;
     /**
+     * @brief Get function for the Students By Number of Classes Set;
+     * @return a set<Student*,StudentNumberOfClassesCmp> with all the Students pointers from the input file;
+     */
+    std::set<Student*,StudentNumberOfClassesCmp> getStudentsByNumberOfClassesSet() const;
+    /**
      * @brief Function that finds a Student by Code in the Student's set;
      * @param code the Code to look for;
      * @return returns a reference to the Student in case it finds him, returns nullptr otherwise;
@@ -70,15 +81,17 @@ public:
      * @return returns a reference to the Student in case it finds him, returns nullptr otherwise;
      */
     Student *findStudentByName(const std::string &name) const;
+    //TODO
+    Class *findClass(const std::string &code) const;
 
     void createRequest(Request *r);
     void processRequests();
     void processStatusRequests();
     void processRegularRequests();
-    void processAddRequest(AddRequest *ar);
-    void processRemoveRequest(RemoveRequest *rr);
-    void processSwitchRequest(SwitchRequest *sr);
-    void processSwapRequest(SwapRequest *sr);
+    static void processAddRequest(AddRequest *ar);
+    static void processRemoveRequest(RemoveRequest *rr);
+    static void processSwitchRequest(SwitchRequest *sr);
+    static void processSwapRequest(SwapRequest *sr);
     /**
      * @brief Reads the classes_per_uc.csv file and stores the input in vector<Uc> ucs;
      */
@@ -92,11 +105,15 @@ public:
      */
     void readStudentsClassesFile();
 
+    void writeClassesPerUcFile();
+    void writeClassesFile();
+    void writeStudentsClassesFile();
 private:
     std::vector<UC*> ucs;
     std::vector<Class*> classes;
     std::set<Student*, StudentCodeCmp> studentsByCode;
     std::set<Student*, StudentNameCmp> studentsByName;
+    std::set<Student*, StudentNumberOfClassesCmp> studentsByNumberOfClasses;
     std::queue<Request*> regularRequests;
     std::queue<Request*> statusRequests;
 };

@@ -421,7 +421,7 @@ int main() {
     menu.run();
 
 //    runTests(&sm);
-//    cout << '\n' << sm.getUcs().size() << ' ' << sm.getClasses().size() << ' ' << sm.getStudentsByCodeSet().size() << '\n';
+//    cout << '\n' << sm.getUcVector().size() << ' ' << sm.getClassesVector().size() << ' ' << sm.getStudentsByCodeSet().size() << '\n';
 
     return 0;
 }
