@@ -48,13 +48,5 @@ bool Class::operator==(const Class &c) const {
     return classCode == c.classCode && uc->getName() == c.uc->getName();
 }
 
-ostream &operator<<(ostream &os, const Class &c) {
-
-    os << "     - UC Code: " << c.getUc()->getName() << "      Class Code: " << c.classCode << endl;
-    for (Slot *s : c.slots)
-        os << "       - " << *s;
-    return os;
-}
-
 
 

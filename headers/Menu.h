@@ -21,121 +21,109 @@ class Menu {
 public:
 
     /**
-     * @brief Constructor for the Menu Object;
-     * @param sm reads the Schedule Manager;
+     * @brief Constructor for the Menu class;
+     * @param sm a pointer to the Schedule Manager object;;
      */
     explicit Menu(ScheduleManager *sm);
-
     /**
-     * @brief Method to get the UCs
+     * @brief Method to get the UCs;
      * @return return a vector with all UCs;
      */
     std::vector<UC*> getUcs();
-
     /**
      * @brief Method to get the Classes of an UC or a Student;
-     * @param uc to get the respective classes;
-     * @param s to get the respective classes
+     * @param uc if not nullptr, the function gets this UC's classes;
+     * @param s if not nullptr, the function gets this Student's classes;
      * @return return a vector with the respective Classes;
      */
     std::vector<Class*> getClasses(UC *uc = nullptr, Student *s = nullptr);
-
     /**
-     * @brief Method to get the Students of a Class
-     * @param c respective Class
-     * @return return a vector with all Students of a Class;
+     * @brief Method to get the Students of a Class vector;
+     * @param c a pointer to the Class in question;
+     * @return returns a vector with all the Students pointers of a Class;
      */
     std::vector<Student*> getStudents(Class *c);
-
     /**
-     * @brief Run the menu
+     * @brief Runs the menu;
      */
     void run();
-
     /**
-     * @brief Run the main menu
+     * @brief Runs the main menu;
      */
     void mainMenu();
-
     /**
-     * @brief Run the UC menu
+     * @brief Shows all the UC's;
      */
     void ucMenu();
-
     /**
-     * @brief Run the Class Menu
+     * @brief Shows all the Classes;
      */
     void classMenu();
-
     /**
-     * @brief Run the Student Menu
+     * @brief Shows all the Students;
      */
     void studentMenu();
-
     /**
-     * @brief Run the Uc Class Menu
+     * @brief Shows the classes from an UC;
      * @param uc the respective Uc
      */
     bool ucClassMenu(UC *uc);
-
     /**
-     * @brief Run the Class Student menu
-     * @param c the respective Class
+     * @brief Shows the Student's of a Class;
+     * @param c the Class in question;
      */
     bool classStudentMenu(Class *c);
-
     /**
-     * @brief Run the Student Menu
-     * @param s the respective Student
+     * @brief Shows a Student's Schedule;
+     * @param s the Student in question;
      */
     bool studentMenu(Student *s);
-
     /**
-     * @brief Run the Add Request menu
+     * @brief Runs the Add Request menu;
      */
     void addRequest();
     /**
-     * @brief Run the Remove Request menu
+     * @brief Runs the Remove Request menu;
      */
     void removeRequest();
     /**
-     * @brief Run the Switch Request menu
+     * @brief Runs the Switch Request menu;
      */
     void switchRequest();
     /**
-     * @brief Run the Swap Request menu
+     * @brief Runs the Swap Request menu;
      */
     void swapRequest();
     /**
-     * Run the Request Menu
+     * Runs the Request Menu;
      */
     void requestMenu();
     /**
-     * @brief Run the ConfigUC Menu
+     * @brief Runs the UC configuration menu;
      */
     void configUcMenu();
     /**
-     * @brief Run the configClass Menu
+     * @brief Runs the Class configuration menu;
      */
     void configClassMenu();
     /**
-     *@brief Run the ConfigStudent Menu
+     *@brief Runs the Student configuration menu;
      */
     void configStudentMenu();
     /**
-     *@brief Run the Find Menu
+     *@brief Runs the find menu;
      */
     void findMenu();
     /**
-     *@brief Run the Config Menu
+     *@brief Runs the configurations menu;
      */
     void configMenu();
     /**
-     *@brief Close the Menu
+     *@brief Closes the menu and asks if the user wants to process and save the requests made;
      */
     void close();
     /**
-     * @brief Clean the Terminal
+     * @brief Cleans the Terminal;
      */
     static void cleanTerminal();
 

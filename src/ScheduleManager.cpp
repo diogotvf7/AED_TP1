@@ -108,7 +108,7 @@ void ScheduleManager::processRequests() {
 
 void ScheduleManager::processStatusRequests() {
 
-    ofstream output_file("../data/output/output_log", std::ios_base::app);
+    ofstream output_file("../data/output/failed_request_log", std::ios_base::app);
 
     while (!statusRequests.empty()) {
 
@@ -133,7 +133,7 @@ void ScheduleManager::processStatusRequests() {
 
 void ScheduleManager::processRegularRequests() {
 
-    ofstream out("../data/output/output_log", std::ios_base::app);
+    ofstream out("../data/output/failed_request_log", std::ios_base::app);
 
     while (!regularRequests.empty()) {
 

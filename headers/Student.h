@@ -21,7 +21,7 @@ class Student {
 
 public:
     /**
-     * @brief Constructor for Student object;
+     * @brief Constructor for the Student class;
      * @param code string for the Student's code which will be converted to an int;
      * @param name string for the Student's name;
      * @param status boolean that determines whether a Student has a special status or not (default is false);
@@ -39,7 +39,7 @@ public:
     std::string getName() const;
     /**
      * @brief Get function for the Student's Classes;
-     * @return returns a list with all the Student's Classes;
+     * @return returns a vector with all the Student's Classes;
      */
     std::vector<Class*> getClasses() const;
     /**
@@ -67,15 +67,18 @@ public:
      * @param c the Class to be removed;
      */
     void removeClass(Class *c);
-    bool isInClass(Class *c) const;
-    bool isInUc(UC *uc) const;
     /**
-     * @brief Overload of operator<< to output Student's info;
-     * @param os the output stream to which we want to output the Student's info;
-     * @param s the Student that whose info we want to output;
-     * @return returns a reference to the original output stream;
+     * @brief Function that checks if a Student is in a specific Class;
+     * @param c the class in question;
+     * @return returns true if the Student is in the class c; returns false otherwise;
      */
-    friend std::ostream& operator<<(std::ostream& os, const Student& s);
+    bool isInClass(Class *c) const;
+    /**
+     * @brief Function that checks if a Student is in a specific UC;
+     * @param uc the uc in question;
+     * @return returns true if the Student is in the UC uc; returns false otherwise;
+     */
+    bool isInUc(UC *uc) const;
 
 private:
     int code;

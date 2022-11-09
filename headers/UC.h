@@ -17,8 +17,8 @@ class UC {
 
 public:
     /**
-     * @brief Constructor for UC object
-     * @param ucCode string for the UC's code
+     * @brief Constructor for the UC class;
+     * @param ucCode string for the UC's code;
      */
     explicit UC(const std::string& ucCode);
     /**

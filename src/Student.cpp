@@ -62,12 +62,4 @@ bool Student::isInUc(UC *uc) const {
     return false;
 }
 
-ostream &operator<<(ostream &os, const Student &s) {
-    os << " - Code: " << s.code << "      Name: " << s.name << "\n" << endl;
-    for (Class *c : s.classes)
-        os << c;
-    return os;
-}
-
-
 
