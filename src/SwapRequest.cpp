@@ -4,6 +4,8 @@
 
 #include "SwapRequest.h"
 
+using namespace std;
+
 SwapRequest::SwapRequest(Student *student, Student *colleague, Class *current, Class *intended) {
     this->student = student;
     this->colleague = colleague;
@@ -27,7 +29,7 @@ Class *SwapRequest::getIntendedClass() const {
     return intended;
 }
 
-std::string SwapRequest::getType() const {
+string SwapRequest::getType() const {
     return "swap";
 }
 
@@ -71,5 +73,6 @@ bool SwapRequest::isPossible() const {
                                                               c->getUc()->getName() + ' ' + c->getName());
     return true;
 }
+
 
 

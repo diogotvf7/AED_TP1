@@ -31,6 +31,11 @@ public:
      */
     Class *getIntendedClass() const;
     /**
+     * @brief Get Function for the Request's type;
+     * @return returns "add";
+     */
+    std::string getType() const override;
+    /**
      * @brief Function that checks if it is possible to Add a class to a student (attends to classes imbalance, full classes, etc.);
      * @return return true if the add is possible; returns false otherwise.
      */

@@ -5,6 +5,8 @@
 #include "Oopsie.h"
 #include "RemoveRequest.h"
 
+using namespace std;
+
 RemoveRequest::RemoveRequest(Student *s, Class *c) {
     this->student = s;
     this->current = c;
@@ -18,7 +20,7 @@ Class *RemoveRequest::getCurrentClass() const {
     return current;
 }
 
-std::string RemoveRequest::getType() const {
+string RemoveRequest::getType() const {
     return "remove";
 }
 

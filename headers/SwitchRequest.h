@@ -37,6 +37,11 @@ public:
      */
     Class *getIntendedClass() const;
     /**
+     * @brief Get Function for the Request's type;
+     * @return returns "switch";
+     */
+    std::string getType() const override;
+    /**
      * @brief Function that checks if a class Switch between two classes is possible (attends to classes imbalance, full classes, etc.);
      * @return return true if the switch is possible; returns false otherwise.
      */

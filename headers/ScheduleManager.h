@@ -60,75 +60,76 @@ public:
     std::set<Student*,StudentNameCmp> getStudentsByNameSet() const;
     /**
      * @brief Function that finds a Student by Code in the Student's set;
-     * @param code the Code to look for;
-     * @return returns a reference to the Student in case it finds him, returns nullptr otherwise;
+     * @param code a string with the Code to look for;
+     * @return returns a pointer to the Student in case he was found, returns nullptr otherwise;
      */
     Student *findStudentByCode(const std::string &code) const;
     /**
      * @brief Function that finds a Student by name in the Student's set;
-     * @param name the Name to look for;
-     * @return returns a reference to the Student in case it finds him, returns nullptr otherwise;
+     * @param name a the Name to look for;
+     * @return returns a pointer to the Student in case he was found, returns nullptr otherwise;
      */
     Student *findStudentByName(const std::string &name) const;
-    //TODO
-    Class *findClass(const std::string &ucCode, const std::string &classCode) const;
-    //TODO
-    UC *findUc(const std::string &ucCode) const;
-
     /**
-     * @brief create Request
-     * @param r request
+     * @brief Function that finds a Class in the Class's vector;
+     * @param ucCode a string with the UC code to look for;
+     * @param classCode a string with the Class code to look for;
+     * @return returns a pointer to the Class in case it was found, returns nullptr otherwise;
+     */
+    Class *findClass(const std::string &ucCode, const std::string &classCode) const;
+    /**
+     * @brief Function that finds a UC in the UC's vector;
+     * @param ucCode a string with the UC code to look for;
+     * @return return a pointer to the UC in case it was found, returns nullptr otherwise;
+     */
+    UC *findUc(const std::string &ucCode) const;
+    /**
+     * @brief Function that creates a Request and adds it to the respective Queue;
+     * @param r a pointer to the Request that is being pushed to the Queue;
      */
     void createRequest(Request *r);
-
     /**
-     * @brief process request
+     * @brief Function that calls 'processStatusRequests()' and 'processRegularRequests()'
      */
     void processRequests();
-
     /**
-     * @brief process status request;
+     * @brief Function that processes Requests from Students with status;
      */
     void processStatusRequests();
-
     /**
-     * process regular request;
+     * @brief Function that processes Requests from regular Students;
      */
     void processRegularRequests();
-
     /**
-     * @brief process AddRequest;
-     * @param ar addrequest
+     * @brief Function that implements the changes of an AddRequest if it is possible;
+     * @param ar a pointer to the Request;
      */
     static void processAddRequest(AddRequest *ar);
-
     /**
-     * @brief process removeRequest;
-     * @param rr removeRequest;
+     * @brief Function that implements the changes of a RemoveRequest if it is possible;
+     * @param rr a pointer to the Request;
      */
     static void processRemoveRequest(RemoveRequest *rr);
-
     /**
-     * @brief process switch request;
-     * @param sr switch request;
+     * @brief Function that implements the changes of a SwitchRequest if it is possible;
+     * @param sr a pointer to the Request;
      */
     static void processSwitchRequest(SwitchRequest *sr);
-
     /**
-     * @brief process Swap Request
-     * @param sr swapRequest
+     * @brief Function that implements the changes of a SwapRequest if it is possible;
+     * @param sr a pointer to the Request;
      */
     static void processSwapRequest(SwapRequest *sr);
     /**
-     * @brief Reads the classes_per_uc.csv file and stores the input in vector<Uc> ucs;
+     * @brief Reads the classes_per_uc.csv file and stores the input in vector<Uc*> ucs;
      */
     void readClassesPerUcFile();
     /**
-     * @brief Reads the classes.csv file and stores the input in vector<Class> classes;
+     * @brief Reads the classes.csv file and stores the input in vector<Class*> classes;
      */
     void readClassesFile();
     /**
-     * @brief Reads the students_classes.csv file and stores the input in set<Student> students;
+     * @brief Reads the students_classes.csv file and stores the input in set<Student*,StudentCodeCmp> studentsByCode and set<Student*,StudentNameCmp> studentsByName;
      */
     void readStudentsClassesFile(const std::string &path);
 

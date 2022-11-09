@@ -30,6 +30,11 @@ public:
      */
     Class *getCurrentClass() const;
     /**
+     * @brief Get Function for the Request's type;
+     * @return returns "remove";
+     */
+    std::string getType() const override;
+    /**
      * @brief Function that checks if it is possible to Remove a class to a student;
      * @return return true if the remove is possible; returns false otherwise.
      */

@@ -44,6 +44,11 @@ public:
      */
     Class *getIntendedClass() const;
     /**
+     * @brief Get Function for the Request's type;
+     * @return returns "swap";
+     */
+    std::string getType() const override;
+    /**
      * @brief Function that checks if a class Swap between two students is possible;
      * @return return true if the swap is possible; returns false otherwise.
      */

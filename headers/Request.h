@@ -18,6 +18,11 @@ public:
      */
     virtual Student *getStudent() const = 0;
     /**
+     * @brief Get Function for the Request's type;
+     * @return returns a string with the Request's type;
+     */
+    virtual std::string getType() const = 0;
+    /**
      * @brief Function that checks if a Request is possible;
      * @return return true if the request is possible; returns false otherwise.
      */
