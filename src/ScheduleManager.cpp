@@ -34,10 +34,6 @@ set<Student*,StudentNameCmp> ScheduleManager::getStudentsByNameSet() const {
     return studentsByName;
 }
 
-set<Student*,StudentNumberOfClassesCmp> ScheduleManager::getStudentsByNumberOfClassesSet() const {
-    return studentsByNumberOfClasses;
-}
-
 Student *ScheduleManager::findStudentByCode(const string &code) const {
     auto i = studentsByCode.find(new Student(code, ""));
     if (i == studentsByCode.end())
@@ -64,17 +60,6 @@ UC *ScheduleManager::findUc(const std::string &ucCode) const {
     if (i == ucs.end())
         return nullptr;
     return *i;
-}
-
-std::vector<UC*> ScheduleManager::ucsByYear (const int year) const {
-
-    vector<UC*> ucsByYear;
-
-    for (UC* uc : ucs) {
-        if (year == 0 && uc->getName()[6] - '0' + 1 == year) {
-            ucsByYear.push_back(uc);
-        }
-    }
 }
 
 void ScheduleManager::createRequest(Request *r) {
@@ -162,7 +147,7 @@ void ScheduleManager::processRegularRequests() {
             else if (r->getType() == "switch")
                 processSwitchRequest(dynamic_cast<SwitchRequest*>(r));
             else if (r->getType() == "swap")
-                processSwapRequest(dynamic_cast<SwapRequest*>(r));
+                processSwapRequest(static_cast<SwapRequest*>(r));
         } catch (Oopsie &e) {
             out << "Failed request: " + e.what() << endl;
         }
@@ -190,7 +175,7 @@ void ScheduleManager::readClassesPerUcFile() {
             currentUC = new UC(ucCode);
             ucs.push_back(currentUC);
         }
-        auto *newClass = new Class(classCode, currentUC);
+        Class *newClass = new Class(classCode, currentUC);
         classes.push_back(newClass);
     }
 }
@@ -242,7 +227,6 @@ void ScheduleManager::readStudentsClassesFile(const string &path) {
             currentStudent = new Student(code, name);
             studentsByCode.insert(currentStudent);
             studentsByName.insert(currentStudent);
-            studentsByNumberOfClasses.insert(currentStudent);
         }
 
         for (UC *uc: ucs)

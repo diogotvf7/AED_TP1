@@ -27,8 +27,8 @@ public:
      */
     std::string getName() const;
     /**
-     * @brief Get function for the UC's Classes list;
-     * @return returns a list<Class*> with pointers to all the UC's classes;
+     * @brief Get function for the UC's Classes vector;
+     * @return returns a vector<Class*> with pointers to all the UC's classes;
      */
     std::vector<Class *> getClasses() const;
     /**

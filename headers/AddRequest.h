@@ -15,31 +15,24 @@ class AddRequest : public Request {
 
 public:
     /**
-     * @brief Constructor for the AddRequest class;
+     * @brief Constructor for a Request of type Add;
      * @param student pointer to the Student who placed the request;
-     * @param intended pointer to the Class the Student wants to join;
+     * @param intended pointer for the Student's intended Class;
      */
     AddRequest(Student *student, Class *intended);
     /**
-     * @brief Get function for the AddRequest's Student pointer;
-     * @return returns a pointer to the Student who placed the request;
+     * @brief Get function for the Student's pointer;
+     * @return a pointer to the Student object;
      */
     Student *getStudent() const override;
     /**
-     * @brief Get function for the AddRequest's Class pointer;
-     * @return returns a pointer to the Class the Student wants to join;
+     * @brief Get function for the intended Class's pointer;
+     * @return a pointer to the intended Class object;
      */
     Class *getIntendedClass() const;
     /**
-     * @brief Get function for the Request's type;
-     * @return returns string "add";
-     */
-    std::string getType() const override;
-    /**
-     * @brief Function that checks if the AddRequest is possible or not.
-     * This function attends to the maximum of students in a class (30) and tries to create balance in the number of students in all Class's of an UC;
-     * It will not be possible to add a student to a Class if there is a gap greater or equal to 4 between the students of the Class with the most Students and the Class with the least Students and the requested Class has three less Students than the Class with the most Students or less;
-     * @return returns false if there are 30 or more students in the requested class, if adding the Student would spoil the UC balance or if the Class overlaps with at least one of the Student's Classes;
+     * @brief Function that checks if it is possible to Add a class to a student (attends to classes imbalance, full classes, etc.);
+     * @return return true if the add is possible; returns false otherwise.
      */
     bool isPossible() const override;
 private:

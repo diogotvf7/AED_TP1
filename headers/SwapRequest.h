@@ -14,16 +14,39 @@
 class SwapRequest : public Request {
 
 public:
+
+    /**
+     * @brief Constructor for a Request of type Swap;
+     * @param student pointer for the Student who placed the request;
+     * @param colleague pointer for the Student with whom the request will be made;
+     * @param current pointer for the Student's current Class;
+     * @param intended pointer for the Student's intended Class;
+     */
     SwapRequest(Student *student, Student *colleague, Class *current, Class *intended);
+    /**
+     * @brief Get function for the Student's pointer;
+     * @return a pointer to the Student object;
+     */
     Student *getStudent() const override;
+    /**
+     * @brief Get function for the colleague's pointer;
+     * @return a pointer to the colleague object;
+     */
     Student *getColleague() const;
+    /**
+     * @brief Get function for the current Class's pointer;
+     * @return a pointer to the current Class object;
+     */
     Class *getCurrentClass() const;
+    /**
+     * @brief Get function for the intended Class's pointer;
+     * @return a pointer to the intended Class object;
+     */
     Class *getIntendedClass() const;
     /**
-     * @brief Get function for the Request's type;
-     * @return returns string "swap";
+     * @brief Function that checks if a class Swap between two students is possible;
+     * @return return true if the swap is possible; returns false otherwise.
      */
-    std::string getType() const override;
     bool isPossible() const override;
 private:
     Student *student;

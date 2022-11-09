@@ -12,8 +12,15 @@ class Student;
 class Request {
 
 public:
+    /**
+     * @brief Get function for the Student's pointer;
+     * @return a pointer to the Student object;
+     */
     virtual Student *getStudent() const = 0;
-    virtual std::string getType() const = 0;
+    /**
+     * @brief Function that checks if a Request is possible;
+     * @return return true if the request is possible; returns false otherwise.
+     */
     virtual bool isPossible() const = 0;
 };
 

@@ -9,6 +9,12 @@
 
 using namespace std;
 
+
+string toLower(const string &s) {
+    string lowerS;
+    for (char c : s) lowerS += tolower(c);
+    return lowerS;
+}
 bool isNumerical(const string& s) {
     for (char c : s) {
         if (!isdigit(c)) return false;
@@ -43,23 +49,23 @@ bool numberOfClassesCmpReverse(T *lhs, T *rhs) {
 Menu::Menu(ScheduleManager *sm) {
     this->sm = sm;
     this->status = "0";
-    this->ucPrintConfig = {{"ORDER", "NAME"}, {"SHOW ATTENDANCE", "NO"}, {"REVERSE", "NO"}, {"YEAR", "ALL"}}; // ORDER->(NAME / ATTENDANCE)   SHOW ATTENDANCE->(YES / NO)   REVERSE->(YES / NO)   YEAR->(1 / 2 / 3 / ALL)
-    this->classPrintConfig = {{"ORDER", "ATTENDANCE"}, {"SHOW ATTENDANCE", "YES"}, {"REVERSE", "NO"}, {"YEAR", "ALL"}}; // ORDER->(NAME / ATTENDANCE)   SHOW ATTENDANCE->(YES / NO)   REVERSE->(YES / NO)   YEAR->(1 / 2 / 3 / ALL)
-    this->studentPrintConfig = {{"ORDER", "NAME"}, {"SHOW NUMBER OF CLASSES", "YES"}, {"REVERSE", "NO"}}; // ORDER->(NAME / NUMBER OF CLASSES / CODE)   SHOW NUMBER OF CLASSES->(YES / NO)   REVERSE->(YES / NO)
+    this->ucPrintConfig = {{"ORDER", "name"}, {"SHOW ATTENDANCE", "no"}, {"REVERSE", "no"}, {"YEAR", "all"}}; // ORDER->(NAME / ATTENDANCE)   SHOW ATTENDANCE->(YES / NO)   REVERSE->(YES / NO)   YEAR->(1 / 2 / 3 / ALL)
+    this->classPrintConfig = {{"ORDER", "name"}, {"SHOW ATTENDANCE", "no"}, {"REVERSE", "no"}, {"YEAR", "all"}}; // ORDER->(NAME / ATTENDANCE)   SHOW ATTENDANCE->(YES / NO)   REVERSE->(YES / NO)   YEAR->(1 / 2 / 3 / ALL)
+    this->studentPrintConfig = {{"ORDER", "name"}, {"SHOW NUMBER OF CLASSES", "no"}, /*{"REVERSE", "no"}*/}; // ORDER->(NAME / CODE)   SHOW NUMBER OF CLASSES->(YES / NO)   REVERSE->(YES / NO)
 }
 
 vector<UC*> Menu::getUcs() {
     vector<UC*> sortedUcs = sm->getUcVector();
-    if (ucPrintConfig["ORDER"] == "NAME" && ucPrintConfig["REVERSE"] == "NO")
+    if (ucPrintConfig["ORDER"] == "name" && ucPrintConfig["REVERSE"] == "no")
         sort(sortedUcs.begin(), sortedUcs.end(), nameCmp<UC>);
 
-    else if (ucPrintConfig["ORDER"] == "NAME" && ucPrintConfig["REVERSE"] == "YES")
+    else if (ucPrintConfig["ORDER"] == "name" && ucPrintConfig["REVERSE"] == "yes")
         sort(sortedUcs.begin(), sortedUcs.end(), nameCmpReverse<UC>);
 
-    else if (ucPrintConfig["ORDER"] == "ATTENDANCE" && ucPrintConfig["REVERSE"] == "NO")
+    else if (ucPrintConfig["ORDER"] == "attendance" && ucPrintConfig["REVERSE"] == "no")
         sort(sortedUcs.begin(), sortedUcs.end(), attendanceCmp<UC>);
 
-    else if (ucPrintConfig["ORDER"] == "ATTENDANCE" && ucPrintConfig["REVERSE"] == "YES")
+    else if (ucPrintConfig["ORDER"] == "attendance" && ucPrintConfig["REVERSE"] == "yes")
         sort(sortedUcs.begin(), sortedUcs.end(), attendanceCmpReverse<UC>);
 
     return sortedUcs;
@@ -73,16 +79,16 @@ vector<Class*> Menu::getClasses(UC *uc, Student *s) {
     else if (s) sortedClasses = s->getClasses();
     else sortedClasses = sm->getClassesVector();
 
-    if (classPrintConfig["ORDER"] == "NAME" && classPrintConfig["REVERSE"] == "NO")
+    if (classPrintConfig["ORDER"] == "name" && classPrintConfig["REVERSE"] == "no")
         sort(sortedClasses.begin(), sortedClasses.end(), nameCmp<Class>);
 
-    else if (classPrintConfig["ORDER"] == "NAME" && classPrintConfig["REVERSE"] == "YES")
+    else if (classPrintConfig["ORDER"] == "name" && classPrintConfig["REVERSE"] == "yes")
         sort(sortedClasses.begin(), sortedClasses.end(), nameCmpReverse<Class>);
 
-    else if (classPrintConfig["ORDER"] == "ATTENDANCE" && classPrintConfig["REVERSE"] == "NO")
+    else if (classPrintConfig["ORDER"] == "attendance" && classPrintConfig["REVERSE"] == "no")
         sort(sortedClasses.begin(), sortedClasses.end(), attendanceCmp<Class>);
 
-    else if (classPrintConfig["ORDER"] == "ATTENDANCE" && classPrintConfig["REVERSE"] == "YES")
+    else if (classPrintConfig["ORDER"] == "attendance" && classPrintConfig["REVERSE"] == "yes")
         sort(sortedClasses.begin(), sortedClasses.end(), attendanceCmpReverse<Class>);
 
     return sortedClasses;
@@ -92,16 +98,16 @@ vector<Student*> Menu::getStudents(Class *c) {
 
     vector<Student*> sortedClassStudents = c->getStudents();
 
-    if (studentPrintConfig["ORDER"] == "NAME" && studentPrintConfig["REVERSE"] == "NO")
+    if (studentPrintConfig["ORDER"] == "name" && studentPrintConfig["REVERSE"] == "no")
         sort(sortedClassStudents.begin(), sortedClassStudents.end(), nameCmp<Student>);
 
-    else if (studentPrintConfig["ORDER"] == "NAME" && studentPrintConfig["REVERSE"] == "YES")
+    else if (studentPrintConfig["ORDER"] == "name" && studentPrintConfig["REVERSE"] == "yes")
         sort(sortedClassStudents.begin(), sortedClassStudents.end(), nameCmpReverse<Student>);
 
-    else if (studentPrintConfig["ORDER"] == "NUMBER OF CLASSES" && studentPrintConfig["REVERSE"] == "NO")
+    else if (studentPrintConfig["ORDER"] == "number of classes" && studentPrintConfig["REVERSE"] == "no")
         sort(sortedClassStudents.begin(), sortedClassStudents.end(), numberOfClassesCmp<Student>);
 
-    else if (studentPrintConfig["ORDER"] == "NUMBER OF CLASSES" && studentPrintConfig["REVERSE"] == "YES")
+    else if (studentPrintConfig["ORDER"] == "number of classes" && studentPrintConfig["REVERSE"] == "yes")
         sort(sortedClassStudents.begin(), sortedClassStudents.end(), numberOfClassesCmpReverse<Student>);
 
     return sortedClassStudents;
@@ -187,7 +193,7 @@ void Menu::ucMenu() {
 
         for (size_t i = 0; i < sortedUcs.size(); i++) {
             cout << right << setw(20) << to_string((i + 1)) + ".   " << sortedUcs[i]->getName();
-            if (ucPrintConfig["SHOW ATTENDANCE"] == "YES") {
+            if (ucPrintConfig["SHOW ATTENDANCE"] == "yes") {
                 cout << ": " << setw(12) <<  to_string((sortedUcs[i]->countStudents())) + " students";
             }
             cout << endl;
@@ -227,7 +233,7 @@ void Menu::classMenu() {
 
         for (int i = page * 20; i < min(page * 20 + 20, (int) sortedClasses.size()); i++) {
             cout << right << setw(20) << to_string(i + 1) + ".   " << sortedClasses[i]->getUc()->getName() << ' ' << sortedClasses[i]->getName();
-            if (classPrintConfig["SHOW ATTENDANCE"] == "YES") {
+            if (classPrintConfig["SHOW ATTENDANCE"] == "yes") {
                 cout << ": " << (sortedClasses[i]->countStudents()) << " students";
             }
             cout << endl;
@@ -271,80 +277,30 @@ void Menu::studentMenu() {
          << "|                                                                |\n"
          << "|________________________________________________________________|\n";
 
-    if (studentPrintConfig["ORDER"] == "NAME" && studentPrintConfig["REVERSE"] == "NO") {
+    if (studentPrintConfig["ORDER"] == "name") {
 
         set<Student*,StudentNameCmp> sortedStudents = sm->getStudentsByNameSet();
         unsigned n = 0;
 
         for (Student *s : sortedStudents) {
-            cout << right << setw(20) << to_string(++n) + ".   " << left << setw(20) << s->getName();
-            if (studentPrintConfig["SHOW NUMBER OF CLASSES"] == "YES")
-                cout <<  to_string(s->countClasses()) + " classes";
+            cout << right << setw(20) << to_string(++n) + ".   " << left << setw(30) << to_string(s->getCode()) + " " + s->getName();
+            if (studentPrintConfig["SHOW NUMBER OF CLASSES"] == "yes")
+                cout << "   " + to_string(s->countClasses()) + " classes";
             cout << endl;
         }
     }
-    if (studentPrintConfig["ORDER"] == "CODE" && studentPrintConfig["REVERSE"] == "NO") {
+    if (studentPrintConfig["ORDER"] == "code") {
 
         set<Student*,StudentCodeCmp> sortedStudents = sm->getStudentsByCodeSet();
         unsigned n = 0;
 
         for (Student *s : sortedStudents) {
-            cout << right << setw(20) << to_string(++n) + ".   " << left << setw(20) << s->getName();
-            if (studentPrintConfig["SHOW NUMBER OF CLASSES"] == "YES")
-                cout <<  to_string(s->countClasses()) + " classes";
+            cout << right << setw(20) << to_string(++n) + ".   " << left << setw(30) << to_string(s->getCode()) + " " + s->getName();
+            if (studentPrintConfig["SHOW NUMBER OF CLASSES"] == "yes")
+                cout <<  "   " + to_string(s->countClasses()) + " classes";
             cout << endl;
         }
     }
-    if (studentPrintConfig["ORDER"] == "NUMBER OF CLASSES" && studentPrintConfig["REVERSE"] == "NO") {
-
-        set<Student*,StudentNumberOfClassesCmp> sortedStudents = sm->getStudentsByNumberOfClassesSet();
-        unsigned n = 0;
-
-        for (Student *s : sortedStudents) {
-            cout << right << setw(20) << to_string(++n) + ".   " << left << setw(20) << s->getName();
-            if (studentPrintConfig["SHOW NUMBER OF CLASSES"] == "YES")
-                cout <<  to_string(s->countClasses()) + " classes";
-            cout << endl;
-        }
-    }
-    if (studentPrintConfig["ORDER"] == "NAME" && studentPrintConfig["REVERSE"] == "YES") {
-
-        set<Student*,StudentNameCmp> sortedStudents = sm->getStudentsByNameSet();
-        unsigned n = 0;
-
-        for (auto itr = sortedStudents.rend(); itr != sortedStudents.rbegin(); itr++) {
-            cout << right << setw(20) << to_string(++n) + ".   " << left << setw(20) << (*itr)->getName();
-            if (studentPrintConfig["SHOW NUMBER OF CLASSES"] == "YES")
-                cout <<  to_string((*itr)->countClasses()) + " classes";
-            cout << endl;
-        }
-    }
-    if (studentPrintConfig["ORDER"] == "CODE" && studentPrintConfig["REVERSE"] == "YES") {
-
-        set<Student*,StudentCodeCmp> sortedStudents = sm->getStudentsByCodeSet();
-        unsigned n = 0;
-
-        for (auto itr = sortedStudents.rend(); itr != sortedStudents.rbegin(); itr++) {
-            cout << right << setw(20) << to_string(++n) + ".   " << left << setw(20) << (*itr)->getName();
-            if (studentPrintConfig["SHOW NUMBER OF CLASSES"] == "YES")
-                cout <<  to_string((*itr)->countClasses()) + " classes";
-            cout << endl;
-        }
-    }
-    if (studentPrintConfig["ORDER"] == "NUMBER OF CLASSES" && studentPrintConfig["REVERSE"] == "YES") {
-
-        set<Student*,StudentNumberOfClassesCmp> sortedStudents = sm->getStudentsByNumberOfClassesSet();
-        unsigned n = 0;
-
-        for (auto itr = sortedStudents.rend(); itr != sortedStudents.rbegin(); itr++) {
-            cout << right << setw(20) << to_string(++n) + ".   " << left << setw(20) << (*itr)->getName();
-            if (studentPrintConfig["SHOW NUMBER OF CLASSES"] == "YES")
-                cout <<  to_string((*itr)->countClasses()) + " classes";
-            cout << endl;
-        }
-    }
-
-
     cout << "__________________________________________________________________\n"
          << "|                     WRITE 'back' TO GO BACK                    |\n"
          << "|________________________________________________________________|\n\n";
@@ -371,7 +327,7 @@ bool Menu::ucClassMenu(UC *uc) {
 
         for (size_t i = 0; i < sortedUcClasses.size(); i++) {
             cout << right << setw(20) << to_string(i + 1) + ".    " << sortedUcClasses[i]->getName();
-            if (classPrintConfig["SHOW ATTENDANCE"] == "YES") {
+            if (classPrintConfig["SHOW ATTENDANCE"] == "yes") {
                 cout << ": " << sortedUcClasses[i]->countStudents() << " students";
             }
             cout << endl;
@@ -411,7 +367,7 @@ bool Menu::classStudentMenu(Class *c) {
 
         for (size_t i = 0; i < sortedClassStudents.size(); i++) {
             cout << right << setw(20) << to_string(i + 1) + ".    " << sortedClassStudents[i]->getName();
-            if (studentPrintConfig["SHOW NUMBER OF CLASSES"] == "YES") {
+            if (studentPrintConfig["SHOW NUMBER OF CLASSES"] == "yes") {
                 cout << ": " << (sortedClassStudents[i]->countClasses()) << " classes";
             }
             cout << endl;
@@ -484,80 +440,92 @@ bool Menu::studentMenu(Student *s) {
 
 void Menu::addRequest() {
 
-   string student, uc, intended; Student *s; Class *i;
+   string tmp1, tmp2; Student *student; Class *intended;
     while (true) {
-        cout << "\nStudent name or code: "; cin >> student;
-        if (!isNumerical(student)) s = sm->findStudentByName(student);
-        else s = sm->findStudentByCode(student);
-        if (s) break;
-        cout << "  - INVALID OPTION\n";
-    }
-    while (true) {
-        cout << "UC Code: "; cin >> uc;
-        cout << "Intended Class code: "; cin >> intended;
-        i = sm->findClass(uc, intended);
-        if (i) break;
-        cout << "  - INVALID OPTION\n";
-    }
-    sm->createRequest(new AddRequest(s, i));
-}
-
-void Menu::removeRequest() {
-
-    string student, uc, current; Student *s; Class *c;
-    while (true) {
-        cout << "\nStudent name or code: "; cin >> student;
-        if (!isNumerical(student)) s = sm->findStudentByName(student);
-        else s = sm->findStudentByCode(student);
-        if (s) break;
-        cout << "  - INVALID OPTION\n";
-    }
-    while (true) {
-        cout << "UC Code: "; cin >> uc;
-        cout << "Current Class code: "; cin >> current;
-        c = sm->findClass(uc, current);
-        if (c) break;
-        cout << "  - INVALID OPTION\n";
-    }
-    sm->createRequest(new RemoveRequest(s, c));
-}
-
-void Menu::switchRequest() {
-    string student, uc, current, intended; Student *s; Class *c, *i;
-    while (true) {
-        cout << "\nStudent name or code: "; cin >> student;
-        if (!isNumerical(student)) s = sm->findStudentByName(student);
-        else s = sm->findStudentByCode(student);
-        if (s) break;
-        cout << "  - INVALID OPTION\n";
-    }
-    while (true) {
-        cout << "UC Code: "; cin >> uc;
-        cout << "Current Class code: "; cin >> current;
-        c = sm->findClass(uc, current);
-        if (c) break;
-        cout << "  - INVALID OPTION\n";
-    }
-    while (true) {
-        cout << "Intended Class code: "; cin >> intended;
-        i = sm->findClass(uc, intended);
-        if (i) break;
-        cout << "  - INVALID OPTION\n";
-    }
-    sm->createRequest(new SwitchRequest(s, c, i));
-
-}
-void Menu::swapRequest() {
-    string tmp1, tmp2; Student *student, *colleague; Class *c, *i;
-    while (true) {
-        cout << "\nStudent name or code: "; cin >> tmp1;
+        cout << "\nStudent name or code: "; getline(cin >> ws, tmp1);
         if (!isNumerical(tmp1)) student = sm->findStudentByName(tmp1);
         else student = sm->findStudentByCode(tmp1);
         if (student) break;
         cout << "  - INVALID OPTION\n";
     }
     while (true) {
-        cout << "\nColleague name or code: "; cin >> tmp1;
+        cout << "UC Code: "; cin >> tmp2;
+        if (sm->findUc(tmp2)) break;
+        cout << "  - INVALID OPTION\n";
+    }
+    while (true) {
+        cout << "Intended Class code: "; cin >> tmp1;
+        intended = sm->findClass(tmp2, tmp1);
+        if (intended) break;
+        cout << "  - INVALID OPTION\n";
+    }
+    sm->createRequest(new AddRequest(student, intended));
+}
+
+void Menu::removeRequest() {
+
+    string tmp1, tmp2; Student *student; Class *current;
+    while (true) {
+        cout << "\nStudent name or code: "; getline(cin >> ws, tmp1);
+        if (!isNumerical(tmp1)) student = sm->findStudentByName(tmp1);
+        else student = sm->findStudentByCode(tmp1);
+        if (student) break;
+        cout << "  - INVALID OPTION\n";
+    }
+    while (true) {
+        cout << "UC Code: "; cin >> tmp2;
+        if (sm->findUc(tmp2)) break;
+        cout << "  - INVALID OPTION\n";
+    }
+    while (true) {
+        cout << "Current Class code: "; cin >> tmp1;
+        current = sm->findClass(tmp2, tmp1);
+        if (current) break;
+        cout << "  - INVALID OPTION\n";
+    }
+    sm->createRequest(new RemoveRequest(student, current));
+}
+
+void Menu::switchRequest() {
+    string tmp1, tmp2; Student *student; Class *current, *intended;
+    while (true) {
+        cout << "\nStudent name or code: "; getline(cin >> ws, tmp1);
+        if (!isNumerical(tmp1)) student = sm->findStudentByName(tmp1);
+        else student = sm->findStudentByCode(tmp1);
+        if (student) break;
+        cout << "  - INVALID OPTION\n";
+    }
+    while (true) {
+        cout << "UC Code: "; cin >> tmp2;
+        if (sm->findUc(tmp2)) break;
+        cout << "  - INVALID OPTION\n";
+    }
+    while (true) {
+        cout << "Current Class code: "; cin >> tmp1;
+        current = sm->findClass(tmp2, tmp1);
+        if (current) break;
+        cout << "  - INVALID OPTION\n";
+    }
+    while (true) {
+        cout << "Intended Class code: "; cin >> tmp1;
+        intended = sm->findClass(tmp2, tmp1);
+        if (intended) break;
+        cout << "  - INVALID OPTION\n";
+    }
+    sm->createRequest(new SwitchRequest(student, current, intended));
+
+}
+void Menu::swapRequest() {
+    string tmp1, tmp2; Student *student, *colleague; Class *current, *intended;
+    while (true) {
+        cout << "\nStudent name or code: "; getline(cin >> ws, tmp1);
+        if (!isNumerical(tmp1)) student = sm->findStudentByName(tmp1);
+        else student = sm->findStudentByCode(tmp1);
+        if (student) break;
+        cout << "  - INVALID OPTION\n";
+    }
+    while (true) {
+        cout << "\nColleague name or code: "; getline(cin >> ws, tmp1);
         if (!isNumerical(tmp1)) colleague = sm->findStudentByName(tmp1);
         else colleague = sm->findStudentByCode(tmp1);
         if (colleague) break;
@@ -565,18 +533,22 @@ void Menu::swapRequest() {
     }
     while (true) {
         cout << "UC Code: "; cin >> tmp2;
+        if (sm->findUc(tmp2)) break;
+        cout << "  - INVALID OPTION\n";
+    }
+    while (true) {
         cout << "Current Class code: "; cin >> tmp1;
-        c = sm->findClass(tmp2, tmp1);
-        if (c) break;
+        current = sm->findClass(tmp2, tmp1);
+        if (current) break;
         cout << "  - INVALID OPTION\n";
     }
     while (true) {
         cout << "Intended Class code: "; cin >> tmp1;
-        i = sm->findClass(tmp2, tmp1);
-        if (i) break;
+        intended = sm->findClass(tmp2, tmp1);
+        if (intended) break;
         cout << "  - INVALID OPTION\n";
     }
-    sm->createRequest(new SwapRequest(student, colleague, c, i));
+    sm->createRequest(new SwapRequest(student, colleague, current, intended));
 }
 
 void Menu::requestMenu() {
@@ -671,7 +643,7 @@ void Menu::findMenu() {
                 }
             case 3:
                 while (true) {
-                    cout << "\nStudent name or code: "; cin >> tmp1;
+                    cout << "\nStudent name or code: "; getline(cin >> ws, tmp1);
                     if (!isNumerical(tmp1)) s = sm->findStudentByName(tmp1);
                     else s = sm->findStudentByCode(tmp1);
                     if (s) {
@@ -686,39 +658,43 @@ void Menu::findMenu() {
 
 void Menu::configUcMenu() {
 
-    string tmp1;
+    string tmp;
     while (true) {
         cout << "   - ORDER->(NAME / ATTENDANCE): ";
-        cin >> tmp1;
-        if (tmp1 == "NAME" || tmp1 == "ATTENDANCE") {
-            ucPrintConfig["ORDER"] = tmp1;
+        cin >> tmp;
+        tmp = toLower(tmp);
+        if (tmp == "name" || tmp == "attendance") {
+            ucPrintConfig["ORDER"] = tmp;
             break;
         }
         else cout << "   - INVALID OPTION" << endl;
     }
     while (true) {
         cout << "   - SHOW ATTENDANCE->(YES / NO): ";
-        cin >> tmp1;
-        if (tmp1 == "YES" || tmp1 == "NO") {
-            ucPrintConfig["SHOW ATTENDANCE"] = tmp1;
+        cin >> tmp;
+        tmp = toLower(tmp);
+        if (tmp == "yes" || tmp == "no") {
+            ucPrintConfig["SHOW ATTENDANCE"] = tmp;
             break;
         }
         else cout << "   - INVALID OPTION" << endl;
     }
     while (true) {
         cout << "   - REVERSE->(YES / NO): ";
-        cin >> tmp1;
-        if (tmp1 == "YES" || tmp1 == "NO") {
-            ucPrintConfig["REVERSE"] = tmp1;
+        cin >> tmp;
+        tmp = toLower(tmp);
+        if (tmp == "yes" || tmp == "no") {
+            ucPrintConfig["REVERSE"] = tmp;
             break;
         }
         else cout << "   - INVALID OPTION" << endl;
     }
     while (true) {
         cout << "   - YEAR->(1 / 2 / 3 / ALL): ";
-        cin >> tmp1;
-        if (tmp1 == "1" || tmp1 == "2" || tmp1 == "3" || tmp1 == "ALL") {
-            ucPrintConfig["YEAR"] = tmp1;
+        cin >> tmp;
+        tmp = toLower(tmp);
+        if (tmp == "1" || tmp == "2" || tmp == "3" || tmp == "all") {
+            ucPrintConfig["YEAR"] = tmp;
             break;
         }
         else cout << "   - INVALID OPTION" << endl;
@@ -727,39 +703,43 @@ void Menu::configUcMenu() {
 
 void Menu::configClassMenu() {
 
-    string tmp1;
+    string tmp;
     while (true) {
         cout << "   - ORDER->(NAME / ATTENDANCE): ";
-        cin >> tmp1;
-        if (tmp1 == "NAME" || tmp1 == "ATTENDANCE") {
-            classPrintConfig["ORDER"] = tmp1;
+        cin >> tmp;
+        tmp = toLower(tmp);
+        if (tmp == "name" || tmp == "attendance") {
+            classPrintConfig["ORDER"] = tmp;
             break;
         }
         else cout << "   - INVALID OPTION" << endl;
     }
     while (true) {
         cout << "   - SHOW ATTENDANCE->(YES / NO): ";
-        cin >> tmp1;
-        if (tmp1 == "YES" || tmp1 == "NO") {
-            classPrintConfig["SHOW ATTENDANCE"] = tmp1;
+        cin >> tmp;
+        tmp = toLower(tmp);
+        if (tmp == "yes" || tmp == "no") {
+            classPrintConfig["SHOW ATTENDANCE"] = tmp;
             break;
         }
         else cout << "   - INVALID OPTION" << endl;
     }
     while (true) {
         cout << "   - REVERSE->(YES / NO): ";
-        cin >> tmp1;
-        if (tmp1 == "YES" || tmp1 == "NO") {
-            classPrintConfig["REVERSE"] = tmp1;
+        cin >> tmp;
+        tmp = toLower(tmp);
+        if (tmp == "yes" || tmp == "no") {
+            classPrintConfig["REVERSE"] = tmp;
             break;
         }
         else cout << "   - INVALID OPTION" << endl;
     }
     while (true) {
         cout << "   - YEAR->(1 / 2 / 3 / ALL): ";
-        cin >> tmp1;
-        if (tmp1 == "1" || tmp1 == "2" || tmp1 == "3" || tmp1 == "ALL") {
-            classPrintConfig["YEAR"] = tmp1;
+        cin >> tmp;
+        tmp = toLower(tmp);
+        if (tmp == "1" || tmp == "2" || tmp == "3" || tmp == "all") {
+            classPrintConfig["YEAR"] = tmp;
             break;
         }
         else cout << "   - INVALID OPTION" << endl;
@@ -767,36 +747,38 @@ void Menu::configClassMenu() {
 }
 
 void Menu::configStudentMenu() {
-    string tmp1;
+    string tmp;
     while (true) {
-        cout << "   - ORDER->(NAME / NUMBER_OF_CLASSES / CODE): ";
-        cin >> tmp1;
-        if (tmp1 == "NAME" || tmp1 == "NUMBER_OF_CLASSES" || tmp1 == "CODE") {
-            studentPrintConfig["ORDER"] = tmp1;
+        cout << "   - ORDER->(NAME / CODE): ";
+        cin >> tmp;
+        tmp = toLower(tmp);
+        if (tmp == "name" || tmp == "code") {
+            studentPrintConfig["ORDER"] = tmp;
             break;
         }
         else cout << "   - INVALID OPTION" << endl;
     }
     while (true) {
         cout << "   - SHOW NUMBER OF CLASSES->(YES / NO): ";
-        cin >> tmp1;
-        if (tmp1 == "YES" || tmp1 == "NO") {
-            studentPrintConfig["SHOW NUMBER OF CLASSES"] = tmp1;
+        cin >> tmp;
+        tmp = toLower(tmp);
+        if (tmp == "yes" || tmp == "no") {
+            studentPrintConfig["SHOW NUMBER OF CLASSES"] = tmp;
             break;
         }
         else cout << "   - INVALID OPTION" << endl;
     }
-    while (true) {
+    /*while (true) {
         cout << "   - REVERSE->(YES / NO): ";
-        cin >> tmp1;
-        if (tmp1 == "YES" || tmp1 == "NO") {
-            studentPrintConfig["REVERSE"] = tmp1;
+        cin >> tmp;
+        tmp = toLower(tmp);
+        if (tmp == "yes" || tmp == "no") {
+            studentPrintConfig["REVERSE"] = tmp;
             break;
         }
         else cout << "   - INVALID OPTION" << endl;
-    }
+    }*/
 }
-
 
 void Menu::configMenu() {
 

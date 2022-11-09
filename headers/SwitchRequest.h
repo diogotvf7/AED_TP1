@@ -15,35 +15,30 @@ class SwitchRequest : public Request {
 
 public:
     /**
-     * @brief Constructor for the SwitchRequest class;
+     * @brief Constructor for a Request of type Switch;
      * @param student pointer to the Student who placed the request;
-     * @param current pointer to  the Class the Student want to leave;
-     * @param intended pointer to  the Class the Student wants to join;
+     * @param current pointer for the Student's current Class;
+     * @param intended pointer for the Student's intended Class;
      */
     SwitchRequest(Student *s, Class *current, Class *intended);
     /**
-     * @brief Get function for the SwitchRequest's Student pointer;
-     * @return returns a pointer to the Student who placed the request;
+     * @brief Get function for the Student's pointer;
+     * @return a pointer to the Student object;
      */
     Student *getStudent() const override;
     /**
-     * @brief Get function for the SwitchRequest's current Class pointer;
-     * @return returns a pointer to the Class the Student is in currently;
+     * @brief Get function for the current Class's pointer;
+     * @return a pointer to the current Class object;
      */
     Class *getCurrentClass() const;
     /**
-     * @brief Get function for the SwitchRequest's intended Class pointer;
-     * @return returns a pointer to the Class the Student wants to join;
+     * @brief Get function for the intended Class's pointer;
+     * @return a pointer to the intended Class object;
      */
     Class *getIntendedClass() const;
     /**
-     * @brief Get function for the Request's type;
-     * @return returns string "switch";
-     */
-    std::string getType() const override;
-    /**
-     * Is possible if intended class has less students;
-     * @return
+     * @brief Function that checks if a class Switch between two classes is possible (attends to classes imbalance, full classes, etc.);
+     * @return return true if the switch is possible; returns false otherwise.
      */
     bool isPossible() const override;
 private:

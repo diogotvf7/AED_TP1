@@ -423,10 +423,10 @@ int main() {
     }
 
     else {
-        cout << "Do you want the original or edited schedule?\n";
-        cout << "All changes to the edited will be lost if you choose the original\n";
-        cout << "0: original\n";
-        cout << "1: edited\n";
+        cout << "Do you want the original or edited schedule?\n"
+             << "All changes to the edited will be lost if you choose the original\n"
+             << "0: original\n"
+             << "1: edited\n";
 
         string option;
 

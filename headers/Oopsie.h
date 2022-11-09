@@ -13,7 +13,17 @@
 class Oopsie : public std::exception {
 
 public:
-    explicit Oopsie(std::string msg);
+
+    /**
+     * @brief Constructor for the Oopsie Exceptions Class;
+     * @param messages string message with the exception cause;
+     */
+    explicit Oopsie(std::string message);
+
+    /**
+     * @brief Get function for the exception cause;
+     * @return a string with the exception cause;
+     */
     std::string what();
 private:
     std::string message;

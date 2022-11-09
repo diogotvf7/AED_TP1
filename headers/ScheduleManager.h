@@ -30,12 +30,6 @@ struct StudentNameCmp {
     }
 };
 
-struct StudentNumberOfClassesCmp {
-    bool operator() (Student *lhs, Student *rhs) const {
-        return lhs->countClasses() < rhs->countClasses();
-    }
-};
-
 class ScheduleManager {
 
 public:
@@ -46,29 +40,24 @@ public:
     explicit ScheduleManager(const std::string &path);
     /**
      * Get function for the UC's vector;
-     * @return a vector<UC*> with all the UCs pointers from the input file;
+     * @return a vector<UC*> with all the info read from the input file;
      */
     std::vector<UC*> getUcVector() const;
     /**
      * @brief Get function for the Class's Vector;
-     * @return a vector<Class*> with all the Classes pointers from input the file;
+     * @return a vector<Class*> with all the info read from the input the file;
      */
     std::vector<Class*> getClassesVector() const;
     /**
-     * @brief Get function for the Students By Code Set;
-     * @return a set<Student*,StudentCodeCmp> with all the Students pointers from the input file;
+     * @brief Get function for the StudentsByCode Set;
+     * @return a set<Student*,StudentCodeCmp> with all the info read from the input file;
      */
     std::set<Student*,StudentCodeCmp> getStudentsByCodeSet() const;
     /**
-     * @brief Get function for the Students By Name Set;
-     * @return a set<Student*,StudentNameCmp> with all the Students pointers from the input file;
+     * @brief Get function for the StudentsByName Set;
+     * @return a set<Student*,StudentNameCmp> with all the info read from the input file;
      */
     std::set<Student*,StudentNameCmp> getStudentsByNameSet() const;
-    /**
-     * @brief Get function for the Students By Number of Classes Set;
-     * @return a set<Student*,StudentNumberOfClassesCmp> with all the Students pointers from the input file;
-     */
-    std::set<Student*,StudentNumberOfClassesCmp> getStudentsByNumberOfClassesSet() const;
     /**
      * @brief Function that finds a Student by Code in the Student's set;
      * @param code the Code to look for;
@@ -86,15 +75,49 @@ public:
     //TODO
     UC *findUc(const std::string &ucCode) const;
 
-    std::vector<UC*> ucsByYear (const int year) const;
-
+    /**
+     * @brief create Request
+     * @param r request
+     */
     void createRequest(Request *r);
+
+    /**
+     * @brief process request
+     */
     void processRequests();
+
+    /**
+     * @brief process status request;
+     */
     void processStatusRequests();
+
+    /**
+     * process regular request;
+     */
     void processRegularRequests();
+
+    /**
+     * @brief process AddRequest;
+     * @param ar addrequest
+     */
     static void processAddRequest(AddRequest *ar);
+
+    /**
+     * @brief process removeRequest;
+     * @param rr removeRequest;
+     */
     static void processRemoveRequest(RemoveRequest *rr);
+
+    /**
+     * @brief process switch request;
+     * @param sr switch request;
+     */
     static void processSwitchRequest(SwitchRequest *sr);
+
+    /**
+     * @brief process Swap Request
+     * @param sr swapRequest
+     */
     static void processSwapRequest(SwapRequest *sr);
     /**
      * @brief Reads the classes_per_uc.csv file and stores the input in vector<Uc> ucs;
@@ -109,13 +132,15 @@ public:
      */
     void readStudentsClassesFile(const std::string &path);
 
+    /**
+     * @brief Writes Changes
+     */
     void writeChanges();
 private:
     std::vector<UC*> ucs;
     std::vector<Class*> classes;
     std::set<Student*,StudentCodeCmp> studentsByCode;
     std::set<Student*,StudentNameCmp> studentsByName;
-    std::set<Student*,StudentNumberOfClassesCmp> studentsByNumberOfClasses;
     std::queue<Request*> regularRequests;
     std::queue<Request*> statusRequests;
 };
