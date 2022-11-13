@@ -22,7 +22,12 @@ string Student::getName() const {
     return name;
 }
 
-vector<Class*> Student::getClasses() const {
+vector<Class*> Student::getClasses(int year) const {
+    if (year) {
+        vector<Class*> tmp;
+        copy_if(classes.begin(), classes.end(), back_inserter(tmp), [year](Class *c){return c->getYear() == year;});
+        return tmp;
+    }
     return classes;
 }
 

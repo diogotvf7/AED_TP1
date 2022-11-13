@@ -1,0 +1,7 @@
+Failed request: Can't add L.EIC001 1LEIC05 to Ines's schedule because: Ines already is in this UC.
+Failed request: Can't swap Ines's L.EIC005 1LEIC01 with Rosarinho's L.EIC005 1LEIC08 because: Rosarinho insn't in L.EIC005 1LEIC08.
+Failed request: Can't switch Dora's L.EIC002 1LEIC06 to L.EIC002 1LEIC07 because: Adding Dora to L.EIC002 1LEIC07 will cause imbalance.
+Failed request: Can't remove L.EIC001 1LEIC01 from Manuel Jacome's schedule because: L.EIC001 1LEIC01 already isn't in Manuel Jacome's schedule.
+Failed request: Can't add L.EIC011 2LEIC07 to Manuel Inacio's schedule because: Adding Manuel Inacio to L.EIC011 2LEIC07 will cause imbalance in L.EIC011.
+Failed request: Can't switch Manuel Inacio's L.EIC025 3LEIC05 to L.EIC025 3LEIC04 because: Adding Manuel Inacio to L.EIC025 3LEIC04 will cause imbalance.
+Failed request: Can't swap Manuel Inacio's L.EIC022 3LEIC05 with Manuel Humberto's L.EIC022 3LEIC12 because: Manuel Humberto insn't in L.EIC022 3LEIC12.

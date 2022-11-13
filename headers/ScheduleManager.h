@@ -40,14 +40,16 @@ public:
     explicit ScheduleManager(const std::string &path);
     /**
      * Get function for the UC's vector;
+     * @param optional parameter that filtrates a specific year
      * @return returns a vector<UC*> with all the info read from the input file;
      */
-    std::vector<UC*> getUcVector() const;
+    std::vector<UC*> getUcVector(int year = 0) const;
     /**
      * @brief Get function for the Class's Vector;
+     * @param optional parameter that filtrates a specific year
      * @return returns a vector<Class*> with all the info read from the input the file;
      */
-    std::vector<Class*> getClassesVector() const;
+    std::vector<Class*> getClassesVector(int year = 0) const;
     /**
      * @brief Get function for the StudentsByCode Set;
      * @return returns a set<Student*,StudentCodeCmp> with all the info read from the input file;

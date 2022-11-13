@@ -21,11 +21,17 @@ UC * Class::getUc() const {
 }
 
 list<Slot*> Class::getSlots() const {
-    return slots;
+    list<Slot*> sorted = slots;
+    sorted.sort([](Slot *lhs, Slot *rhs){return *lhs < *rhs;});
+    return sorted;
 }
 
 vector<Student*> Class::getStudents() const {
     return students;
+}
+
+int Class::getYear() const {
+    return classCode[0] - '0';
 }
 
 void Class::addStudent(Student *s) {

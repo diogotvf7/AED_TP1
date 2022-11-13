@@ -8,6 +8,8 @@
 #include <ostream>
 #include <string>
 
+
+
 class Slot {
 
 public:

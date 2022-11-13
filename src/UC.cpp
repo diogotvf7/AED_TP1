@@ -14,8 +14,17 @@ string UC::getName() const {
     return ucCode;
 }
 
-std::vector<Class *> UC::getClasses() const {
+std::vector<Class *> UC::getClasses(int year) const {
+    if (year) {
+        vector<Class*> tmp;
+        copy_if(classes.begin(), classes.end(), back_inserter(tmp), [year](Class *c){return c->getYear() == year;});
+        return tmp;
+    }
     return classes;
+}
+
+int UC::getYear() const {
+    return ucCode[6] - '0' + 1;
 }
 
 unsigned UC::countStudents() const {

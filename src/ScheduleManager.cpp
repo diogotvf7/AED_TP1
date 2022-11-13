@@ -18,11 +18,23 @@ ScheduleManager::ScheduleManager(const string &path) {
     readStudentsClassesFile(path);
 }
 
-std::vector<UC *> ScheduleManager::getUcVector() const {
+vector<UC*> ScheduleManager::getUcVector(int year) const {
+
+    if (year) {
+        vector<UC*> tmp;
+        copy_if(ucs.begin(), ucs.end(), back_inserter(tmp), [year](UC *uc){return uc->getYear() == year;});
+        return tmp;
+    }
     return ucs;
 }
 
-vector<Class*> ScheduleManager::getClassesVector() const {
+vector<Class*> ScheduleManager::getClassesVector(int year) const {
+
+    if (year) {
+        vector<Class*> tmp;
+        copy_if(classes.begin(), classes.end(), back_inserter(tmp), [year](Class *c){return c->getYear() == year;});
+        return tmp;
+    }
     return classes;
 }
 

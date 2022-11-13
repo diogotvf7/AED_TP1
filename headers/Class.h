@@ -48,6 +48,11 @@ public:
      */
     std::vector<Student*> getStudents() const;
     /**
+     * @brief Get function for the Class's year in the cycle of studies;
+     * @return returns an int correspondent to the year;
+     */
+    int getYear() const;
+    /**
      * @brief Function that adds Student pointers to vector<Student*> students;
      * @param s the Student pointer to be added;
      */

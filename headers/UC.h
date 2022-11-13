@@ -28,9 +28,15 @@ public:
     std::string getName() const;
     /**
      * @brief Get function for the UC's Classes vector;
+     * @param optional parameter that filtrates a specific year
      * @return returns a vector<Class*> with pointers to all the UC's classes;
      */
-    std::vector<Class *> getClasses() const;
+    std::vector<Class*> getClasses(int year = 0) const;
+    /**
+     * @brief Get function for the UC's year in the cycle of studies;
+     * @return returns an int correspondent to the year;
+     */
+    int getYear() const;
     /**
      * @brief Funtion that counts the amount of Students in an UC;
      * @return returns an unsigned value for the total number of Students registered in the UC;

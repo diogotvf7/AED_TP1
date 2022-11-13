@@ -44,6 +44,6 @@ ostream &operator<<(std::ostream& os, const Slot& s) {
     float endHours; float endMinutes = modf(s.start + s.duration, &endHours) * 60;
     ostringstream endOss; endOss << setfill('0') << right << setw(2) << endHours << ':' << setw(2) << left << endMinutes;
 
-    os << setfill(' ') << left << setw(15) << s.weekday << setw(15) << startOss.str() << setw(15) << endOss.str() << setw(15) << s.type << endl;
+    os << setfill(' ') << left << setw(15) << s.weekday << setw(15) << startOss.str() << " - " << setw(15) << endOss.str() << setw(15) << s.type << endl;
     return os;
 }

@@ -61,8 +61,14 @@ public:
     void classMenu();
     /**
      * @brief Shows all the Students;
+     * @return return a pointer to the selected Student, returns nullptr if no student is selected;
      */
-    void studentMenu();
+    Student * studentMenu();
+    /**
+     * @brief Shows a Student's Schedule;
+     * @param s the Student in question;
+     */
+    bool studentClassesMenu(Student *s);
     /**
      * @brief Shows the classes from an UC;
      * @param uc the respective Uc
@@ -73,11 +79,6 @@ public:
      * @param c the Class in question;
      */
     bool classStudentMenu(Class *c);
-    /**
-     * @brief Shows a Student's Schedule;
-     * @param s the Student in question;
-     */
-    bool studentMenu(Student *s);
     /**
      * @brief Runs the Add Request menu;
      */

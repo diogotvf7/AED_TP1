@@ -39,9 +39,10 @@ public:
     std::string getName() const;
     /**
      * @brief Get function for the Student's Classes;
+     * @param optional parameter that filtrates a specific year
      * @return returns a vector with all the Student's Classes;
      */
-    std::vector<Class*> getClasses() const;
+    std::vector<Class*> getClasses(int year = 0) const;
     /**
      * @brief Get function for the Student's Status;
      * @return returns the bool value of Status;
