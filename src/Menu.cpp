@@ -303,9 +303,10 @@ Student *Menu::studentMenu() {
             while (true) {
 
                 cout << "   - OPTION: "; cin >> status;
-                if (isNumerical(status) && page * 20 + 1 <= stoi(status) && stoi(status) <= min(page * 20 + 21, (int) sortedStudents.size()))
+                if (isNumerical(status) && page * 20 + 1 <= stoi(status) && stoi(status) <= min(page * 20 + 21, (int) sortedStudents.size())) {
                     alive = studentClassesMenu(references[stoi(status) - 1]);
-                else if (status == "w" && page * 20 - 20 >= 0) {
+                    break;
+                } else if (status == "w" && page * 20 - 20 >= 0) {
                     page--;
                     for (int i = 0; i < 40; i++) {
                         --itr;
@@ -353,9 +354,10 @@ Student *Menu::studentMenu() {
             while (true) {
 
                 cout << "   - OPTION: "; cin >> status;
-                if (isNumerical(status) && page * 20 + 1 <= stoi(status) && stoi(status) <= min(page * 20 + 21, (int) sortedStudents.size()))
+                if (isNumerical(status) && page * 20 + 1 <= stoi(status) && stoi(status) <= min(page * 20 + 21, (int) sortedStudents.size())) {
                     alive = studentClassesMenu(references[stoi(status) - 1]);
-                else if (status == "w" && page * 20 - 20 >= 0) {
+                    break;
+                } else if (status == "w" && page * 20 - 20 >= 0) {
                     page--;
                     for (int i = 0; i < 40; i++) {
                         --itr;
@@ -385,7 +387,7 @@ bool Menu::studentClassesMenu(Student *s) {
              << "|________________________________________________________________|\n";
 
         for (int i = 0; i < sortedStudentClasses.size(); i++) {
-            cout << right << setw(20) << to_string(i + 1) + ".    " << sortedStudentClasses[i]->getName() << endl;
+            cout << right << setw(20) << to_string(i + 1) + ".    " << sortedStudentClasses[i]->getUc()->getName() << "  " << sortedStudentClasses[i]->getName() << endl;
             for (Slot *slot : sortedStudentClasses[i]->getSlots())
                 cout << right << setw(11) << " - " << *slot;
             cout << endl;
